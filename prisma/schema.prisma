@@ -1,0 +1,454 @@
+// This is your Prisma schema file for NAAC-QMS
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  IQAC_ADMIN
+  PRINCIPAL
+  FACULTY
+  STUDENT
+  ALUMNI
+  EMPLOYER
+  PARENT
+  NON_TEACHING
+  EXTERNAL_STAKEHOLDER
+}
+
+enum StakeholderType {
+  STUDENT
+  FACULTY
+  ALUMNI
+  EMPLOYER
+  PARENT
+  NON_TEACHING
+  INDUSTRY_PARTNER
+  ACADEMIC_EXPERT
+}
+
+enum QuestionType {
+  LIKERT_SCALE
+  RATING_STARS
+  MULTIPLE_CHOICE
+  SINGLE_CHOICE
+  YES_NO
+  TEXT_RESPONSE
+  NUMERIC_SCORE
+  NPS
+  FILE_ATTACHMENT
+}
+
+enum FormStatus {
+  DRAFT
+  PUBLISHED
+  CLOSED
+  ARCHIVED
+}
+
+enum GapPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum ActionStatus {
+  OPEN
+  ASSIGNED
+  IN_PROGRESS
+  AWAITING_EVIDENCE
+  UNDER_VERIFICATION
+  COMPLETED
+  REOPENED
+  CLOSED
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+  REQUIRES_UPDATE
+}
+
+model User {
+  id            String          @id @default(uuid())
+  email         String          @unique
+  passwordHash  String
+  fullName      String
+  role          Role            @default(STUDENT)
+  departmentId  String?
+  department    Department?     @relation(fields: [departmentId], references: [id])
+  programmeId   String?
+  programme     Programme?      @relation(fields: [programmeId], references: [id])
+  phone         String?
+  avatarUrl     String?
+  isActive      Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  stakeholderProfile Stakeholder?
+  assignedActions    ActionPlan[]    @relation("AssignedTo")
+  createdActions     ActionPlan[]    @relation("CreatedBy")
+  verifiedActions    ActionPlan[]    @relation("VerifiedBy")
+  uploadedEvidence   Evidence[]      @relation("EvidenceUploader")
+  verifiedEvidence   Evidence[]      @relation("EvidenceVerifier")
+  auditLogs          AuditLog[]
+  notifications      Notification[]
+  responses          FeedbackResponse[]
+}
+
+model Department {
+  id          String       @id @default(uuid())
+  code        String       @unique
+  name        String
+  headOfDept  String?
+  email       String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  users             User[]
+  programmes        Programme[]
+  stakeholders      Stakeholder[]
+  qualityIndicators QualityIndicator[]
+  gaps              Gap[]
+  actionPlans       ActionPlan[]
+  evidence          Evidence[]
+  responses         FeedbackResponse[]
+}
+
+model Programme {
+  id           String       @id @default(uuid())
+  code         String       @unique
+  name         String
+  degreeLevel  String       // UG, PG, Ph.D.
+  departmentId String
+  department   Department   @relation(fields: [departmentId], references: [id])
+  durationYears Int         @default(4)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  users        User[]
+  stakeholders Stakeholder[]
+  responses    FeedbackResponse[]
+}
+
+model AcademicYear {
+  id        String    @id @default(uuid())
+  name      String    @unique // e.g. "2025-26"
+  startDate DateTime
+  endDate   DateTime
+  isCurrent Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  forms             FeedbackForm[]
+  qualityIndicators QualityIndicator[]
+  evidence          Evidence[]
+  responses         FeedbackResponse[]
+  gaps              Gap[]
+  reports           Report[]
+}
+
+model Stakeholder {
+  id              String          @id @default(uuid())
+  userId          String?         @unique
+  user            User?           @relation(fields: [userId], references: [id])
+  type            StakeholderType
+  identifier      String          // Roll number, Employee ID, or Reg number
+  fullName        String
+  email           String
+  phone           String?
+  departmentId    String?
+  department      Department?     @relation(fields: [departmentId], references: [id])
+  programmeId     String?
+  programme       Programme?      @relation(fields: [programmeId], references: [id])
+  batchYear       String?
+  organization    String?         // For employers & alumni
+  designation     String?         // For employers & faculty
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  responses FeedbackResponse[]
+}
+
+model FeedbackForm {
+  id              String          @id @default(uuid())
+  title           String
+  code            String          @unique
+  description     String
+  targetType      StakeholderType
+  academicYearId  String
+  academicYear    AcademicYear    @relation(fields: [academicYearId], references: [id])
+  departmentId    String?
+  status          FormStatus      @default(DRAFT)
+  allowAnonymous  Boolean         @default(true)
+  startDate       DateTime?
+  endDate         DateTime?
+  instructions    String?
+  version         Int             @default(1)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  sections  FeedbackSection[]
+  responses FeedbackResponse[]
+}
+
+model FeedbackSection {
+  id          String             @id @default(uuid())
+  formId      String
+  form        FeedbackForm       @relation(fields: [formId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  orderIndex  Int
+  category    String             // e.g. "Curriculum", "Teaching-Learning", "Infrastructure"
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  questions FeedbackQuestion[]
+}
+
+model FeedbackQuestion {
+  id           String            @id @default(uuid())
+  sectionId    String
+  section      FeedbackSection   @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  prompt       String
+  questionType QuestionType      @default(LIKERT_SCALE)
+  parameter    String            // Academic quality parameter
+  isRequired   Boolean           @default(true)
+  orderIndex   Int
+  scaleMax     Int               @default(5)
+  options      String[]          // For single/multi choice
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  answers FeedbackAnswer[]
+}
+
+model FeedbackResponse {
+  id              String          @id @default(uuid())
+  formId          String
+  form            FeedbackForm    @relation(fields: [formId], references: [id])
+  academicYearId  String
+  academicYear    AcademicYear    @relation(fields: [academicYearId], references: [id])
+  departmentId    String?
+  department      Department?     @relation(fields: [departmentId], references: [id])
+  programmeId     String?
+  programme       Programme?      @relation(fields: [programmeId], references: [id])
+  stakeholderId   String?
+  stakeholder     Stakeholder?    @relation(fields: [stakeholderId], references: [id])
+  userId          String?
+  user            User?           @relation(fields: [userId], references: [id])
+  isAnonymous     Boolean         @default(false)
+  stakeholderType StakeholderType
+  overallScore    Float?
+  sentimentScore  Float?          // -1.0 to 1.0
+  submittedAt     DateTime        @default(now())
+  ipHash          String?
+
+  answers FeedbackAnswer[]
+}
+
+model FeedbackAnswer {
+  id          String           @id @default(uuid())
+  responseId  String
+  response    FeedbackResponse @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  questionId  String
+  question    FeedbackQuestion @relation(fields: [questionId], references: [id])
+  scoreValue  Float?           // Numerical or Likert score
+  textValue   String?
+  optionValues String[]
+  createdAt   DateTime         @default(now())
+}
+
+model QualityCategory {
+  id          String             @id @default(uuid())
+  code        String             @unique // e.g. "CRITERION_1"
+  name        String             // "Curricular Aspects"
+  weight      Float              @default(15.0)
+  description String?
+  orderIndex  Int
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  indicators QualityIndicator[]
+}
+
+model QualityIndicator {
+  id          String           @id @default(uuid())
+  code        String           @unique // e.g. "QI-1.1.1"
+  name        String
+  description String
+  categoryId  String
+  category    QualityCategory  @relation(fields: [categoryId], references: [id])
+  departmentId String?
+  department  Department?      @relation(fields: [departmentId], references: [id])
+  academicYearId String
+  academicYear AcademicYear    @relation(fields: [academicYearId], references: [id])
+  targetScore Float
+  actualScore Float
+  unit        String           // "%", "Rating (1-5)", "Count", "Days"
+  dataSource  String
+  frequency   String           // "Annual", "Per Semester", "Continuous"
+  owner       String
+  formula     String?
+  status      String           // "EXCELLENT", "GOOD", "NEEDS_ATTENTION", "CRITICAL"
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  gaps        Gap[]
+  evidence    Evidence[]
+}
+
+model Gap {
+  id             String           @id @default(uuid())
+  parameter      String
+  category       String
+  indicatorId    String?
+  indicator      QualityIndicator? @relation(fields: [indicatorId], references: [id])
+  departmentId   String?
+  department     Department?      @relation(fields: [departmentId], references: [id])
+  academicYearId String
+  academicYear   AcademicYear     @relation(fields: [academicYearId], references: [id])
+  currentScore   Float
+  targetScore    Float
+  gapValue       Float
+  priority       GapPriority      @default(HIGH)
+  responsesCount Int              @default(0)
+  affectedGroups StakeholderType[]
+  suggestedAction String
+  isVerified     Boolean          @default(false)
+  verifiedAt     DateTime?
+  status         String           @default("DETECTED") // DETECTED, VERIFIED, CONVERTED_TO_ACTION, RESOLVED
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  actionPlans ActionPlan[]
+}
+
+model ActionPlan {
+  id                  String             @id @default(uuid())
+  code                String             @unique // e.g. "CAPA-2026-001"
+  gapId               String?
+  gap                 Gap?               @relation(fields: [gapId], references: [id])
+  departmentId        String
+  department          Department         @relation(fields: [departmentId], references: [id])
+  issue               String
+  rootCause           String
+  correctiveAction    String
+  preventiveAction    String
+  priority            GapPriority        @default(HIGH)
+  status              ActionStatus       @default(OPEN)
+  assignedToId        String
+  assignedTo          User               @relation("AssignedTo", fields: [assignedToId], references: [id])
+  createdById         String
+  createdBy           User               @relation("CreatedBy", fields: [createdById], references: [id])
+  verifiedById        String?
+  verifiedBy          User?              @relation("VerifiedBy", fields: [verifiedById], references: [id])
+  startDate           DateTime
+  dueDate             DateTime
+  completedAt         DateTime?
+  expectedOutcome     String
+  actualOutcome       String?
+  beforeScore         Float?             // Baseline score before action
+  afterScore          Float?             // Remeasured score after action
+  closureRemarks      String?
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+
+  evidence            Evidence[]
+}
+
+model Evidence {
+  id                 String             @id @default(uuid())
+  title              String
+  code               String             @unique
+  description        String
+  fileUrl            String
+  fileType           String             // "PDF", "DOCX", "XLSX", "PPTX", "PNG", "CSV"
+  fileSize           Int                // In bytes
+  category           String
+  departmentId       String?
+  department         Department?        @relation(fields: [departmentId], references: [id])
+  academicYearId     String
+  academicYear       AcademicYear       @relation(fields: [academicYearId], references: [id])
+  actionPlanId       String?
+  actionPlan         ActionPlan?        @relation(fields: [actionPlanId], references: [id])
+  qualityIndicatorId String?
+  qualityIndicator   QualityIndicator?  @relation(fields: [qualityIndicatorId], references: [id])
+  uploadedById       String
+  uploadedBy         User               @relation("EvidenceUploader", fields: [uploadedById], references: [id])
+  verifiedById       String?
+  verifiedBy         User?              @relation("EvidenceVerifier", fields: [verifiedById], references: [id])
+  verificationStatus VerificationStatus @default(PENDING)
+  verificationNotes  String?
+  version            Int                @default(1)
+  tags               String[]
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+}
+
+model Report {
+  id             String       @id @default(uuid())
+  reportType     String       // "STAKEHOLDER_FEEDBACK", "ATR", "CAPA", "IQAC_ANNUAL", "DEPT_QUALITY"
+  title          String
+  academicYearId String
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+  departmentId   String?
+  parameters     Json
+  summaryData    Json
+  generatedBy    String
+  approvedBy     String?
+  isApproved     Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   // "ACTION_ASSIGNED", "EVIDENCE_UPLOADED", "SURVEY_PUBLISHED", "GAP_DETECTED"
+  linkUrl   String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  action      String   // "CREATE", "UPDATE", "DELETE", "LOGIN", "EXPORT", "VERIFY"
+  module      String   // "FEEDBACK", "CAPA", "EVIDENCE", "INDICATORS", "USERS"
+  description String
+  ipAddress   String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+}
+
+model AIInsight {
+  id             String    @id @default(uuid())
+  academicYearId String
+  category       String
+  title          String
+  summary        String
+  majorStrengths String[]
+  majorConcerns  String[]
+  emergingTrends String[]
+  suggestedCAPA  String[]
+  sentimentScore Float
+  sampleSize     Int
+  confidence     Float     @default(0.88)
+  isApproved     Boolean   @default(false)
+  reviewedBy     String?
+  reviewedAt     DateTime?
+  createdAt      DateTime  @default(now())
+}
