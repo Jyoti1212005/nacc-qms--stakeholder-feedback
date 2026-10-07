@@ -7,6 +7,8 @@ import { apiRouter } from './server/routes.ts';
 import { connectMongoDB } from './server/config/db.ts';
 import { dbStore } from './server/db.ts';
 
+import http from 'http';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -14,6 +16,7 @@ async function startServer() {
   const app = express();
   const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
   const isProduction = process.env.NODE_ENV === 'production';
+  const httpServer = http.createServer(app);
 
   app.use(cors());
   app.use(express.json({ limit: '10mb' }));
@@ -39,7 +42,12 @@ async function startServer() {
   if (!isProduction) {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: {
+          server: httpServer,
+        },
+      },
       appType: 'spa',
     });
     app.use(vite.middlewares);
@@ -51,14 +59,25 @@ async function startServer() {
     });
   }
 
-  const server = app.listen(PORT, '0.0.0.0', () => {
+  httpServer.listen(PORT, '0.0.0.0', () => {
     console.log(`[NAAC-QMS] Institutional Quality Portal running at http://localhost:${PORT}`);
+  });
+
+  httpServer.on('error', (err: any) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`\n[NAAC-QMS] Error: Port ${PORT} already use me hai (EADDRINUSE).`);
+      console.error(`Port free karne ke liye Windows terminal me run karein:`);
+      console.error(`  npx kill-port ${PORT}\n`);
+    } else {
+      console.error('[NAAC-QMS] Server error:', err);
+    }
+    process.exit(1);
   });
 
   // Graceful shutdown handling
   const shutdown = () => {
     console.log('\n[NAAC-QMS] Gracefully terminating server...');
-    server.close(() => {
+    httpServer.close(() => {
       console.log('[NAAC-QMS] Server shutdown complete.');
       process.exit(0);
     });

@@ -159,9 +159,20 @@ class DatabaseStore {
 
       if (departments.length > 0) this.departments = departments as any;
       if (programmes.length > 0) this.programmes = programmes as any;
-      if (academicYears.length > 0) this.academicYears = academicYears as any;
-      if (users.length > 0) this.users = users as any;
-      if (stakeholders.length > 0) this.stakeholders = stakeholders as any;
+      if (users.length > 0) {
+        const cleanMongoUsers = (users as any[]).filter(
+          (u) =>
+            !/^(jyoti|ghjhujk|hello|sourabh)/i.test(u.fullName) &&
+            !u.email.includes('test') &&
+            !u.id.startsWith('usr-179')
+        );
+        const userMap = new Map<string, User>();
+        initialUsers.forEach((u) => userMap.set(u.id, u));
+        cleanMongoUsers.forEach((u) => userMap.set(u.id, u));
+        this.users = Array.from(userMap.values());
+      } else {
+        this.users = [...initialUsers];
+      }
       if (feedbackForms.length > 0) this.feedbackForms = feedbackForms as any;
       if (feedbackResponses.length > 0) this.feedbackResponses = feedbackResponses as any;
       if (qualityCategories.length > 0) this.qualityCategories = qualityCategories as any;

@@ -458,9 +458,11 @@ export const QualityIndicatorsPage: React.FC = () => {
                   }
                   className="w-full p-2.5 border border-slate-200 rounded-xl text-xs font-semibold"
                 >
-                  <option value="Dr. Anand Raman (HoD CSE)">Dr. Anand Raman (HoD CSE)</option>
-                  <option value="Prof. S. R. Murthy (HoD ECE)">Prof. S. R. Murthy (HoD ECE)</option>
-                  <option value="Dr. Vikram Joshi (HoD Mechanical)">Dr. Vikram Joshi (HoD Mechanical)</option>
+                  <option value="Dr. Anand Raman (HoD CSE)">Dr. Anand Raman (HoD B.Tech Computer Science)</option>
+                  <option value="Dr. Rajesh Deshmukh (HoD Mechanical)">Dr. Rajesh Deshmukh (HoD Mechanical Engineering)</option>
+                  <option value="Dr. Meenakshi Sundaram (HoD BCA)">Dr. Meenakshi Sundaram (HoD BCA)</option>
+                  <option value="Dr. Sunita Kulkarni (HoD BBA)">Dr. Sunita Kulkarni (HoD BBA)</option>
+                  <option value="Dr. Vikramaditya Sen (HoD CSE AI&ML)">Dr. Vikramaditya Sen (HoD B.Tech CSE AI&ML)</option>
                   <option value="Prof. Nitin Gadgil (Dean Placements)">Prof. Nitin Gadgil (Dean Placements)</option>
                   <option value="Chief Librarian & Systems Admin">Chief Librarian & Systems Admin</option>
                 </select>

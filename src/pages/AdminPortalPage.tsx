@@ -73,7 +73,7 @@ export const AdminPortalPage: React.FC = () => {
   const [newUserName, setNewUserName] = useState('');
   const [newUserEmail, setNewUserEmail] = useState('');
   const [newUserRole, setNewUserRole] = useState<Role>('FACULTY');
-  const [newUserDept, setNewUserDept] = useState('Computer Science & Engineering');
+  const [newUserDept, setNewUserDept] = useState('B.Tech Computer Science');
 
   // Accreditation weights state (Criterion 1 to 7)
   const [criteriaWeights, setCriteriaWeights] = useState([
@@ -117,7 +117,7 @@ export const AdminPortalPage: React.FC = () => {
       email: 'harjit.alumni@tcs.com',
       password: 'demo',
       role: 'ALUMNI' as Role,
-      department: 'Electronics & Communication Engg.',
+      department: 'Mechanical Engineering',
     },
     {
       id: 'usr-ext-4',
@@ -716,12 +716,11 @@ export const AdminPortalPage: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { name: 'Computer Science & Engineering', code: 'CSE', hod: 'Dr. Anand Raman', score: 4.28, faculty: 65 },
-                { name: 'Electronics & Communication Engg.', code: 'ECE', hod: 'Dr. Meenakshi Sundaram', score: 4.15, faculty: 48 },
-                { name: 'Mechanical Engineering', code: 'ME', hod: 'Dr. Vikram Malhotra', score: 3.98, faculty: 42 },
-                { name: 'Civil Engineering', code: 'CE', hod: 'Prof. Rajeshwari Nair', score: 3.92, faculty: 38 },
-                { name: 'Applied Sciences & Humanities', code: 'ASH', hod: 'Dr. P. K. Sen', score: 4.05, faculty: 55 },
-                { name: 'Management Studies (MBA)', code: 'DOMS', hod: 'Dr. Shalini Varma', score: 4.12, faculty: 32 },
+                { name: 'B.Tech Computer Science', code: 'CSE', branchCourse: 'B.Tech in Computer Science and Engineering', hod: 'Dr. Anand Raman', score: 4.28, faculty: 65, duration: '4 Years (UG)' },
+                { name: 'Mechanical Engineering', code: 'MECH', branchCourse: 'B.Tech in Mechanical Engineering', hod: 'Dr. Rajesh Deshmukh', score: 4.12, faculty: 48, duration: '4 Years (UG)' },
+                { name: 'BCA (Computer Applications)', code: 'BCA', branchCourse: 'Bachelor of Computer Applications (BCA)', hod: 'Dr. Meenakshi Sundaram', score: 4.20, faculty: 36, duration: '3 Years (UG)' },
+                { name: 'BBA (Business Administration)', code: 'BBA', branchCourse: 'Bachelor of Business Administration (BBA)', hod: 'Dr. Sunita Kulkarni', score: 4.15, faculty: 32, duration: '3 Years (UG)' },
+                { name: 'B.Tech CSE (AI & ML)', code: 'CSE-AIML', branchCourse: 'B.Tech CSE (Artificial Intelligence & ML)', hod: 'Dr. Vikramaditya Sen', score: 4.38, faculty: 44, duration: '4 Years (UG)' },
               ].map((dept) => (
                 <div
                   key={dept.code}
@@ -736,7 +735,12 @@ export const AdminPortalPage: React.FC = () => {
                     </span>
                   </div>
                   <h4 className="font-extrabold text-[#0a192f] text-xs leading-snug">{dept.name}</h4>
-                  <p className="text-[11px] text-slate-500 mt-1">Head: {dept.hod}</p>
+                  <div className="mt-2 p-2 rounded-lg bg-white border border-slate-200 text-[11px]">
+                    <span className="text-[10px] font-bold text-slate-400 block uppercase">Branch Course:</span>
+                    <span className="font-semibold text-slate-800">{dept.branchCourse}</span>
+                    <span className="text-[10px] text-[#c2410c] font-bold block mt-0.5">{dept.duration}</span>
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-2">Head: {dept.hod}</p>
                   <p className="text-[10px] text-slate-400 mt-0.5">{dept.faculty} Academic Faculty</p>
                 </div>
               ))}

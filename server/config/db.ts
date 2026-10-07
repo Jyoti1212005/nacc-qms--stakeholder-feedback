@@ -56,8 +56,8 @@ export function isMongoConnected(): boolean {
 export async function connectMongoDB(): Promise<boolean> {
   const uri = process.env.MONGODB_URI;
 
-  if (!uri) {
-    console.log('[MongoDB] Notice: MONGODB_URI is not set in .env. Running in In-Memory fallback mode.');
+  if (!uri || uri.trim() === '' || uri.includes('<db_password>')) {
+    console.log('[MongoDB] Notice: MONGODB_URI contains placeholder <db_password> or is empty. Please replace <db_password> in .env with your Atlas database user password. Running in In-Memory fallback mode.');
     return false;
   }
 
@@ -86,7 +86,11 @@ async function autoSeedIfEmpty() {
   try {
     const userCount = await UserModel.countDocuments();
     if (userCount > 0) {
-      console.log(`[MongoDB] Database already populated (${userCount} users found). Skipping initial seed.`);
+      console.log(`[MongoDB] Database already populated (${userCount} users found). Ensuring current departments & programmes...`);
+      await DepartmentModel.deleteMany({});
+      await DepartmentModel.insertMany(initialDepartments);
+      await ProgrammeModel.deleteMany({});
+      await ProgrammeModel.insertMany(initialProgrammes);
       return;
     }
 

@@ -94,12 +94,11 @@ export const NaacBookletReportGenerator: React.FC<NaacBookletReportGeneratorProp
   ];
 
   const departmentWiseData = [
-    { dept: 'Computer Science & Engineering', code: 'CSE', score: 4.28, rate: '82%', fill: '#3b82f6' },
-    { dept: 'Electronics & Communication Engg.', code: 'ECE', score: 4.15, rate: '76%', fill: '#10b981' },
-    { dept: 'Mechanical Engineering', code: 'Mech', score: 3.98, rate: '71%', fill: '#f59e0b' },
-    { dept: 'Civil Engineering', code: 'Civil', score: 3.92, rate: '68%', fill: '#8b5cf6' },
-    { dept: 'Applied Sciences', code: 'Applied Sci', score: 4.05, rate: '74%', fill: '#6366f1' },
-    { dept: 'Management Studies', code: 'Mgmt', score: 4.12, rate: '69%', fill: '#0ea5e9' },
+    { dept: 'B.Tech Computer Science', code: 'CSE', score: 4.28, rate: '82%', fill: '#3b82f6' },
+    { dept: 'Mechanical Engineering', code: 'MECH', score: 4.12, rate: '75%', fill: '#f59e0b' },
+    { dept: 'BCA (Computer Applications)', code: 'BCA', score: 4.20, rate: '79%', fill: '#10b981' },
+    { dept: 'BBA (Business Administration)', code: 'BBA', score: 4.15, rate: '73%', fill: '#8b5cf6' },
+    { dept: 'B.Tech CSE (AI & ML)', code: 'CSE-AIML', score: 4.38, rate: '85%', fill: '#0ea5e9' },
   ];
 
   const atrTableData = [

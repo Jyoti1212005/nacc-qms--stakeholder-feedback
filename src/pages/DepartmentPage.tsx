@@ -8,6 +8,7 @@ import {
   FileCheck2,
   ArrowRight,
   UserCheck,
+  GraduationCap,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useAuth } from '../context/AuthContext';
@@ -72,6 +73,48 @@ export const DepartmentPage: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Branch Courses & Degree Programmes Offered */}
+      {deptData?.programmes && deptData.programmes.length > 0 && (
+        <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-3">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 rounded-xl bg-orange-100 text-[#c2410c] flex items-center justify-center font-bold">
+                <GraduationCap className="w-4 h-4 text-[#ff7a50]" />
+              </div>
+              <div>
+                <h2 className="text-sm font-bold text-slate-900">Branch Courses & Programmes Offered</h2>
+                <p className="text-xs text-slate-500">Degree curriculum tracks administered by {dept?.name}</p>
+              </div>
+            </div>
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-orange-100 text-[#c2410c]">
+              {deptData.programmes.length} Active Branch Course{deptData.programmes.length > 1 ? 's' : ''}
+            </span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {deptData.programmes.map((prog: any) => (
+              <div
+                key={prog.id}
+                className="p-3.5 rounded-xl border border-orange-100 bg-[#fffaf5] flex items-start space-x-3 transition-all hover:border-[#fed7aa]"
+              >
+                <div className="p-2 rounded-lg bg-white border border-[#fed7aa] text-[#c2410c] shrink-0 font-mono text-xs font-black shadow-xs">
+                  {prog.code}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-extrabold text-[#0a192f] text-xs">{prog.name}</h4>
+                  <div className="flex items-center space-x-2 mt-1 text-[11px] text-slate-500">
+                    <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 font-bold text-[10px]">
+                      {prog.degreeLevel}
+                    </span>
+                    <span>•</span>
+                    <span className="font-medium">{prog.durationYears} Years Duration</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

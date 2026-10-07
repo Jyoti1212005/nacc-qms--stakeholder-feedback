@@ -8,6 +8,8 @@ export interface DemoAccount {
   password: string;
   role: Role;
   department: string;
+  designation?: string;
+  category?: 'LEADERSHIP_ADMIN' | 'FACULTY_STAFF' | 'STUDENTS' | 'EXTERNAL';
 }
 
 export const STAKEHOLDER_ROLE_DEFINITIONS: Record<Role, StakeholderRoleDefinition> = {
@@ -452,8 +454,29 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   demoAccounts: DemoAccount[];
-  login: (email: string, pass: string) => Promise<boolean>;
+  login: (email: string, pass: string) => Promise<{ success: boolean; error?: string }>;
   demoLogin: (email: string) => Promise<boolean>;
+  sendOtp: (
+    email: string,
+    purpose?: 'REGISTER' | 'LOGIN'
+  ) => Promise<{ success: boolean; message?: string; devOtp?: string; emailSent?: boolean; error?: string }>;
+  verifyOtp: (email: string, otp: string) => Promise<{ success: boolean; error?: string }>;
+  otpLogin: (email: string, otp: string) => Promise<{ success: boolean; error?: string }>;
+  googleLogin: (params: {
+    credential?: string;
+    googleProfile?: { email: string; name: string; picture?: string; sub?: string };
+    role?: Role;
+    departmentId?: string;
+  }) => Promise<{ success: boolean; error?: string }>;
+  register: (userData: {
+    fullName: string;
+    email: string;
+    password: string;
+    role: Role;
+    departmentId?: string;
+    programmeId?: string;
+    otp?: string;
+  }) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   hasRole: (roles: Role[]) => boolean;
   currentRoleDefinition: StakeholderRoleDefinition;
@@ -507,33 +530,158 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       .finally(() => setIsLoading(false));
   }, [token]);
 
-  const login = async (email: string, pass: string): Promise<boolean> => {
+  const login = async (email: string, pass: string): Promise<{ success: boolean; error?: string }> => {
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password: pass }),
       });
-      if (!res.ok) {
-        const err = await res.json();
-        alert(err.error || 'Authentication failed');
-        return false;
-      }
       const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || 'Authentication failed' };
+      }
       setToken(data.token);
       setCurrentUser(data.user);
       localStorage.setItem('naac_qms_token', data.token);
-      return true;
-    } catch (e) {
+      return { success: true };
+    } catch (e: any) {
       console.error('Login error:', e);
-      return false;
+      return { success: false, error: e.message || 'Network error during login' };
     }
   };
 
   const demoLogin = async (email: string): Promise<boolean> => {
     const acc = demoAccounts.find((a) => a.email.toLowerCase() === email.toLowerCase());
     if (!acc) return false;
-    return await login(acc.email, acc.password);
+    const res = await login(acc.email, acc.password);
+    return res.success;
+  };
+
+  const sendOtp = async (
+    email: string,
+    purpose: 'REGISTER' | 'LOGIN' = 'REGISTER'
+  ): Promise<{ success: boolean; message?: string; devOtp?: string; emailSent?: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, purpose }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || 'Failed to send OTP.' };
+      }
+      return {
+        success: true,
+        message: data.message,
+        devOtp: data.devOtp,
+        emailSent: data.emailSent,
+      };
+    } catch (e: any) {
+      console.error('sendOtp error:', e);
+      const isFetchFailed = e.name === 'TypeError' || (e.message && e.message.toLowerCase().includes('fetch'));
+      return {
+        success: false,
+        error: isFetchFailed
+          ? 'Backend Server connect nahi ho pa raha hai (http://localhost:3000). Kripya confirm karein ki dev server live hai.'
+          : (e.message || 'Network error while requesting OTP.'),
+      };
+    }
+  };
+
+  const verifyOtp = async (email: string, otp: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || 'Invalid OTP code.' };
+      }
+      return { success: true };
+    } catch (e: any) {
+      console.error('verifyOtp error:', e);
+      return { success: false, error: e.message || 'Network error while verifying OTP.' };
+    }
+  };
+
+  const otpLogin = async (email: string, otp: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/auth/otp-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || 'OTP login failed.' };
+      }
+      setToken(data.token);
+      setCurrentUser(data.user);
+      localStorage.setItem('naac_qms_token', data.token);
+      return { success: true };
+    } catch (e: any) {
+      console.error('otpLogin error:', e);
+      return { success: false, error: e.message || 'Network error during OTP login.' };
+    }
+  };
+
+  const googleLogin = async (params: {
+    credential?: string;
+    googleProfile?: { email: string; name: string; picture?: string; sub?: string };
+    role?: Role;
+    departmentId?: string;
+  }): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(params),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || 'Google login failed.' };
+      }
+      setToken(data.token);
+      setCurrentUser(data.user);
+      localStorage.setItem('naac_qms_token', data.token);
+      return { success: true };
+    } catch (e: any) {
+      console.error('googleLogin error:', e);
+      return { success: false, error: e.message || 'Network error during Google authentication.' };
+    }
+  };
+
+  const register = async (userData: {
+    fullName: string;
+    email: string;
+    password: string;
+    role: Role;
+    departmentId?: string;
+    programmeId?: string;
+    otp?: string;
+  }): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || 'Registration failed' };
+      }
+      setToken(data.token);
+      setCurrentUser(data.user);
+      localStorage.setItem('naac_qms_token', data.token);
+      return { success: true };
+    } catch (e: any) {
+      console.error('Registration error:', e);
+      return { success: false, error: e.message || 'Network error during registration' };
+    }
   };
 
   const logout = () => {
@@ -604,6 +752,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         demoAccounts,
         login,
         demoLogin,
+        sendOtp,
+        verifyOtp,
+        otpLogin,
+        googleLogin,
+        register,
         logout,
         hasRole,
         currentRoleDefinition,

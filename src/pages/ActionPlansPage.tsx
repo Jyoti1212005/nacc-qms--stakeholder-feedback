@@ -147,23 +147,39 @@ export const ActionPlansPage: React.FC = () => {
     }
   };
 
-  const filtered = actions.filter((a) => (filterStatus === 'all' ? true : a.status === filterStatus));
-
-  const getStatusBadge = (st: ActionStatus) => {
-    switch (st) {
-      case 'CLOSED':
-        return 'bg-emerald-100 text-emerald-800 border-emerald-200';
-      case 'COMPLETED':
-      case 'UNDER_VERIFICATION':
-        return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'IN_PROGRESS':
-        return 'bg-purple-100 text-purple-800 border-purple-200';
-      case 'AWAITING_EVIDENCE':
-        return 'bg-amber-100 text-amber-800 border-amber-200';
-      default:
-        return 'bg-slate-100 text-slate-700 border-slate-200';
+  const getCapaStatusPresentation = (st: ActionStatus) => {
+    if (st === 'CLOSED' || st === 'COMPLETED') {
+      return {
+        label: 'Resolved / Closed',
+        badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+        dotColor: 'bg-emerald-500',
+        stepIndex: 3,
+      };
     }
+    if (st === 'UNDER_VERIFICATION' || st === 'AWAITING_EVIDENCE') {
+      return {
+        label: 'Pending Verification',
+        badgeColor: 'bg-amber-100 text-amber-900 border-amber-300',
+        dotColor: 'bg-amber-500',
+        stepIndex: 2,
+      };
+    }
+    return {
+      label: 'In Review',
+      badgeColor: 'bg-blue-100 text-blue-900 border-blue-300',
+      dotColor: 'bg-blue-500',
+      stepIndex: 1,
+    };
   };
+
+  const filtered = actions.filter((a) => {
+    if (filterStatus === 'all') return true;
+    const info = getCapaStatusPresentation(a.status);
+    if (filterStatus === 'IN_REVIEW') return info.label === 'In Review';
+    if (filterStatus === 'PENDING_VERIFICATION') return info.label === 'Pending Verification';
+    if (filterStatus === 'RESOLVED_CLOSED') return info.label === 'Resolved / Closed';
+    return a.status === filterStatus;
+  });
 
   return (
     <div className="space-y-6">
@@ -219,55 +235,116 @@ export const ActionPlansPage: React.FC = () => {
 
       {/* Status Filter Tabs */}
       <div className="flex items-center space-x-2 overflow-x-auto pb-1 scrollbar-none">
-        {['all', 'ASSIGNED', 'IN_PROGRESS', 'AWAITING_EVIDENCE', 'UNDER_VERIFICATION', 'CLOSED'].map((st) => (
+        {[
+          { id: 'all', label: 'All Plans' },
+          { id: 'IN_REVIEW', label: 'In Review' },
+          { id: 'PENDING_VERIFICATION', label: 'Pending Verification' },
+          { id: 'RESOLVED_CLOSED', label: 'Resolved / Closed' },
+        ].map((st) => (
           <button
-            key={st}
-            onClick={() => setFilterStatus(st)}
+            key={st.id}
+            onClick={() => setFilterStatus(st.id)}
             className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center justify-center shrink-0 ${
-              filterStatus === st
-                ? 'bg-purple-700 text-white shadow-xs'
+              filterStatus === st.id
+                ? 'bg-purple-700 text-white shadow-xs font-bold'
                 : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
             }`}
           >
-            {st === 'all' ? 'All Plans' : st.replace(/_/g, ' ')}
+            {st.label}
           </button>
         ))}
       </div>
 
       {/* Action Plans Cards */}
       <div className="space-y-4">
-        {filtered.map((action) => (
-          <div
-            key={action.id}
-            className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-purple-300 transition-all space-y-4"
-          >
-            {/* Header line */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-100 pb-3">
-              <div className="flex items-center space-x-2.5">
-                <span className="font-mono text-xs font-extrabold text-purple-700 px-2 py-0.5 bg-purple-50 rounded border border-purple-200">
-                  {action.code}
-                </span>
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${getStatusBadge(action.status)}`}>
-                  {action.status.replace(/_/g, ' ')}
-                </span>
-                {action.isOverdue && (
-                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-200 animate-pulse">
-                    OVERDUE
+        {filtered.map((action) => {
+          const statusInfo = getCapaStatusPresentation(action.status);
+          return (
+            <div
+              key={action.id}
+              className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-purple-300 transition-all space-y-4"
+            >
+              {/* Header line */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-100 pb-3">
+                <div className="flex items-center space-x-2.5">
+                  <span className="font-mono text-xs font-extrabold text-purple-700 px-2 py-0.5 bg-purple-50 rounded border border-purple-200">
+                    {action.code}
                   </span>
-                )}
+                  <span className={`inline-flex items-center space-x-1.5 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full border shadow-2xs ${statusInfo.badgeColor}`}>
+                    <span className={`w-1.5 h-1.5 rounded-full ${statusInfo.dotColor}`} />
+                    <span>{statusInfo.label}</span>
+                  </span>
+                  {action.isOverdue && (
+                    <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-red-100 text-red-800 border border-red-200 animate-pulse">
+                      OVERDUE
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex items-center space-x-3 text-xs text-slate-500">
+                  <span className="flex items-center space-x-1">
+                    <UserCheck className="w-3.5 h-3.5 text-slate-400" />
+                    <strong className="text-slate-700">{action.assignedToName}</strong>
+                  </span>
+                  <span className="flex items-center space-x-1">
+                    <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                    <span>Due: {action.dueDate}</span>
+                  </span>
+                </div>
               </div>
 
-              <div className="flex items-center space-x-3 text-xs text-slate-500">
-                <span className="flex items-center space-x-1">
-                  <UserCheck className="w-3.5 h-3.5 text-slate-400" />
-                  <strong className="text-slate-700">{action.assignedToName}</strong>
-                </span>
-                <span className="flex items-center space-x-1">
-                  <Calendar className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Due: {action.dueDate}</span>
-                </span>
+              {/* Visual Milestone Timeline Indicator */}
+              <div className="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-slate-500">
+                    Remediation Milestone Timeline
+                  </span>
+                  <span className="text-[10px] font-bold text-purple-900 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">
+                    {statusInfo.stepIndex === 3 ? 'Stage 4/4: Fully Resolved & Ratified' : statusInfo.stepIndex === 2 ? 'Stage 3/4: Verification & Evidence Review' : 'Stage 2/4: Remediation In Review'}
+                  </span>
+                </div>
+                
+                <div className="relative flex items-center justify-between px-2 pt-1 pb-1">
+                  {/* Background Track */}
+                  <div className="absolute top-4 left-6 right-6 h-1 bg-slate-200 z-0" />
+                  {/* Progress Line */}
+                  <div 
+                    className="absolute top-4 left-6 h-1 bg-purple-600 z-0 transition-all duration-300"
+                    style={{
+                      width: statusInfo.stepIndex === 3 ? 'calc(100% - 48px)' : statusInfo.stepIndex === 2 ? '66%' : '33%'
+                    }}
+                  />
+
+                  {[
+                    { label: 'Gap Identified', sub: action.startDate || 'Formulated' },
+                    { label: 'In Review', sub: 'Protocol Active' },
+                    { label: 'Pending Verification', sub: 'Evidence Check' },
+                    { label: 'Resolved / Closed', sub: action.completedAt ? 'Remeasured' : 'Target Milestone' },
+                  ].map((m, mIdx) => {
+                    const isPast = mIdx <= statusInfo.stepIndex;
+                    const isCurrent = mIdx === statusInfo.stepIndex;
+                    return (
+                      <div key={mIdx} className="relative z-10 flex flex-col items-center text-center">
+                        <div
+                          className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black border-2 transition-all ${
+                            isPast
+                              ? 'bg-purple-700 text-white border-purple-700 shadow-xs'
+                              : 'bg-white text-slate-400 border-slate-300'
+                          } ${isCurrent ? 'ring-3 ring-purple-200 scale-110' : ''}`}
+                        >
+                          {isPast ? '✓' : mIdx + 1}
+                        </div>
+                        <span className={`text-[10px] mt-1 font-bold ${isCurrent ? 'text-purple-900 font-extrabold' : 'text-slate-600'}`}>
+                          {m.label}
+                        </span>
+                        <span className="text-[9px] text-slate-400 font-mono hidden sm:block">
+                          {m.sub}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
 
             {/* Core Issue & Root Cause */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
@@ -365,8 +442,9 @@ export const ActionPlansPage: React.FC = () => {
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        );
+      })}
+    </div>
 
       {/* Update Status / Closure Modal */}
       {selectedAction && (

@@ -66,6 +66,9 @@ export interface User {
   avatarUrl?: string;
   isActive: boolean;
   createdAt: string;
+  isEmailVerified?: boolean;
+  authProvider?: 'local' | 'google';
+  googleId?: string;
 }
 
 export interface Department {

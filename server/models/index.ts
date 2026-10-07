@@ -29,7 +29,7 @@ import {
 const UserSchema = new Schema<User>({
   id: { type: String, required: true, unique: true, index: true },
   email: { type: String, required: true, unique: true, index: true },
-  passwordHash: { type: String, required: true },
+  passwordHash: { type: String, default: '' },
   fullName: { type: String, required: true },
   role: { type: String, required: true, index: true },
   departmentId: { type: String, index: true },
@@ -37,6 +37,9 @@ const UserSchema = new Schema<User>({
   phone: { type: String },
   avatarUrl: { type: String },
   isActive: { type: Boolean, default: true },
+  isEmailVerified: { type: Boolean, default: false },
+  authProvider: { type: String, default: 'local' },
+  googleId: { type: String },
   createdAt: { type: String, default: () => new Date().toISOString() },
 });
 

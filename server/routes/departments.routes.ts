@@ -29,8 +29,11 @@ departmentsRouter.get('/departments/:id/dashboard', (req: Request, res: Response
         ) / 100
       : 4.0;
 
+  const deptProgrammes = dbStore.programmes.filter((p) => p.departmentId === dept.id);
+
   res.json({
     department: dept,
+    programmes: deptProgrammes,
     stats: {
       responsesCount: deptResponses.length,
       averageSatisfaction: avgSatisfaction,
@@ -44,4 +47,8 @@ departmentsRouter.get('/departments/:id/dashboard', (req: Request, res: Response
     indicators: deptIndicators,
     evidence: deptEvidence,
   });
+});
+
+departmentsRouter.get('/programmes', (_req: Request, res: Response) => {
+  res.json(dbStore.programmes);
 });

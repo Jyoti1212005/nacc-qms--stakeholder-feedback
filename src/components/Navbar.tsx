@@ -586,6 +586,17 @@ export const Navbar: React.FC = () => {
             </div>
           )}
         </div>
+
+        {/* Direct 1-Click Sign Out Button */}
+        <button
+          onClick={logout}
+          id="btn-navbar-logout"
+          className="flex items-center space-x-1.5 px-2.5 py-1.5 min-h-[40px] rounded-xl text-xs font-bold bg-[#14325a] hover:bg-rose-900/60 text-blue-200 hover:text-rose-200 border border-blue-400/30 hover:border-rose-400/40 transition-all cursor-pointer shadow-xs shrink-0"
+          title="Sign out of current account"
+        >
+          <LogOut className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Sign Out</span>
+        </button>
       </div>
 
       {/* 3D Stakeholder Profile Modal */}

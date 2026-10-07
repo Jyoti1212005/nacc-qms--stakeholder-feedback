@@ -108,6 +108,8 @@ export interface AuthUser {
   departmentId?: string;
   programmeId?: string;
   avatarUrl?: string;
+  isEmailVerified?: boolean;
+  authProvider?: 'local' | 'google';
 }
 
 export interface StakeholderProfileData {

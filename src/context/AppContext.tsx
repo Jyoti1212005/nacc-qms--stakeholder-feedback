@@ -90,13 +90,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       }
     }
   }, [currentUser, defaultLandingPage]);
-  const [selectedAcademicYear, setSelectedAcademicYear] = useState<string>('ay-5');
+  const [selectedAcademicYear, setSelectedAcademicYear] = useState<string>('ay-4');
   const [academicYears, setAcademicYears] = useState<AcademicYear[]>([
     { id: 'ay-1', name: '2022-23', startDate: '2022-07-01', endDate: '2023-06-30', isCurrent: false },
     { id: 'ay-2', name: '2023-24', startDate: '2023-07-01', endDate: '2024-06-30', isCurrent: false },
     { id: 'ay-3', name: '2024-25', startDate: '2024-07-01', endDate: '2025-06-30', isCurrent: false },
-    { id: 'ay-4', name: '2025-26', startDate: '2025-07-01', endDate: '2026-06-30', isCurrent: false },
-    { id: 'ay-5', name: '2026-27', startDate: '2026-07-01', endDate: '2027-06-30', isCurrent: true },
+    { id: 'ay-4', name: '2025-26', startDate: '2025-07-01', endDate: '2026-06-30', isCurrent: true },
+    { id: 'ay-5', name: '2026-27', startDate: '2026-07-01', endDate: '2027-06-30', isCurrent: false },
   ]);
   const [selectedDepartmentId, setSelectedDepartmentId] = useState<string>('all');
   const [departments, setDepartments] = useState<Department[]>([]);

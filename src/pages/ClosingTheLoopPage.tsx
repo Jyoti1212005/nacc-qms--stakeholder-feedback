@@ -321,16 +321,21 @@ export const ClosingTheLoopPage: React.FC = () => {
               className="w-full min-h-[44px] px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold bg-white text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-[#0a192f] cursor-pointer"
             >
               <option value="all">All Departments (Institutional)</option>
-              {departments.map((d) => (
-                <option key={d.id} value={d.id}>
-                  {d.name} ({d.code})
-                </option>
-              ))}
-              <option value="dept-1">Computer Science & Engineering (CSE)</option>
-              <option value="dept-2">Civil Engineering (CIVIL)</option>
-              <option value="dept-3">Mechanical Engineering (MECH)</option>
-              <option value="dept-4">Chemistry & Materials (CHEM)</option>
-              <option value="dept-5">Central Library & Admin</option>
+              {departments && departments.length > 0 ? (
+                departments.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.name} ({d.code})
+                  </option>
+                ))
+              ) : (
+                <>
+                  <option value="dept-1">B.Tech Computer Science (CSE)</option>
+                  <option value="dept-2">Mechanical Engineering (MECH)</option>
+                  <option value="dept-3">BCA (Bachelor of Computer Applications)</option>
+                  <option value="dept-4">BBA (Bachelor of Business Administration)</option>
+                  <option value="dept-5">B.Tech CSE (AI & ML) (CSE-AIML)</option>
+                </>
+              )}
             </select>
           </div>
 

@@ -81,14 +81,14 @@ analyticsRouter.post('/ai/atr-generate', (req: Request, res: Response) => {
       slNo: 2,
       gapCode: 'GAP-2026-002',
       criterion: 'Criterion 4.1: Computing & Specialized Lab Infrastructure',
-      department: 'Electronics & Communication / CSE',
-      departmentCode: 'ECE',
+      department: 'B.Tech CSE (AI & ML)',
+      departmentCode: 'CSE-AIML',
       stakeholder: 'Students & Faculty',
       deficiency: 'Advanced AI/Deep-Learning lab hardware was insufficient for compute-intensive neural net workloads (3.25/5.0).',
-      rootCause: 'Existing GPU servers were legacy RTX 2060 generation with limited VRAM capacity for modern transformer models.',
+      rootCause: 'Existing GPU servers were legacy generation with limited VRAM capacity for modern transformer models.',
       actionTaken: 'Procured and commissioned 30 NVIDIA RTX 4090 GPU workstations with high-throughput local network storage.',
       preventiveAction: 'Institutional Annual Lab Modernization Policy enacted with dedicated budget allocation of ₹45 Lakhs annually.',
-      responsibleAuthority: 'Prof. S. R. Murthy (HoD ECE) & Lab Superintendent',
+      responsibleAuthority: 'Dr. Vikramaditya Sen (HoD CSE AI&ML) & Lab Superintendent',
       baselineScore: 3.25,
       remeasuredScore: 4.41,
       delta: 1.16,
@@ -257,11 +257,11 @@ Key corrective interventions successfully resolved include: (1) Mandatory 120-ho
 
 // Stakeholder Pulse (Micro-Surveys)
 let pulseSubmissions: any[] = [
-  { id: 'pulse-1', rating: 5, category: 'Curriculum & Teaching', quickFeedback: 'Great practical hands-on examples in AI class today.', stakeholderType: 'STUDENT', departmentName: 'Computer Science & Engineering', submittedAt: '2026-09-22T10:30:00Z' },
-  { id: 'pulse-2', rating: 4, category: 'Laboratory Infrastructure', quickFeedback: 'GPU workstation throughput in AI Lab 3 is vastly improved.', stakeholderType: 'STUDENT', departmentName: 'Electronics & Communication', submittedAt: '2026-09-22T11:15:00Z' },
+  { id: 'pulse-1', rating: 5, category: 'Curriculum & Teaching', quickFeedback: 'Great practical hands-on examples in AI class today.', stakeholderType: 'STUDENT', departmentName: 'B.Tech Computer Science', submittedAt: '2026-09-22T10:30:00Z' },
+  { id: 'pulse-2', rating: 4, category: 'Laboratory Infrastructure', quickFeedback: 'GPU workstation throughput in AI Lab 3 is vastly improved.', stakeholderType: 'STUDENT', departmentName: 'B.Tech CSE (AI & ML)', submittedAt: '2026-09-22T11:15:00Z' },
   { id: 'pulse-3', rating: 5, category: 'Faculty Mentorship', quickFeedback: 'Proctoring session helped organize capstone research methodology.', stakeholderType: 'STUDENT', departmentName: 'Mechanical Engineering', submittedAt: '2026-09-22T14:00:00Z' },
-  { id: 'pulse-4', rating: 4, category: 'Placement & Internships', quickFeedback: 'Corporate mock interviews provided high quality diagnostic feedback.', stakeholderType: 'ALUMNI', departmentName: 'Computer Science & Engineering', submittedAt: '2026-09-23T09:00:00Z' },
-  { id: 'pulse-5', rating: 5, category: 'Wi-Fi & Digital Campus', quickFeedback: 'Campus Wi-Fi 6 latency in hostel study halls is rock solid.', stakeholderType: 'STUDENT', departmentName: 'Information Technology', submittedAt: '2026-09-23T11:30:00Z' },
+  { id: 'pulse-4', rating: 4, category: 'Placement & Internships', quickFeedback: 'Corporate mock interviews provided high quality diagnostic feedback.', stakeholderType: 'ALUMNI', departmentName: 'BBA (Bachelor of Business Administration)', submittedAt: '2026-09-23T09:00:00Z' },
+  { id: 'pulse-5', rating: 5, category: 'Wi-Fi & Digital Campus', quickFeedback: 'Campus cloud lab latency in computer applications halls is rock solid.', stakeholderType: 'STUDENT', departmentName: 'BCA (Bachelor of Computer Applications)', submittedAt: '2026-09-23T11:30:00Z' },
 ];
 
 analyticsRouter.post('/pulse-survey', (req: Request, res: Response) => {
