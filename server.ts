@@ -4,7 +4,7 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { apiRouter } from './server/routes.ts';
-import { connectMongoDB } from './server/config/db.ts';
+import { connectSupabase } from './server/config/supabase.ts';
 import { dbStore } from './server/db.ts';
 
 import http from 'http';
@@ -22,9 +22,9 @@ async function startServer() {
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-  // Initialize MongoDB Connection (Hybrid Mode)
-  await connectMongoDB();
-  await dbStore.syncFromMongo();
+  // Initialize Supabase Connection (Hybrid Mode)
+  await connectSupabase();
+  await dbStore.syncFromSupabase();
 
   // API request telemetry
   app.use((req, _res, next) => {

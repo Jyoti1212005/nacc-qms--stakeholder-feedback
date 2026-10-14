@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { dbStore } from '../db.ts';
 import { getAuthUser } from '../middleware/auth.ts';
 import { UserModel } from '../models/index.ts';
-import { isMongoConnected } from '../config/db.ts';
+import { isSupabaseConnected } from '../config/supabase.ts';
 import { User, Role } from '../types.ts';
 import {
   generateAndSendOtp,
@@ -155,13 +155,13 @@ authRouter.post('/auth/register', async (req: Request, res: Response) => {
 
   dbStore.users.push(newUser);
 
-  // If MongoDB is connected, persist into MongoDB Atlas
+  // If Supabase is connected, persist into Supabase PostgreSQL
   try {
-    if (isMongoConnected()) {
+    if (isSupabaseConnected()) {
       await UserModel.create(newUser);
     }
-  } catch (mongoErr: any) {
-    console.warn('[MongoDB] Registration save warning:', mongoErr.message);
+  } catch (sbErr: any) {
+    console.warn('[Supabase] Registration save warning:', sbErr.message);
   }
 
   dbStore.logAudit('CREATE', 'AUTH', `New user registered with verified email: ${newUser.fullName} (${newUser.role})`, newUser, undefined, req.ip);
@@ -342,11 +342,11 @@ authRouter.post('/auth/google', async (req: Request, res: Response) => {
     dbStore.users.push(newUser);
 
     try {
-      if (isMongoConnected()) {
+      if (isSupabaseConnected()) {
         await UserModel.create(newUser);
       }
-    } catch (mongoErr: any) {
-      console.warn('[MongoDB] Google user save warning:', mongoErr.message);
+    } catch (sbErr: any) {
+      console.warn('[Supabase] Google user save warning:', sbErr.message);
     }
 
     user = newUser;

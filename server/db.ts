@@ -48,7 +48,7 @@ import {
 import {
   initialClosingTheLoopItems,
 } from './closingTheLoopData.ts';
-import { isMongoConnected } from './config/db.ts';
+import { isSupabaseConnected } from './config/supabase.ts';
 import {
   UserModel,
   DepartmentModel,
@@ -107,12 +107,12 @@ class DatabaseStore {
     this.seed();
   }
 
-  // Sync latest data from MongoDB into application store
-  async syncFromMongo() {
-    if (!isMongoConnected()) return;
+  // Sync latest data from Supabase into application store
+  async syncFromSupabase() {
+    if (!isSupabaseConnected()) return;
 
     try {
-      console.log('[MongoDB Sync] Loading latest data from MongoDB into application store...');
+      console.log('[Supabase Sync] Loading latest data from Supabase into application store...');
       const [
         users,
         departments,
@@ -159,16 +159,18 @@ class DatabaseStore {
 
       if (departments.length > 0) this.departments = departments as any;
       if (programmes.length > 0) this.programmes = programmes as any;
+      if (academicYears.length > 0) this.academicYears = academicYears as any;
+      if (stakeholders.length > 0) this.stakeholders = stakeholders as any;
       if (users.length > 0) {
-        const cleanMongoUsers = (users as any[]).filter(
+        const cleanUsers = (users as any[]).filter(
           (u) =>
             !/^(jyoti|ghjhujk|hello|sourabh)/i.test(u.fullName) &&
-            !u.email.includes('test') &&
-            !u.id.startsWith('usr-179')
+            !u.email?.includes('test') &&
+            !u.id?.startsWith('usr-179')
         );
         const userMap = new Map<string, User>();
         initialUsers.forEach((u) => userMap.set(u.id, u));
-        cleanMongoUsers.forEach((u) => userMap.set(u.id, u));
+        cleanUsers.forEach((u) => userMap.set(u.id, u));
         this.users = Array.from(userMap.values());
       } else {
         this.users = [...initialUsers];
@@ -189,35 +191,40 @@ class DatabaseStore {
       if (roleCategoryMappings.length > 0) this.roleCategoryMappings = roleCategoryMappings as any;
       if (questionTemplates.length > 0) this.questionTemplates = questionTemplates as any;
 
-      console.log(`[MongoDB Sync] Synchronized ${users.length} users, ${feedbackForms.length} forms, ${feedbackResponses.length} responses.`);
+      console.log(`[Supabase Sync] Synchronized ${users.length} users, ${feedbackForms.length} forms, ${feedbackResponses.length} responses.`);
     } catch (err: any) {
-      console.error('[MongoDB Sync] Error syncing data:', err.message);
+      console.error('[Supabase Sync] Error syncing data:', err.message);
     }
+  }
+
+  // Alias for backward compatibility
+  async syncFromMongo() {
+    return this.syncFromSupabase();
   }
 
   // Safe background persistence helper
   persistAsync(model: any, doc: any) {
-    if (isMongoConnected() && doc && doc.id) {
-      model.findOneAndUpdate({ id: doc.id }, { $set: doc }, { upsert: true, new: true }).catch((err: any) => {
-        console.error(`[MongoDB] Upsert error in ${model.modelName}:`, err.message);
+    if (isSupabaseConnected() && doc && doc.id) {
+      model.findOneAndUpdate({ id: doc.id }, { $set: doc }).catch((err: any) => {
+        console.error(`[Supabase] Upsert error in ${model.tableName || 'table'}:`, err.message);
       });
     }
   }
 
   deleteAsync(model: any, id: string) {
-    if (isMongoConnected() && id) {
+    if (isSupabaseConnected() && id) {
       model.deleteOne({ id }).catch((err: any) => {
-        console.error(`[MongoDB] Delete error in ${model.modelName}:`, err.message);
+        console.error(`[Supabase] Delete error in ${model.tableName || 'table'}:`, err.message);
       });
     }
   }
 
   getDatabaseStatus() {
     return {
-      connected: isMongoConnected(),
-      provider: isMongoConnected() ? 'MongoDB Atlas (Persistent Cloud Cluster)' : 'In-Memory State Store (Fallback)',
-      database: isMongoConnected() ? 'naac_qms' : 'memory',
-      status: isMongoConnected() ? 'ONLINE' : 'STANDALONE_FALLBACK',
+      connected: isSupabaseConnected(),
+      provider: isSupabaseConnected() ? 'Supabase (PostgreSQL Cloud)' : 'In-Memory State Store (Fallback)',
+      database: isSupabaseConnected() ? 'Supabase' : 'memory',
+      status: isSupabaseConnected() ? 'ONLINE' : 'STANDALONE_FALLBACK',
       counts: {
         users: this.users.length,
         departments: this.departments.length,

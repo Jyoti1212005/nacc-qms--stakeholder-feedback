@@ -3,7 +3,7 @@
 This document specifies the database schemas, entity relationships, constraints, and data dictionaries for the **NAAC Stakeholder Feedback & Quality Management System (NAAC-QMS)**.
 
 > [!NOTE]
-> **MongoDB Integration Available**: The system is integrated with **MongoDB Atlas via Mongoose** using a resilient hybrid architecture. See [`MONGODB_GUIDE.md`](file:///c:/Users/soura/Downloads/naac-qms---stakeholder-feedback-&-quality-management-system/MONGODB_GUIDE.md) and Mongoose models in [`server/models/index.ts`](file:///c:/Users/soura/Downloads/naac-qms---stakeholder-feedback-&-quality-management-system/server/models/index.ts).
+> **Supabase Cloud Database Integration**: The system is integrated with **Supabase (PostgreSQL Cloud)** using a resilient hybrid architecture with instant auto-seeding and in-memory fallback. See [`SUPABASE_GUIDE.md`](file:///c:/Users/HP/Downloads/naac-qms---stakeholder-feedback-&-quality-management-system/SUPABASE_GUIDE.md), SQL migration script in [`supabase_schema.sql`](file:///c:/Users/HP/Downloads/naac-qms---stakeholder-feedback-&-quality-management-system/supabase_schema.sql), and models in [`server/models/index.ts`](file:///c:/Users/HP/Downloads/naac-qms---stakeholder-feedback-&-quality-management-system/server/models/index.ts).
 
 ---
 
