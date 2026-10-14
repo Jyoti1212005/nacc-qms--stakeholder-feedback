@@ -1,4 +1,7 @@
 {
+  "git.path": "C:\\Users\\HP\\MinGit\\cmd\\git.exe",
+  "git.enabled": true,
+  "git.autofetch": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
