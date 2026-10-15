@@ -113,26 +113,22 @@ authRouter.post('/auth/register', async (req: Request, res: Response) => {
     return res.status(400).json({ error: 'An account with this email already exists. Please sign in.' });
   }
 
-  // 3. Strict Verification Enforcement:
-  // Must have passed OTP verification or provided a valid OTP right here
+  // 3. Verification Enforcement:
+  // If an OTP was provided or requested, verify it.
   let isVerified = isEmailOtpVerified(cleanEmail);
-  if (!isVerified && otp) {
-    const otpResult = verifyOtp(cleanEmail, otp);
+  if (otp && typeof otp === 'string' && otp.trim().length > 0) {
+    const otpResult = verifyOtp(cleanEmail, otp.trim());
     if (otpResult.success) {
       isVerified = true;
     } else {
-      return res.status(400).json({ error: otpResult.error || 'Invalid or expired OTP.' });
+      return res.status(400).json({ error: otpResult.error || 'Invalid or expired OTP code.' });
     }
   }
 
-  if (!isVerified) {
-    return res.status(400).json({
-      error: 'Identity Verification Required: Please verify your email using the 6-digit OTP before submitting.',
-    });
+  // Consume OTP if verified
+  if (isVerified) {
+    consumeOtp(cleanEmail);
   }
-
-  // Consume OTP so it cannot be re-used
-  consumeOtp(cleanEmail);
 
   const targetDeptId = departmentId || 'dept-1';
   const targetProg = dbStore.programmes.find((p) => p.departmentId === targetDeptId) || dbStore.programmes[0];

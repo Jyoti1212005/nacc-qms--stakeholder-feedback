@@ -282,24 +282,19 @@ export const LandingPage: React.FC = () => {
     setRegError('');
     setRegSuccess('');
 
-    if (!regFullName || !regEmail || !regPassword) {
+    if (!regFullName.trim() || !regEmail.trim() || !regPassword) {
       setRegError('Full Name, Official Email, and Password are required.');
-      return;
-    }
-
-    if (!regOtpVerified && !regOtp) {
-      setRegError('Verification Required: Please verify your email with the 6-digit OTP before submitting.');
       return;
     }
 
     setIsSubmitting(true);
     const result = await register({
-      fullName: regFullName,
-      email: regEmail,
+      fullName: regFullName.trim(),
+      email: regEmail.trim(),
       password: regPassword,
       role: regRole,
       departmentId: regDept,
-      otp: regOtp.trim(),
+      otp: regOtp ? regOtp.trim() : undefined,
     });
     setIsSubmitting(false);
 
@@ -1963,15 +1958,19 @@ export const LandingPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => {
-                      if (regOtpVerified) setRegStep(2);
+                      if (!regEmail.trim()) {
+                        setRegError('Please enter your email address first.');
+                        return;
+                      }
+                      setRegError('');
+                      setRegStep(2);
                     }}
-                    disabled={!regOtpVerified}
-                    className={`py-2 px-3 rounded-lg flex items-center justify-center space-x-1.5 transition-all ${
+                    className={`py-2 px-3 rounded-lg flex items-center justify-center space-x-1.5 transition-all cursor-pointer ${
                       regStep === 2
-                        ? 'bg-white text-[#c2410c] shadow-xs cursor-pointer'
+                        ? 'bg-white text-[#c2410c] shadow-xs'
                         : regOtpVerified
-                        ? 'text-slate-600 hover:text-slate-900 cursor-pointer'
-                        : 'text-slate-400 opacity-60 cursor-not-allowed'
+                        ? 'text-emerald-700 hover:text-emerald-900'
+                        : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
                     <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-extrabold ${
@@ -2119,22 +2118,35 @@ export const LandingPage: React.FC = () => {
                         </div>
                       )}
 
-                      {/* If already verified, allow jumping to Step 2 */}
-                      {regOtpVerified && (
-                        <div className="pt-2 flex items-center justify-between">
+                      {/* Option to proceed to Step 2 */}
+                      <div className="pt-2 flex items-center justify-between">
+                        {regOtpVerified ? (
                           <p className="text-xs text-emerald-800 font-bold flex items-center space-x-1.5">
                             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                             <span>Email verified!</span>
                           </p>
-                          <button
-                            type="button"
-                            onClick={() => setRegStep(2)}
-                            className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl cursor-pointer transition-all shadow-xs"
-                          >
-                            Proceed to Step 2 →
-                          </button>
-                        </div>
-                      )}
+                        ) : (
+                          <span className="text-[11px] text-slate-500 font-medium">Or direct profile details:</span>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (!regEmail.trim()) {
+                              setRegError('Please enter your email address first.');
+                              return;
+                            }
+                            setRegError('');
+                            setRegStep(2);
+                          }}
+                          className={`px-3.5 py-1.5 text-xs font-bold rounded-xl cursor-pointer transition-all shadow-xs ${
+                            regOtpVerified
+                              ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                              : 'bg-slate-800 hover:bg-slate-900 text-white'
+                          }`}
+                        >
+                          {regOtpVerified ? 'Proceed to Step 2 →' : 'Fill Profile Details →'}
+                        </button>
+                      </div>
                     </div>
 
                     <div className="pt-1 text-center">
@@ -2156,11 +2168,19 @@ export const LandingPage: React.FC = () => {
                 {/* STEP 2: Profile Details & Password */}
                 {regStep === 2 && (
                   <form onSubmit={handleRegister} className="space-y-3 animate-in fade-in duration-150">
-                    {/* Verified Email Confirmation Badge */}
-                    <div className="flex items-center justify-between p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-950">
+                    {/* Email Confirmation Badge */}
+                    <div className={`flex items-center justify-between p-2.5 rounded-xl text-xs ${
+                      regOtpVerified
+                        ? 'bg-emerald-50 border border-emerald-200 text-emerald-950'
+                        : 'bg-slate-50 border border-slate-200 text-slate-900'
+                    }`}>
                       <div className="flex items-center space-x-2 truncate mr-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                        <span className="truncate">Verified: <strong className="font-mono">{regEmail}</strong></span>
+                        {regOtpVerified ? (
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                        ) : (
+                          <Mail className="w-4 h-4 text-[#ff7a50] shrink-0" />
+                        )}
+                        <span className="truncate">{regOtpVerified ? 'Verified Email:' : 'Email:'} <strong className="font-mono">{regEmail}</strong></span>
                       </div>
                       <button
                         type="button"
