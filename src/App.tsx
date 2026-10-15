@@ -33,10 +33,10 @@ const AppContent: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#fffaf5] flex items-center justify-center text-[#0a192f] text-xs">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-900 text-xs">
         <div className="flex flex-col items-center space-y-3">
-          <div className="w-10 h-10 border-3 border-[#ff7a50] border-t-[#0a192f] rounded-full animate-spin" />
-          <p className="font-bold text-[#0a192f]">Loading NAAC-QMS Suite...</p>
+          <div className="w-8 h-8 border-2 border-slate-300 border-t-blue-600 rounded-full animate-spin" />
+          <p className="font-medium text-slate-600 text-xs tracking-wide">Loading NAAC-QMS Suite...</p>
         </div>
       </div>
     );
@@ -89,7 +89,7 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#fdfaf7] flex flex-col selection:bg-[#ff7a50] selection:text-white text-[#0b1a30] overflow-x-hidden w-full">
+    <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900 overflow-x-hidden w-full font-sans">
       <Navbar />
 
       <div className="flex flex-1 w-full overflow-x-hidden min-w-0">

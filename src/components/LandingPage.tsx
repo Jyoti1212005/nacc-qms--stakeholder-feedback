@@ -500,22 +500,22 @@ export const LandingPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-white via-[#fffaf5] to-[#fff3ea] text-[#0b1a30] flex flex-col selection:bg-[#ff7a50] selection:text-white overflow-x-hidden w-full">
-      {/* Top Header - Navy Blue Bar with White & Peach Accents */}
-      <header className="border-b border-[#1b3456] bg-[#0a192f] text-white sticky top-0 z-40 px-3 sm:px-6 py-2.5 sm:py-3.5 flex items-center justify-between shadow-lg">
-        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-linear-to-br from-[#0f2d59] to-[#1e3a8a] border border-[#3b5e8c] flex items-center justify-center text-[#ffa07a] font-bold shadow-md shrink-0">
-            <Award className="w-5 h-5 sm:w-6 sm:h-6" />
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-blue-600 selection:text-white overflow-x-hidden w-full font-sans">
+      {/* Top Header - Executive Slate Bar */}
+      <header className="border-b border-slate-800 bg-slate-900/95 text-white sticky top-0 z-40 px-3 sm:px-6 py-3 flex items-center justify-between shadow-xs backdrop-blur-md">
+        <div className="flex items-center space-x-2.5 sm:space-x-3.5 min-w-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-linear-to-br from-blue-600 to-indigo-700 border border-blue-500/40 flex items-center justify-center text-white font-bold shadow-xs shrink-0">
+            <Award className="w-5 h-5 sm:w-5.5 sm:h-5.5" />
           </div>
           <div className="min-w-0">
-            <div className="flex items-center space-x-1.5 sm:space-x-2">
-              <span className="font-extrabold text-base sm:text-xl tracking-tight text-white truncate">NAAC-QMS</span>
-              <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-linear-to-r from-amber-500/20 to-orange-500/20 text-[#fed7aa] rounded-lg border border-amber-400/40 shadow-xs shrink-0">
-                <ShieldCheck className="w-3 h-3 text-[#ff9d7a]" />
+            <div className="flex items-center space-x-2">
+              <span className="font-extrabold text-base sm:text-lg tracking-tight text-white truncate">NAAC-QMS</span>
+              <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 rounded-md border border-emerald-500/20 shrink-0">
+                <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 <span>NAAC A++ Accredited</span>
               </span>
             </div>
-            <p className="text-[10px] sm:text-[11px] text-blue-200/80 font-medium hidden md:block truncate">
+            <p className="text-[11px] text-slate-400 font-normal hidden md:block truncate">
               Continuous Quality Management & Stakeholder Feedback System • Apex Institute
             </p>
           </div>
@@ -601,56 +601,55 @@ export const LandingPage: React.FC = () => {
         </div>
       </header>
 
-      {/* Hero Section with Animated 3D Floating Geometry */}
-      <section className="relative pt-8 sm:pt-14 pb-12 sm:pb-16 px-4 sm:px-6 max-w-6xl mx-auto text-center overflow-hidden w-full">
-        {/* Animated Background 3D Ambient Orbs */}
-        <div className="absolute top-10 left-1/4 w-72 h-72 rounded-full bg-linear-to-tr from-[#ff7a50]/15 to-[#fed7aa]/25 blur-3xl pointer-events-none animate-float-slow -z-10" />
-        <div className="absolute top-40 right-1/4 w-80 h-80 rounded-full bg-linear-to-br from-[#1e3a8a]/10 to-[#ffa07a]/15 blur-3xl pointer-events-none animate-float-reverse -z-10" />
+      {/* Hero Section with Clean Architectural Precision */}
+      <section className="relative pt-10 sm:pt-16 pb-12 sm:pb-20 px-4 sm:px-6 max-w-6xl mx-auto text-center overflow-hidden w-full">
+        {/* Subtle dot grid overlay */}
+        <div className="absolute inset-0 bg-grid-subtle opacity-40 -z-10 pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-64 bg-radial from-blue-500/10 via-indigo-500/5 to-transparent blur-2xl pointer-events-none -z-10" />
 
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-4 sm:mb-6 max-w-full">
-          <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#fff0e6] border border-[#fed7aa] text-[#c2410c] text-xs font-bold shadow-xs">
-            <Sparkles className="w-4 h-4 text-[#ff7a50] shrink-0" />
+        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-5 sm:mb-6 max-w-full">
+          <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-medium shadow-2xs">
+            <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
             <span className="truncate">Higher Education Quality Assurance & Accreditation Framework</span>
           </div>
 
           <button
             onClick={() => setShowExportSsrModal(true)}
-            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold transition-all shadow-xs cursor-pointer group"
+            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 text-xs font-medium transition-all shadow-2xs cursor-pointer group"
           >
-            <Award className="w-4 h-4 text-amber-600 shrink-0 group-hover:scale-110 transition-transform" />
-            <span>Export NAAC ATR / SSR (PDF) • Metric 1.4.2 Verified →</span>
+            <Award className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+            <span>Export NAAC ATR / SSR (PDF) • Metric 1.4.2 →</span>
           </button>
 
           <button
             onClick={() => setShowPublicAtrModal(true)}
-            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-bold transition-all shadow-xs cursor-pointer group"
+            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 text-xs font-medium transition-all shadow-2xs cursor-pointer group"
           >
-            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 group-hover:scale-110 transition-transform" />
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
             <span>Public Disclosure Portal & QR Seal →</span>
           </button>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0a192f] leading-tight max-w-4xl mx-auto">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.12] max-w-4xl mx-auto">
           Multi-Stakeholder Feedback &{' '}
-          <span className="bg-linear-to-r from-[#0a192f] via-[#1e3a8a] to-[#ff7a50] bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-blue-600 via-indigo-600 to-slate-900 bg-clip-text text-transparent">
             Continuous Quality Improvement.
           </span>
         </h1>
 
         <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-slate-600 max-w-3xl mx-auto font-normal leading-relaxed">
-          A modern full-stack institutional platform designed for Indian Higher Education Institutions to collect structured feedback from <strong className="text-[#0a192f] font-semibold">Students</strong>, <strong className="text-[#0a192f] font-semibold">Teachers & Faculty</strong>, <strong className="text-[#0a192f] font-semibold">Alumni</strong>, <strong className="text-[#0a192f] font-semibold">Employers</strong>, <strong className="text-[#0a192f] font-semibold">Parents</strong>, <strong className="text-[#0a192f] font-semibold">Administrative Staff</strong>, and <strong className="text-[#0a192f] font-semibold">Technical Staff</strong>, pinpoint quality gaps, implement CAPA action plans, and build NAAC-ready Action Taken Reports.
+          An institutional intelligence platform designed for Indian Higher Education Institutions to collect structured feedback from <strong className="text-slate-900 font-semibold">Students</strong>, <strong className="text-slate-900 font-semibold">Faculty</strong>, <strong className="text-slate-900 font-semibold">Alumni</strong>, <strong className="text-slate-900 font-semibold">Employers</strong>, <strong className="text-slate-900 font-semibold">Parents</strong>, and <strong className="text-slate-900 font-semibold">Administrative Staff</strong>, pinpoint quality gaps, implement CAPA action plans, and publish statutory NAAC Action Taken Reports.
         </p>
 
-        {/* Prominent Primary CTA Button Pair Directly Below Hero Subheadline */}
+        {/* Primary CTA Pair */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-lg mx-auto">
           <button
             onClick={() => demoLogin('iqac@naac-qms.edu')}
             id="btn-hero-explore-iqac"
-            className="w-full sm:w-auto px-6 py-3.5 min-h-[50px] bg-linear-to-r from-[#0a192f] via-[#102a4e] to-[#1e3a8a] hover:from-[#081526] hover:to-[#172554] text-white font-extrabold text-sm rounded-2xl shadow-xl shadow-blue-950/20 hover:shadow-2xl hover:-translate-y-0.5 transition-all flex items-center justify-center space-x-2.5 cursor-pointer border border-[#3b5e8c]/50 group"
+            className="w-full sm:w-auto px-6 py-3.5 min-h-[48px] bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl shadow-sm shadow-blue-600/25 transition-all flex items-center justify-center space-x-2.5 cursor-pointer group"
           >
-            <Sparkles className="w-4 h-4 text-[#ffa07a] group-hover:rotate-12 transition-transform" />
             <span>Explore IQAC Dashboard</span>
-            <ArrowRight className="w-4 h-4 text-[#ffa07a] group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 text-blue-200 group-hover:translate-x-0.5 transition-transform" />
           </button>
           <a
             href="#stakeholder-perspectives"
@@ -659,9 +658,9 @@ export const LandingPage: React.FC = () => {
               document.getElementById('stakeholder-perspectives')?.scrollIntoView({ behavior: 'smooth' });
             }}
             id="btn-hero-submit-feedback"
-            className="w-full sm:w-auto px-6 py-3.5 min-h-[50px] bg-linear-to-r from-[#fff0e6] to-[#ffe2cc] hover:from-[#ffe7d6] hover:to-[#ffd5b8] text-[#c2410c] hover:text-[#9a3412] font-extrabold text-sm rounded-2xl border-2 border-[#fed7aa] shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center space-x-2 cursor-pointer group"
+            className="w-full sm:w-auto px-6 py-3.5 min-h-[48px] bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm rounded-xl border border-slate-300 shadow-2xs transition-all flex items-center justify-center space-x-2 cursor-pointer group"
           >
-            <Send className="w-4 h-4 text-[#ff7a50] group-hover:scale-110 transition-transform" />
+            <Send className="w-4 h-4 text-slate-500 group-hover:text-blue-600 transition-colors" />
             <span>Submit Stakeholder Feedback</span>
           </a>
         </div>

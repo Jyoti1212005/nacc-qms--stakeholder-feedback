@@ -1,72 +1,183 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    --brand-primary: #1e40af;
+    --brand-accent: #2563eb;
+    --brand-surface: #0f172a;
+    --brand-border: #e2e8f0;
+  }
+
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #fdfaf7;
-    color: #0b1a30;
+    background-color: #f8fafc;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
   }
-  code, pre {
-    font-family: 'JetBrains Mono', monospace;
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-feature-settings: 'tnum' on, 'zero' on;
+  }
+
+  ::selection {
+    background-color: #2563eb;
+    color: #ffffff;
   }
 }
 
-/* 3D Animations & Float Keyframes */
-@keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-16px) rotate(3deg);
-  }
+/* Subtle architectural dot grid background */
+.bg-grid-subtle {
+  background-size: 28px 28px;
+  background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1px);
 }
 
-@keyframes float-reverse {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(14px) rotate(-3deg);
-  }
+.dark-grid-subtle {
+  background-size: 28px 28px;
+  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.15) 1px, transparent 1px);
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.08);
-  }
+/* Precision enterprise glass effect */
+.enterprise-glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
 }
 
-.animate-float-slow {
-  animation: float-slow 7s ease-in-out infinite;
+.enterprise-glass-dark {
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(51, 65, 85, 0.6);
 }
 
-.animate-float-reverse {
-  animation: float-reverse 9s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
-}
-
-/* Custom scrollbar in White, Navy Blue & Peach aesthetic */
+/* Precision enterprise scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #fff5ee;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #fdbca0;
+  background: #cbd5e1;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff7a50;
+  background: #94a3b8;
+}
+
+/* ========================================================================== */
+/* 2026 Executive Enterprise Design System (Eliminates AI Clichés)          */
+/* Replaces synthetic peach/orange with institutional Sapphire Blue & Slate  */
+/* ========================================================================== */
+
+/* Primary Action Buttons */
+.bg-\[\#ff7a50\],
+.hover\:bg-\[\#f0683d\]:hover,
+.hover\:to-\[\#ea580c\]:hover {
+  background-color: #2563eb !important;
+}
+
+.bg-linear-to-r.from-\[\#ff7a50\].to-\[\#f97316\],
+.bg-linear-to-r.from-\[\#ff7a50\].to-\[\#ea580c\],
+.bg-linear-to-r.from-orange-500.to-amber-500 {
+  background-image: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+}
+
+.hover\:from-\[\#f0683d\]:hover,
+.hover\:to-\[\#ea580c\]:hover {
+  background-image: linear-gradient(135deg, #1d4ed8, #1e40af) !important;
+}
+
+/* Accent & Text Hierarchy */
+.text-\[\#ff7a50\],
+.text-\[\#ffa07a\],
+.text-\[\#ff9d7a\],
+.group-hover\:text-\[\#ff7a50\]:hover {
+  color: #3b82f6 !important;
+}
+
+.text-\[\#c2410c\],
+.text-\[\#ea580c\] {
+  color: #1d4ed8 !important;
+}
+
+/* Clean Borders */
+.border-\[\#ff7a50\],
+.border-\[\#ff7a50\]\/40,
+.border-\[\#f97316\],
+.focus\:border-\[\#ff7a50\]:focus {
+  border-color: #3b82f6 !important;
+}
+
+.border-\[\#fed7aa\],
+.border-\[\#fed7aa\]\/80,
+.border-\[\#eddcd2\],
+.border-\[\#f3e8e0\],
+.border-\[\#ffe4d6\],
+.border-\[\#fed7aa\]\/40 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Clean Surfaces & Panels */
+.bg-\[\#fffaf5\],
+.bg-\[\#fff5ee\],
+.bg-\[\#fff0e6\],
+.bg-\[\#fff3ea\],
+.bg-\[\#fdfaf7\] {
+  background-color: #f8fafc !important;
+}
+
+.hover\:bg-\[\#fff5ee\]:hover,
+.hover\:bg-\[\#fffaf5\]:hover,
+.hover\:bg-\[\#fff0e6\]:hover,
+.hover\:bg-\[\#ffe2cc\]:hover {
+  background-color: #f1f5f9 !important;
+}
+
+/* Authoritative Deep Slate Navy */
+.bg-\[\#0a192f\],
+.bg-\[\#071324\],
+.bg-\[\#0b1a30\],
+.bg-\[\#0d203b\],
+.bg-\[\#0f2444\],
+.bg-\[\#0d223f\],
+.bg-\[\#14325a\] {
+  background-color: #0f172a !important;
+}
+
+.border-\[\#1b3456\],
+.border-\[\#234573\],
+.border-\[\#2a4d7d\],
+.border-\[\#3b5e8c\] {
+  border-color: #1e293b !important;
+}
+
+.hover\:bg-\[\#16335a\]:hover,
+.hover\:bg-\[\#122b4d\]:hover,
+.hover\:bg-\[\#1b4175\]:hover {
+  background-color: #1e293b !important;
+}
+
+.text-\[\#fed7aa\],
+.text-\[\#ffebd9\] {
+  color: #94a3b8 !important;
+}
+
+.text-\[\#0a192f\],
+.text-\[\#0b1a30\] {
+  color: #0f172a !important;
+}
+
+/* Eliminate AI floating motion clichés */
+.animate-float-slow,
+.animate-float-reverse,
+.animate-pulse-glow {
+  animation: none !important;
 }
 
 @media print {
