@@ -35,6 +35,7 @@ import {
   QrCode,
   Activity,
   FileText,
+  Info,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StakeholderType, FeedbackAnswer, Role } from '../types';
@@ -85,10 +86,12 @@ export const LandingPage: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [authModalTab, setAuthModalTab] = useState<'login' | 'register'>('login');
   const [showRoleMatrix, setShowRoleMatrix] = useState(false);
+  const [selectedRoleForMatrix, setSelectedRoleForMatrix] = useState<Role | undefined>(undefined);
   const [showPublicAtrModal, setShowPublicAtrModal] = useState(false);
   const [showExportSsrModal, setShowExportSsrModal] = useState(false);
   const [landingAcademicYear, setLandingAcademicYear] = useState('ay-4');
   const [roleFilterTab, setRoleFilterTab] = useState<'ALL' | 'STUDENTS' | 'FACULTY_STAFF' | 'LEADERSHIP_ADMIN' | 'EXTERNAL'>('ALL');
+  const [showAllPersonas, setShowAllPersonas] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -777,34 +780,34 @@ export const LandingPage: React.FC = () => {
           <ThreeDQualityOrbit />
         </div>
 
-        {/* Quick Demo Personas - Instant Login in Crisp White Box */}
-        <div className="mt-10 sm:mt-14 bg-white rounded-3xl p-4 sm:p-7 border border-[#eddcd2] max-w-5xl mx-auto shadow-xl w-full">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#f3e8e0] gap-2">
+        {/* Quick Demo Personas - Instant Login in Clean Enterprise Box */}
+        <div className="mt-10 sm:mt-14 bg-white rounded-2xl p-5 sm:p-7 border border-slate-200/90 max-w-5xl mx-auto shadow-xs w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-200 gap-2">
             <div className="text-left">
-              <h2 className="text-sm sm:text-base font-extrabold text-[#0a192f] tracking-tight flex items-center space-x-2">
-                <Sparkles className="w-4 h-4 text-[#ff7a50] shrink-0" />
+              <h2 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight flex items-center space-x-2">
+                <Users className="w-4 h-4 text-blue-600 shrink-0" />
                 <span>One-Click Role Switcher (Pre-Seeded Institutional Personas)</span>
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
-                Explore NAAC-QMS through authentic academic personas across Computer Science, Mechanical, Civil, MBA, and Applied Sciences:
+                Explore NAAC-QMS through authentic academic personas across Engineering, MBA, and Applied Sciences:
               </p>
             </div>
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setShowRoleMatrix(true)}
-                className="text-[11px] font-extrabold text-[#0a192f] bg-white hover:bg-[#fff0e6] border border-[#fed7aa] px-3 py-2 min-h-[44px] rounded-xl transition-colors cursor-pointer flex items-center space-x-1"
+                className="text-xs font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-300 px-3 py-2 min-h-[38px] rounded-xl transition-all cursor-pointer flex items-center space-x-1.5 shadow-2xs"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#ff7a50]" />
+                <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
                 <span>Role Definitions</span>
               </button>
-              <span className="self-start sm:self-auto text-[11px] font-bold text-[#c2410c] bg-[#fff0e6] border border-[#fed7aa] px-2.5 py-1 rounded-full">
+              <span className="self-start sm:self-auto text-xs font-semibold text-slate-700 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-full">
                 {demoAccounts.length} Verified Roles
               </span>
             </div>
           </div>
 
           {/* Quick Tab Filters: [All | Students | Faculty & Staff | Leadership / Admin | External (Alumni/Employers)] */}
-          <div className="flex items-center gap-1.5 sm:gap-2 pt-4 pb-1 overflow-x-auto no-scrollbar border-b border-[#f3e8e0]">
+          <div className="flex items-center gap-1.5 sm:gap-2 pt-4 pb-1 overflow-x-auto no-scrollbar border-b border-slate-200">
             {[
               { id: 'ALL' as const, label: 'All', count: demoAccounts.length },
               {
@@ -840,17 +843,19 @@ export const LandingPage: React.FC = () => {
               return (
                 <button
                   key={tab.id}
-                  onClick={() => setRoleFilterTab(tab.id)}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center space-x-1.5 border min-h-[40px] ${
+                  onClick={() => {
+                    setRoleFilterTab(tab.id);
+                  }}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all shrink-0 cursor-pointer flex items-center space-x-1.5 border min-h-[36px] ${
                     isActive
-                      ? 'bg-[#0a192f] text-white border-[#0a192f] shadow-sm'
-                      : 'bg-[#fffaf5] hover:bg-[#fff0e6] text-[#0a192f] border-[#fed7aa] hover:border-[#ff7a50]'
+                      ? 'bg-blue-600 text-white border-blue-600 shadow-2xs'
+                      : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   <span>{tab.label}</span>
                   <span
-                    className={`text-[10px] font-black px-2 py-0.5 rounded-full ${
-                      isActive ? 'bg-[#ff7a50] text-white' : 'bg-[#fed7aa]/60 text-[#c2410c]'
+                    className={`text-[10px] font-bold px-1.5 py-0.2 rounded-full ${
+                      isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
                     }`}
                   >
                     {tab.count}
@@ -860,64 +865,119 @@ export const LandingPage: React.FC = () => {
             })}
           </div>
 
-          {/* Persona Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 pt-5 text-left">
-            {demoAccounts
-              .filter((acc) => {
-                if (roleFilterTab === 'ALL') return true;
-                const cat =
-                  acc.category ||
-                  (acc.role === 'STUDENT'
-                    ? 'STUDENTS'
-                    : ['FACULTY', 'NON_TEACHING', 'TECHNICAL_STAFF'].includes(acc.role)
-                    ? 'FACULTY_STAFF'
-                    : ['SUPER_ADMIN', 'IQAC_ADMIN', 'PRINCIPAL', 'HOD'].includes(acc.role)
-                    ? 'LEADERSHIP_ADMIN'
-                    : 'EXTERNAL');
-                return cat === roleFilterTab;
-              })
-              .map((acc) => {
-                const isStaff = acc.role === 'NON_TEACHING' || acc.role === 'TECHNICAL_STAFF';
-                const isFaculty = acc.role === 'FACULTY';
-                const isStudent = acc.role === 'STUDENT';
-                const isAdmin = acc.role === 'SUPER_ADMIN' || acc.role === 'IQAC_ADMIN' || acc.role === 'PRINCIPAL';
-                const isHod = acc.role === 'HOD';
+          {/* Persona Cards Grid with Compact View & View More */}
+          {(() => {
+            const filteredPersonas = demoAccounts.filter((acc) => {
+              if (roleFilterTab === 'ALL') return true;
+              const cat =
+                acc.category ||
+                (acc.role === 'STUDENT'
+                  ? 'STUDENTS'
+                  : ['FACULTY', 'NON_TEACHING', 'TECHNICAL_STAFF'].includes(acc.role)
+                  ? 'FACULTY_STAFF'
+                  : ['SUPER_ADMIN', 'IQAC_ADMIN', 'PRINCIPAL', 'HOD'].includes(acc.role)
+                  ? 'LEADERSHIP_ADMIN'
+                  : 'EXTERNAL');
+              return cat === roleFilterTab;
+            });
 
-                let badgeStyle = 'bg-blue-100 text-blue-900 border-blue-300';
-                if (isStaff) badgeStyle = 'bg-orange-100 text-orange-900 border-orange-300';
-                if (isFaculty) badgeStyle = 'bg-sky-100 text-sky-900 border-sky-300';
-                if (isStudent) badgeStyle = 'bg-emerald-100 text-emerald-900 border-emerald-300';
-                if (isAdmin) badgeStyle = 'bg-purple-100 text-purple-900 border-purple-300';
-                if (isHod) badgeStyle = 'bg-indigo-100 text-indigo-900 border-indigo-300';
+            const visiblePersonas = showAllPersonas ? filteredPersonas : filteredPersonas.slice(0, 4);
 
-                return (
-                  <button
-                    key={acc.id}
-                    onClick={() => demoLogin(acc.email)}
-                    className="p-3.5 min-h-[44px] rounded-xl bg-[#fffaf5] hover:bg-[#fff0e6] border border-[#fed7aa] hover:border-[#ff7a50] text-left transition-all group flex flex-col justify-between cursor-pointer shadow-xs hover:shadow-md"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded border uppercase tracking-tight ${badgeStyle}`}>
-                          {acc.role.replace('_', ' ')}
-                        </span>
-                        <ArrowRight className="w-3.5 h-3.5 text-[#ff7a50] group-hover:translate-x-1 transition-all shrink-0" />
+            return (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-5 text-left">
+                  {visiblePersonas.map((acc) => {
+                    const isStaff = acc.role === 'NON_TEACHING' || acc.role === 'TECHNICAL_STAFF';
+                    const isFaculty = acc.role === 'FACULTY';
+                    const isStudent = acc.role === 'STUDENT';
+                    const isAdmin = acc.role === 'SUPER_ADMIN' || acc.role === 'IQAC_ADMIN' || acc.role === 'PRINCIPAL';
+                    const isHod = acc.role === 'HOD';
+
+                    let badgeStyle = 'bg-blue-50 text-blue-700 border-blue-200';
+                    if (isStaff) badgeStyle = 'bg-amber-50 text-amber-700 border-amber-200';
+                    if (isFaculty) badgeStyle = 'bg-sky-50 text-sky-700 border-sky-200';
+                    if (isStudent) badgeStyle = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                    if (isAdmin) badgeStyle = 'bg-purple-50 text-purple-700 border-purple-200';
+                    if (isHod) badgeStyle = 'bg-indigo-50 text-indigo-700 border-indigo-200';
+
+                    return (
+                      <div
+                        key={acc.id}
+                        className="p-3.5 min-h-[44px] rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-blue-400 text-left transition-all group flex flex-col justify-between shadow-2xs hover:shadow-xs relative"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className={`text-[10px] font-semibold px-2 py-0.5 rounded border uppercase tracking-tight ${badgeStyle}`}>
+                              {acc.role.replace('_', ' ')}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedRoleForMatrix(acc.role);
+                                setShowRoleMatrix(true);
+                              }}
+                              title={`View ${acc.role.replace('_', ' ')} permissions & responsibilities`}
+                              className="p-1 rounded-md text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
+                            >
+                              <Info className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                          <h3 className="text-xs font-bold text-slate-900 group-hover:text-blue-600 line-clamp-1">
+                            {acc.fullName}
+                          </h3>
+                          <p className="text-[11px] font-medium text-slate-600 line-clamp-1 mt-0.5">
+                            {acc.designation || acc.role.replace('_', ' ')}
+                          </p>
+                          <p className="text-[10px] text-slate-400 truncate mt-0.5">{acc.department}</p>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => demoLogin(acc.email)}
+                          className="text-[11px] text-blue-600 font-semibold mt-3 flex items-center justify-between w-full pt-2 border-t border-slate-100 group-hover:border-blue-100 cursor-pointer"
+                        >
+                          <span className="group-hover:underline">Sign in as {acc.role.replace('_', ' ')}</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0" />
+                        </button>
                       </div>
-                      <h3 className="text-xs font-extrabold text-[#0a192f] group-hover:text-[#c2410c] line-clamp-1">
-                        {acc.fullName}
-                      </h3>
-                      <p className="text-[11px] font-semibold text-slate-700 line-clamp-1 mt-0.5">
-                        {acc.designation || acc.role.replace('_', ' ')}
-                      </p>
-                      <p className="text-[10px] text-slate-500 truncate mt-0.5">{acc.department}</p>
-                    </div>
-                    <span className="text-[10px] text-[#ea580c] font-bold mt-3 flex items-center space-x-1 group-hover:underline">
-                      <span>Sign in as {acc.role.replace('_', ' ')} &rarr;</span>
-                    </span>
+                    );
+                  })}
+                </div>
+
+                {/* Compact View More / Show Less Action Bar */}
+                <div className="pt-5 flex flex-wrap items-center justify-center gap-2.5">
+                  {filteredPersonas.length > 4 && (
+                    <button
+                      type="button"
+                      onClick={() => setShowAllPersonas(!showAllPersonas)}
+                      id="btn-toggle-view-more-personas"
+                      className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white transition-all shadow-xs cursor-pointer group"
+                    >
+                      <span>
+                        {showAllPersonas
+                          ? 'Show Fewer Personas ↑'
+                          : `View More Roles & Personas (${filteredPersonas.length - 4} more) ↓`}
+                      </span>
+                    </button>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedRoleForMatrix(undefined);
+                      setShowRoleMatrix(true);
+                    }}
+                    id="btn-role-governance-details"
+                    className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-300 transition-all shadow-2xs cursor-pointer"
+                  >
+                    <Info className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Role Governance Matrix & Future Scope (View More Details) →</span>
                   </button>
-                );
-              })}
-          </div>
+                </div>
+              </>
+            );
+          })()}
         </div>
       </section>
 
@@ -2406,6 +2466,7 @@ export const LandingPage: React.FC = () => {
       {/* Role Matrix Modal */}
       <RoleMatrixModal
         isOpen={showRoleMatrix}
+        initialRole={selectedRoleForMatrix}
         onClose={() => setShowRoleMatrix(false)}
       />
 

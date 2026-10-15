@@ -25,6 +25,7 @@ import { useAuth } from '../context/AuthContext';
 import { useApp } from '../context/AppContext';
 import { StakeholderProfile } from './StakeholderProfile';
 import { PublicAtrPortalModal } from './PublicAtrPortalModal';
+import { RoleMatrixModal } from './RoleMatrixModal';
 
 export const Navbar: React.FC = () => {
   const { currentUser, logout, demoAccounts, demoLogin } = useAuth();
@@ -48,6 +49,8 @@ export const Navbar: React.FC = () => {
 
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showDemoMenu, setShowDemoMenu] = useState(false);
+  const [showAllNavbarRoles, setShowAllNavbarRoles] = useState(false);
+  const [showRoleMatrixNavbar, setShowRoleMatrixNavbar] = useState(false);
   const [showNotifMenu, setShowNotifMenu] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showPublicAtrModal, setShowPublicAtrModal] = useState(false);
@@ -181,7 +184,7 @@ export const Navbar: React.FC = () => {
           <span>Surveys & Feedback</span>
         </button>
 
-        {/* Quick Demo Switcher */}
+        {/* Quick Demo Switcher - Compact with View More */}
         <div className="relative">
           <button
             onClick={() => {
@@ -189,41 +192,70 @@ export const Navbar: React.FC = () => {
               setShowNotifMenu(false);
               setShowUserMenu(false);
             }}
-            className="flex items-center space-x-1.5 px-2.5 py-2 min-h-[44px] rounded-xl text-xs font-semibold bg-[#0f2444] hover:bg-[#16335a] text-[#ffebd9] border border-[#2a4d7d] transition-colors cursor-pointer"
+            className="flex items-center space-x-1.5 px-2.5 py-2 min-h-[44px] rounded-xl text-xs font-semibold bg-[#0f2444] hover:bg-[#16335a] text-slate-100 border border-slate-700/70 transition-colors cursor-pointer"
             title="Switch Demo Role"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#ffa07a] shrink-0" />
+            <Sparkles className="w-3.5 h-3.5 text-blue-400 shrink-0" />
             <span className="hidden sm:inline">Role Switcher</span>
-            <ChevronDown className="w-3 h-3 text-[#fed7aa] shrink-0" />
+            <ChevronDown className="w-3 h-3 text-slate-400 shrink-0" />
           </button>
 
           {showDemoMenu && (
-            <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-white rounded-2xl shadow-2xl border border-[#fed7aa] py-2 z-50 text-[#0b1a30] animate-in fade-in zoom-in-95 duration-100">
-              <div className="px-3.5 py-2 border-b border-[#f3e8e0] bg-[#fffaf5] rounded-t-2xl">
-                <p className="text-[11px] font-extrabold text-[#c2410c] uppercase tracking-wider">Institutional Personas</p>
-                <p className="text-xs text-slate-600 mt-0.5">Explore as Student, Teacher, Staff, or Leadership:</p>
+            <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 py-2 z-50 text-slate-900 animate-in fade-in zoom-in-95 duration-100">
+              <div className="px-3.5 py-2 border-b border-slate-100 bg-slate-50/80 rounded-t-2xl flex items-center justify-between">
+                <div>
+                  <p className="text-[11px] font-bold text-slate-900 uppercase tracking-wider">Institutional Personas</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Quick switch active test identity:</p>
+                </div>
+                <span className="text-[10px] font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded-full">
+                  {showAllNavbarRoles ? `${demoAccounts.length} Roles` : 'Top 5'}
+                </span>
               </div>
-              <div className="max-h-80 sm:max-h-96 overflow-y-auto py-1">
-                {demoAccounts.map((acc) => (
+
+              {/* Account list - compact top 5 or expanded */}
+              <div className="max-h-72 overflow-y-auto py-1 divide-y divide-slate-50">
+                {(showAllNavbarRoles ? demoAccounts : demoAccounts.slice(0, 5)).map((acc) => (
                   <button
                     key={acc.id}
                     onClick={() => {
                       demoLogin(acc.email);
                       setShowDemoMenu(false);
                     }}
-                    className={`w-full text-left px-3.5 py-2.5 min-h-[44px] text-xs flex items-center justify-between hover:bg-[#fff5ee] transition-colors cursor-pointer ${
-                      currentUser?.email === acc.email ? 'bg-[#fff0e6] font-bold text-[#c2410c]' : 'text-[#0b1a30]'
+                    className={`w-full text-left px-3.5 py-2 min-h-[40px] text-xs flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer ${
+                      currentUser?.email === acc.email ? 'bg-blue-50 font-bold text-blue-700' : 'text-slate-800'
                     }`}
                   >
                     <div className="min-w-0 pr-2">
-                      <p className="font-bold truncate">{acc.fullName}</p>
+                      <p className="font-semibold truncate text-xs">{acc.fullName}</p>
                       <p className="text-[10px] text-slate-500 truncate">{acc.department}</p>
                     </div>
-                    <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold border shrink-0 ${getRoleBadgeColor(acc.role)}`}>
+                    <span className={`px-1.5 py-0.5 rounded text-[9px] font-semibold border shrink-0 ${getRoleBadgeColor(acc.role)}`}>
                       {acc.role.replace('_', ' ')}
                     </span>
                   </button>
                 ))}
+              </div>
+
+              {/* Dropdown Action Bar: View More Personas & View Governance Matrix */}
+              <div className="px-3 py-2 border-t border-slate-100 bg-slate-50/60 flex flex-col space-y-1.5 rounded-b-2xl">
+                <button
+                  type="button"
+                  onClick={() => setShowAllNavbarRoles(!showAllNavbarRoles)}
+                  className="w-full text-center py-1.5 px-2 rounded-lg text-[11px] font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-200/60 transition-colors cursor-pointer"
+                >
+                  {showAllNavbarRoles ? 'Show Fewer Personas ↑' : `View More Personas (${demoAccounts.length - 5} more) ↓`}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowRoleMatrixNavbar(true);
+                    setShowDemoMenu(false);
+                  }}
+                  className="w-full text-center py-1.5 px-2 rounded-lg text-[11px] font-semibold text-blue-600 hover:text-blue-700 hover:bg-blue-50 border border-blue-200 transition-colors cursor-pointer flex items-center justify-center space-x-1"
+                >
+                  <ShieldCheck className="w-3 h-3 text-blue-600" />
+                  <span>Role Governance & Matrix Details →</span>
+                </button>
               </div>
             </div>
           )}
@@ -609,6 +641,12 @@ export const Navbar: React.FC = () => {
       <PublicAtrPortalModal
         isOpen={showPublicAtrModal}
         onClose={() => setShowPublicAtrModal(false)}
+      />
+
+      {/* Role Matrix Modal */}
+      <RoleMatrixModal
+        isOpen={showRoleMatrixNavbar}
+        onClose={() => setShowRoleMatrixNavbar(false)}
       />
     </header>
   );
