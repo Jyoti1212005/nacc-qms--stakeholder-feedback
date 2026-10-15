@@ -801,10 +801,10 @@ export const LandingPage: React.FC = () => {
             <div className="text-left">
               <h2 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight flex items-center space-x-2">
                 <Users className="w-4 h-4 text-blue-600 shrink-0" />
-                <span>One-Click Role Switcher (Pre-Seeded Institutional Personas)</span>
+                <span>One-Click Role Switcher (IKGPTU Staff, Faculty & Stakeholders)</span>
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
-                Explore NAAC-QMS through authentic academic personas across Engineering, MBA, and Applied Sciences:
+                Explore NAAC-QMS directly through authenticated university staff, HoDs, teaching faculty, and institutional leaders:
               </p>
             </div>
             <div className="flex items-center space-x-2">
@@ -815,7 +815,7 @@ export const LandingPage: React.FC = () => {
                 <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
                 <span>Role Definitions</span>
               </button>
-              <span className="self-start sm:self-auto text-xs font-semibold text-slate-700 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-full">
+              <span className="self-start sm:self-auto text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-2.5 py-1 rounded-full">
                 {demoAccounts.length} Verified Roles
               </span>
             </div>
@@ -938,10 +938,10 @@ export const LandingPage: React.FC = () => {
                               <Info className="w-3.5 h-3.5" />
                             </button>
                           </div>
-                          <h3 className="text-xs font-bold text-slate-900 group-hover:text-blue-600 line-clamp-1">
+                          <h3 className="text-xs font-bold text-slate-900 group-hover:text-blue-600 line-clamp-2 min-h-[32px]">
                             {acc.fullName}
                           </h3>
-                          <p className="text-[11px] font-medium text-slate-600 line-clamp-1 mt-0.5">
+                          <p className="text-[11px] font-medium text-slate-600 line-clamp-2 min-h-[28px] mt-0.5">
                             {acc.designation || acc.role.replace('_', ' ')}
                           </p>
                           <p className="text-[10px] text-slate-400 truncate mt-0.5">{acc.department}</p>

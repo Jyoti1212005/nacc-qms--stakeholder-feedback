@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { dbStore } from '../db.ts';
 import { DepartmentModel, ProgrammeModel, UserModel } from '../models/index.ts';
 import { Department, Programme, User } from '../types.ts';
+import { initialUsers } from '../seedData.ts';
 
 export const institutionRouter = Router();
 
@@ -124,12 +125,15 @@ institutionRouter.post('/institution/sync-ptu', async (_req: Request, res: Respo
     dbStore.departments = [...ptuDepartments];
     dbStore.programmes = [...ptuProgrammes];
 
-    // Update leadership names
-    ptuLeadershipUsers.forEach((ptuUser) => {
+    // Update all users with authentic IKGPTU leadership, faculty, and college staff
+    initialUsers.forEach((ptuUser) => {
       const existing = dbStore.users.find((u) => u.id === ptuUser.id || u.email === ptuUser.email);
       if (existing) {
         existing.fullName = ptuUser.fullName;
         existing.departmentId = ptuUser.departmentId;
+        existing.role = ptuUser.role;
+      } else {
+        dbStore.users.push(ptuUser);
       }
     });
 
@@ -148,7 +152,7 @@ institutionRouter.post('/institution/sync-ptu', async (_req: Request, res: Respo
         console.warn(`[Supabase] Prog sync:`, e.message);
       }
     }
-    for (const usr of ptuLeadershipUsers) {
+    for (const usr of initialUsers) {
       try {
         await UserModel.findOneAndUpdate({ id: usr.id }, { $set: usr });
       } catch (e: any) {

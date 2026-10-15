@@ -477,27 +477,41 @@ authRouter.get('/auth/demo-users', (_req: Request, res: Response) => {
   };
 
   const getDesignation = (user: User) => {
-    if (user.role === 'SUPER_ADMIN') return 'Super Administrator & Institutional Architect';
-    if (user.role === 'IQAC_ADMIN') return 'Director, Internal Quality Assurance Cell';
-    if (user.role === 'PRINCIPAL') return 'Principal & Head of Institution';
+    if (user.role === 'SUPER_ADMIN') return 'Chief System Administrator & IT Head';
+    if (user.role === 'IQAC_ADMIN') return 'Director, Internal Quality Assurance Cell (IQAC)';
+    if (user.role === 'PRINCIPAL') return 'Vice-Chancellor & Head of Institution (IKGPTU)';
     if (user.role === 'HOD') {
       const dept = dbStore.departments.find((d) => d.id === user.departmentId);
+      if (user.fullName.includes('DSW') || user.fullName.includes('Grover')) return 'Professor, Dean Student Welfare & HoD Mechanical';
+      if (user.fullName.includes('Sachdeva')) return 'Professor & Head, Computer Science & Engg';
+      if (user.fullName.includes('Soch')) return 'Professor & Head, Management Studies';
       return `Head of Department (${dept ? dept.code : 'HoD'})`;
     }
     if (user.role === 'FACULTY') {
+      if (user.fullName.includes('Professor, Chemical') || user.fullName.includes('Bhargava')) return 'Professor, Chemical & Applied Sciences';
       if (user.fullName.includes('Associate')) return 'Associate Professor';
       return 'Assistant Professor';
     }
-    if (user.role === 'NON_TEACHING') return 'Administrative Superintendent';
-    if (user.role === 'TECHNICAL_STAFF') return 'Senior Lab Technical Officer';
+    if (user.role === 'NON_TEACHING') {
+      if (user.fullName.includes('Registrar') || user.email.includes('exam')) return 'Assistant Registrar (Examinations & Conduct)';
+      if (user.fullName.includes('Librarian') || user.email.includes('library')) return 'Librarian & Knowledge Officer (Central Library)';
+      return 'Superintendent (Academic & Admin Branch)';
+    }
+    if (user.role === 'TECHNICAL_STAFF') {
+      if (user.fullName.includes('Workshop') || user.email.includes('workshop')) return 'Workshop Superintendent & Technical Officer';
+      return 'Senior Technical Officer (Computing Laboratories)';
+    }
     if (user.role === 'STUDENT') {
-      if (user.fullName.includes('MBA') || user.email.includes('rohan')) return 'PG Scholar (MBA, Sem 3)';
+      if (user.fullName.includes('MBA') || user.email.includes('rohan')) return 'PG Scholar (MBA Management, Sem 3)';
       if (user.fullName.includes('Civil') || user.email.includes('ananya')) return 'UG Scholar (B.Tech Civil, Sem 3)';
       if (user.fullName.includes('Mechanical') || user.email.includes('pooja')) return 'UG Scholar (B.Tech Mech, Sem 5)';
       return 'UG Scholar (B.Tech CSE, Sem 7)';
     }
-    if (user.role === 'ALUMNI') return 'Alumni Network Representative';
-    if (user.role === 'EMPLOYER') return 'Corporate Recruiter & Industry Partner';
+    if (user.role === 'ALUMNI') {
+      if (user.fullName.includes('Infosys')) return 'Alumni Network Representative (Infosys SWE)';
+      return 'Alumni Network Representative (Tata Motors)';
+    }
+    if (user.role === 'EMPLOYER') return 'Campus Placement & Talent Acquisition Partner (TCS)';
     if (user.role === 'PARENT') return 'Parent & Guardian Advisory Representative';
     return 'Institutional Stakeholder';
   };

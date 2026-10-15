@@ -216,11 +216,11 @@ export const Navbar: React.FC = () => {
             <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 py-2 z-50 text-slate-900 animate-in fade-in zoom-in-95 duration-100">
               <div className="px-3.5 py-2 border-b border-slate-100 bg-slate-50/80 rounded-t-2xl flex items-center justify-between">
                 <div>
-                  <p className="text-[11px] font-bold text-slate-900 uppercase tracking-wider">Institutional Personas</p>
-                  <p className="text-[11px] text-slate-500 mt-0.5">Quick switch active test identity:</p>
+                  <p className="text-[11px] font-bold text-slate-900 uppercase tracking-wider">IKGPTU Staff & Roles</p>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Quick switch active staff login:</p>
                 </div>
                 <span className="text-[10px] font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded-full">
-                  {showAllNavbarRoles ? `${demoAccounts.length} Roles` : 'Top 5'}
+                  {showAllNavbarRoles ? `${demoAccounts.length} Staff & Roles` : 'Top 5'}
                 </span>
               </div>
 
@@ -239,7 +239,7 @@ export const Navbar: React.FC = () => {
                   >
                     <div className="min-w-0 pr-2">
                       <p className="font-semibold truncate text-xs">{acc.fullName}</p>
-                      <p className="text-[10px] text-slate-500 truncate">{acc.department}</p>
+                      <p className="text-[10px] text-slate-500 truncate">{acc.designation || acc.department}</p>
                     </div>
                     <span className={`px-1.5 py-0.5 rounded text-[9px] font-semibold border shrink-0 ${getRoleBadgeColor(acc.role)}`}>
                       {acc.role.replace('_', ' ')}

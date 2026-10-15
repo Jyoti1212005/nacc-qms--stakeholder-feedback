@@ -169,11 +169,19 @@ class DatabaseStore {
             !u.id?.startsWith('usr-179')
         );
         const userMap = new Map<string, User>();
-        initialUsers.forEach((u) => userMap.set(u.id, u));
+        // Add dynamic/registered users first
         cleanUsers.forEach((u) => userMap.set(u.id, u));
+        // Ensure institutional college staff, leadership, and student personas from initialUsers take precedence
+        initialUsers.forEach((u) => {
+          userMap.set(u.id, u);
+          UserModel.findOneAndUpdate({ id: u.id }, { $set: u }).catch(() => {});
+        });
         this.users = Array.from(userMap.values());
       } else {
         this.users = [...initialUsers];
+        for (const u of initialUsers) {
+          UserModel.findOneAndUpdate({ id: u.id }, { $set: u }).catch(() => {});
+        }
       }
       if (feedbackForms.length > 0) this.feedbackForms = feedbackForms as any;
       if (feedbackResponses.length > 0) this.feedbackResponses = feedbackResponses as any;
