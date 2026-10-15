@@ -256,7 +256,7 @@ The analysis identified ${identifiedGaps} high-priority deficiencies requiring C
     title: `Official Action Taken Report (ATR) on Stakeholder Feedback - AY ${ay.name}`,
     referenceNo: `NAAC-QMS-ATR-${ay.name.replace('-', '')}-${dept?.code || 'INST'}`,
     generatedAt: new Date().toISOString(),
-    generatedBy: user?.fullName || 'Prof. Radhika Venkataraman (Director, IQAC)',
+    generatedBy: user?.fullName || 'Prof. Rajiv Chauhan (Director, IQAC)',
     academicYear: ay.name,
     academicYearId: ay.id,
     department: deptName,
@@ -274,8 +274,8 @@ The analysis identified ${identifiedGaps} high-priority deficiencies requiring C
     },
     matrix,
     signatories: {
-      iqacDirector: 'Prof. Radhika Venkataraman, Ph.D. — Director, IQAC',
-      principal: 'Dr. K. S. Krishnamurthy, M.Tech, Ph.D. — Principal & Chairperson, IQAC',
+      iqacDirector: 'Prof. Rajiv Chauhan — Director, IQAC & Professor',
+      principal: 'Prof. (Dr.) Susheel Mittal — Vice-Chancellor & Chairperson, IQAC',
     },
   };
 
@@ -296,7 +296,7 @@ The analysis identified ${identifiedGaps} high-priority deficiencies requiring C
         generatedTimestamp: reportPayload.generatedAt,
       },
       generatedBy: reportPayload.generatedBy,
-      approvedBy: 'Dr. K. S. Krishnamurthy (Principal)',
+      approvedBy: 'Prof. (Dr.) Susheel Mittal (Vice-Chancellor)',
       isApproved: true,
       createdAt: reportPayload.generatedAt,
     });
@@ -337,12 +337,13 @@ atrRouter.get('/public/atr', (req: Request, res: Response) => {
 
   res.json({
     institution: {
-      name: 'Apex Institute of Technology & Management (Autonomous)',
-      accreditationStatus: 'NAAC Accredited "A+" Grade (3.42 CGPA)',
+      name: 'I.K. Gujral Punjab Technical University (IKGPTU)',
+      accreditationStatus: 'NAAC Accredited Grade "B" (Cycle-I) • Cycle-II A+ SSR Preparation',
       portalTitle: 'Official Stakeholder Feedback Action Taken Report (ATR) Portal',
       naacMetricClause: 'NAAC Criterion 1: Metric 1.4.2 (Feedback Process & Action Taken Report Hosted on Website)',
-      iqacDirector: 'Prof. Radhika Venkataraman, Ph.D.',
-      principalChairperson: 'Dr. K. S. Krishnamurthy, M.Tech, Ph.D.',
+      iqacDirector: 'Prof. Rajiv Chauhan (Director IQAC)',
+      principalChairperson: 'Prof. (Dr.) Susheel Mittal (Vice-Chancellor, IKGPTU)',
+      websiteUrl: 'https://ptu.ac.in/',
     },
     referenceNo,
     verificationCode: `VERIFY-${ay.name.replace('-', '')}-${Math.floor(100000 + Math.random() * 900000)}`,
@@ -386,7 +387,7 @@ atrRouter.get('/public/atr', (req: Request, res: Response) => {
       isRatified: true,
       ratificationBody: 'Internal Quality Assurance Cell (IQAC) & Governing Council',
       digitalSignatureStatus: 'CRYPTOGRAPHICALLY SIGNED & VERIFIED',
-      publicPortalUrl: `https://institution.edu/naac/metric-1.4.2/${referenceNo.toLowerCase()}`,
+      publicPortalUrl: `https://ptu.ac.in/naac/metric-1.4.2/${referenceNo.toLowerCase()}`,
     }
   });
 });
@@ -399,19 +400,19 @@ atrRouter.get('/public/verify/:referenceNo', (req: Request, res: Response) => {
   res.json({
     status: 'VERIFIED_AUTHENTIC',
     referenceNo,
-    institution: 'Apex Institute of Technology & Management (Autonomous)',
-    accreditationStatus: 'NAAC Accredited "A+" Grade (3.42 CGPA)',
+    institution: 'I.K. Gujral Punjab Technical University (IKGPTU)',
+    accreditationStatus: 'NAAC Accredited Grade "B" (Cycle-I) • Cycle-II A+ SSR Preparation',
     academicYear: currentAy,
     documentType: 'Official Action Taken Report (ATR) on Stakeholder Feedback',
     regulatoryStandard: 'NAAC Quality Indicator Framework (Metric 1.4.2)',
     auditOutcome: '100% Closed-Loop Corrective Action Verified with Statutory Proofs',
     signedBy: [
-      { name: 'Prof. Radhika Venkataraman', designation: 'Director, Internal Quality Assurance Cell (IQAC)' },
-      { name: 'Dr. K. S. Krishnamurthy', designation: 'Principal & Chairperson, IQAC' }
+      { name: 'Prof. Rajiv Chauhan', designation: 'Director, Internal Quality Assurance Cell (IQAC)' },
+      { name: 'Prof. (Dr.) Susheel Mittal', designation: 'Vice-Chancellor & Chairperson, IQAC (IKGPTU)' }
     ],
     timestamp: new Date().toISOString(),
     cryptographicHash: '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069',
-    sealText: 'OFFICIALLY RATIFIED BY APEX IQAC AUDIT PANEL',
+    sealText: 'OFFICIALLY RATIFIED BY IKGPTU IQAC QUALITY PANEL',
   });
 });
 

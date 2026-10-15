@@ -149,12 +149,12 @@ The system includes pre-configured personas for demonstration and testing:
 
 | Role | Name | Email | Password | Access Scope |
 | :--- | :--- | :--- | :--- | :--- |
-| **Super Admin** | Dr. Vikramaditya Rao | `superadmin@naac-qms.edu` | `Admin@123` | Full Institutional Administration |
-| **IQAC Director** | Prof. Radhika Venkataraman | `iqac@naac-qms.edu` | `Iqac@123` | Quality Cockpit, Surveys, Weights, ATR |
-| **Principal** | Dr. K. S. Krishnamurthy | `principal@naac-qms.edu` | `Principal@123` | Executive Governance & Sign-offs |
-| **HoD (CSE)** | Dr. Anand Raman | `hod.cse@naac-qms.edu` | `Hod@123` | Department Cockpit & Assigned CAPAs |
-| **Faculty Member** | Dr. Meenakshi Sundaram | `faculty.cse@naac-qms.edu` | `Faculty@123` | Faculty Appraisal & Course Feedback |
-| **Final-Year Student** | Aarav Sharma | `student@naac-qms.edu` | `Student@123` | Student Surveys & Feedback Submission |
+| **Vice-Chancellor / Principal** | Prof. (Dr.) Susheel Mittal | `principal@naac-qms.edu` | `Principal@123` | Executive Governance & Statutory Sign-offs |
+| **IQAC Director** | Prof. Rajiv Chauhan | `iqac@naac-qms.edu` | `Iqac@123` | Quality Cockpit, Surveys, Weights, ATR & SSR |
+| **Super Admin / Registrar** | Dr. S. K. Misra | `superadmin@naac-qms.edu` | `Admin@123` | Full Institutional Administration & Master Config |
+| **HoD (CSE)** | Dr. Monika Sachdeva | `hod.cse@naac-qms.edu` | `Hod@123` | Department Cockpit & Assigned CAPAs |
+| **Faculty Member** | Dr. Raman Kumar | `faculty.cse@naac-qms.edu` | `Faculty@123` | Faculty Appraisal & Course Feedback |
+| **Final-Year Student** | Arjun Verma | `student@naac-qms.edu` | `Student@123` | Student Surveys & Feedback Submission |
 
 *Note: You can switch between any account instantly via the **Demo Switcher** in the top navigation bar.*
 

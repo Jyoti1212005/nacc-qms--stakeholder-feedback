@@ -107,14 +107,14 @@ export const PublicAtrPortalModal: React.FC<Props> = ({
                   </span>
                   <span className="text-[10px] text-blue-200 font-semibold">• Public Transparency Portal</span>
                   <span className="px-2 py-0.5 text-[9px] font-extrabold uppercase bg-blue-500/20 text-blue-200 border border-blue-400/30 rounded-full">
-                    A+ Grade (3.42 CGPA)
+                    NAAC Grade 'B' (Cycle-I) • Cycle-II A+ Prep
                   </span>
                 </div>
                 <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
                   Action Taken Report (ATR) on Stakeholder Feedback
                 </h1>
                 <p className="text-xs text-blue-200/90 font-medium mt-0.5 max-w-2xl">
-                  Apex Institute of Technology & Management (Autonomous) • Internal Quality Assurance Cell (IQAC)
+                  I.K. Gujral Punjab Technical University (IKGPTU) • Internal Quality Assurance Cell (IQAC)
                 </p>
                 <p className="text-[10px] text-blue-300/80 font-mono mt-1">
                   Document Reference: <strong className="text-white">{data?.referenceNo || 'NAAC-QMS-ATR-202627-INST'}</strong> • Ratified by Board of Studies & Academic Council
@@ -294,7 +294,7 @@ export const PublicAtrPortalModal: React.FC<Props> = ({
                   <span>Institutional Quality Mandate & Closing-the-Loop Methodology</span>
                 </div>
                 <p className="text-slate-600">
-                  In accordance with the regulatory quality directives of the <strong>National Assessment and Accreditation Council (NAAC)</strong> for autonomous institutions, the Internal Quality Assurance Cell (IQAC) of Apex Institute of Technology & Management collects structured feedback on curriculum design, teaching-learning quality, and institutional facilities from all four primary stakeholder cohorts: <strong>Students, Teachers, Alumni, and Industry Employers</strong>.
+                  In accordance with the regulatory quality directives of the <strong>National Assessment and Accreditation Council (NAAC)</strong> for state universities, the Internal Quality Assurance Cell (IQAC) of I.K. Gujral Punjab Technical University (IKGPTU) collects structured feedback on curriculum design, teaching-learning quality, and institutional facilities from all four primary stakeholder cohorts: <strong>Students, Teachers, Alumni, and Industry Employers</strong>.
                 </p>
                 <p className="text-slate-600">
                   Every low-scoring metric (&lt; 4.0 / 5.0 benchmark) triggers a formal <strong>Corrective and Preventive Action (CAPA)</strong> protocol. The interventions detailed below were approved by respective Boards of Studies (BoS), ratified by the Academic Council, implemented with documentary evidence, and validated through statistical remeasurement.
@@ -476,7 +476,7 @@ export const PublicAtrPortalModal: React.FC<Props> = ({
                   <div className="text-left sm:text-right text-[11px] text-slate-500 space-y-1">
                     <div>
                       <span className="font-semibold">Portal Host:</span>{' '}
-                      <span className="font-mono text-slate-700">apex.edu.in/iqac/metric-1.4.2</span>
+                      <span className="font-mono text-slate-700">ptu.ac.in/naac/metric-1.4.2</span>
                     </div>
                     <div>
                       <span className="font-semibold">Verification SHA:</span>{' '}
@@ -493,25 +493,25 @@ export const PublicAtrPortalModal: React.FC<Props> = ({
                 <div className="grid grid-cols-2 gap-8 text-center pt-2">
                   <div className="space-y-1">
                     <div className="font-serif italic font-extrabold text-slate-800 text-base border-b border-slate-300 pb-1 mx-auto max-w-[240px]">
-                      Prof. Radhika Venkataraman, Ph.D.
+                      Prof. Rajiv Chauhan
                     </div>
                     <p className="text-[11px] font-bold text-slate-800 uppercase tracking-wide">
                       Director, IQAC
                     </p>
                     <p className="text-[10px] text-slate-500">
-                      Internal Quality Assurance Cell
+                      Internal Quality Assurance Cell (IKGPTU)
                     </p>
                   </div>
 
                   <div className="space-y-1">
                     <div className="font-serif italic font-extrabold text-slate-800 text-base border-b border-slate-300 pb-1 mx-auto max-w-[240px]">
-                      Dr. K. S. Krishnamurthy, M.Tech, Ph.D.
+                      Prof. (Dr.) Susheel Mittal
                     </div>
                     <p className="text-[11px] font-bold text-slate-800 uppercase tracking-wide">
-                      Principal & Chairperson, IQAC
+                      Vice-Chancellor & Chairperson, IQAC
                     </p>
                     <p className="text-[10px] text-slate-500">
-                      Apex Institute of Technology & Management
+                      I.K. Gujral Punjab Technical University (IKGPTU)
                     </p>
                   </div>
                 </div>

@@ -30,7 +30,7 @@ export const LiveQrVerificationModal: React.FC<LiveQrVerificationModalProps> = (
   onClose,
   referenceNo = 'NAAC-QMS-ATR-202627-INST',
   academicYear = '2026-27',
-  departmentName = 'Apex Institute of Technology & Management (All Departments)',
+  departmentName = 'I.K. Gujral Punjab Technical University (All Departments)',
   averageDelta = 1.28,
   totalGapsRemediated = 6,
 }) => {
@@ -78,7 +78,7 @@ export const LiveQrVerificationModal: React.FC<LiveQrVerificationModalProps> = (
                   IQAC Verification & Digital Seal
                 </h2>
                 <p className="text-xs text-blue-200/90 font-medium">
-                  Apex Institute of Technology & Management (Autonomous)
+                  I.K. Gujral Punjab Technical University (IKGPTU)
                 </p>
               </div>
             </div>
@@ -175,18 +175,18 @@ export const LiveQrVerificationModal: React.FC<LiveQrVerificationModalProps> = (
           <div className="grid grid-cols-2 gap-4 pt-3 border-t border-slate-200">
             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
               <div className="font-serif italic font-bold text-slate-800 text-sm border-b border-slate-300 pb-1 mb-1">
-                Prof. Radhika Venkataraman
+                Prof. Rajiv Chauhan
               </div>
               <p className="text-[10px] font-bold text-slate-700 uppercase">Director, IQAC</p>
-              <p className="text-[9px] text-slate-500">Internal Quality Assurance Cell</p>
+              <p className="text-[9px] text-slate-500">Internal Quality Assurance Cell (IKGPTU)</p>
             </div>
 
             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
               <div className="font-serif italic font-bold text-slate-800 text-sm border-b border-slate-300 pb-1 mb-1">
-                Dr. K. S. Krishnamurthy
+                Prof. (Dr.) Susheel Mittal
               </div>
-              <p className="text-[10px] font-bold text-slate-700 uppercase">Principal & Chairperson, IQAC</p>
-              <p className="text-[9px] text-slate-500">Apex Institute of Technology</p>
+              <p className="text-[10px] font-bold text-slate-700 uppercase">Vice-Chancellor & Chairperson, IQAC</p>
+              <p className="text-[9px] text-slate-500">I.K. Gujral Punjab Technical University</p>
             </div>
           </div>
 

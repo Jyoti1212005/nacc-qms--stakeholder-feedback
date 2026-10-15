@@ -50,6 +50,8 @@ export const CollegeWebsiteImporterModal: React.FC<CollegeWebsiteImporterModalPr
   const [instProfile, setInstProfile] = useState<any>(null);
   const [departmentsList, setDepartmentsList] = useState<any[]>([]);
   const [programmesList, setProgrammesList] = useState<any[]>([]);
+  const [iqacCommittee, setIqacCommittee] = useState<any[]>([]);
+  const [naacCriteriaList, setNaacCriteriaList] = useState<any[]>([]);
 
   useEffect(() => {
     if (isOpen) {
@@ -65,6 +67,8 @@ export const CollegeWebsiteImporterModal: React.FC<CollegeWebsiteImporterModalPr
         setInstProfile(data.profile);
         setDepartmentsList(data.departments || []);
         setProgrammesList(data.programmes || []);
+        setIqacCommittee(data.iqacCommittee || []);
+        setNaacCriteriaList(data.naacCriteria || []);
       }
     } catch (err) {
       console.error('Failed to load profile:', err);
@@ -356,6 +360,76 @@ export const CollegeWebsiteImporterModal: React.FC<CollegeWebsiteImporterModalPr
                         <p className="text-[11px] text-slate-600 mt-0.5">HoD: <strong className="text-slate-800">{dept.headOfDept}</strong></p>
                       </div>
                       <p className="text-[10px] text-blue-600 font-mono mt-2 truncate">{dept.email}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* NAAC 7 Criteria Quality Framework (IKGPTU SSR/AQAR) */}
+              <div>
+                <div className="flex items-center justify-between mb-2.5">
+                  <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center space-x-1.5">
+                    <Award className="w-3.5 h-3.5 text-blue-600" />
+                    <span>NAAC 7 Criteria & AQAR Quality Benchmark Framework</span>
+                  </h4>
+                  <span className="text-xs text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-full font-semibold">
+                    1000 Total NAAC Weightage
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {naacCriteriaList.map((crit) => (
+                    <div
+                      key={crit.criterionNo}
+                      className="p-3.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 transition-all shadow-2xs space-y-2 text-left"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800">
+                          Criterion {crit.criterionNo}
+                        </span>
+                        <span className="text-[10px] font-semibold text-slate-500">
+                          Weight: <strong>{crit.weightage} pts</strong>
+                        </span>
+                      </div>
+                      <div>
+                        <h5 className="text-xs font-extrabold text-slate-900">{crit.name}</h5>
+                        <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">{crit.aqarBenchmark}</p>
+                      </div>
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                        <span className="text-slate-500">Current Score:</span>
+                        <div className="flex items-center space-x-2">
+                          <span className="font-bold text-emerald-700">{crit.scoreActual} / 4.0</span>
+                          <span className="text-[10px] text-slate-400">(Target: {crit.scoreTarget})</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Official IKGPTU IQAC Committee Roster */}
+              <div>
+                <div className="flex items-center justify-between mb-2.5">
+                  <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center space-x-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Official IKGPTU IQAC Committee (Re-Constituted Cell)</span>
+                  </h4>
+                  <span className="text-xs text-slate-500 font-medium">
+                    {iqacCommittee.length} Committee Officers
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {iqacCommittee.map((member, i) => (
+                    <div
+                      key={i}
+                      className="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 text-left hover:bg-white transition-colors shadow-2xs"
+                    >
+                      <span className="text-[9px] font-bold uppercase tracking-wider text-blue-600 block">
+                        {member.role}
+                      </span>
+                      <h6 className="text-xs font-bold text-slate-900 line-clamp-1 mt-0.5">{member.name}</h6>
+                      <p className="text-[10px] text-slate-500 line-clamp-1 mt-0.2">{member.designation}</p>
                     </div>
                   ))}
                 </div>

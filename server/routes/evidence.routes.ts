@@ -82,7 +82,7 @@ evidenceRouter.post('/evidence/:id/verify', (req: Request, res: Response) => {
   evi.verificationStatus = status || 'VERIFIED';
   evi.verificationNotes = notes || 'Verified for compliance against institutional standards.';
   evi.verifiedById = user?.id || 'user-iqac';
-  evi.verifiedByName = user?.fullName || 'Prof. Radhika Venkataraman';
+  evi.verifiedByName = user?.fullName || 'Prof. Rajiv Chauhan';
 
   dbStore.logAudit('VERIFY', 'EVIDENCE', `Updated evidence verification: ${evi.title} -> ${evi.verificationStatus}`, user, undefined, req.ip);
   res.json({ success: true, evidence: evi });

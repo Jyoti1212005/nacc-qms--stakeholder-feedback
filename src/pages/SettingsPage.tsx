@@ -116,21 +116,21 @@ export const SettingsPage: React.FC = () => {
           <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
             <span className="text-[10px] text-slate-400 block font-semibold">Institution Name</span>
             <span className="font-bold text-slate-800 text-sm block mt-0.5">
-              {settings?.institutionName || 'Apex Institute of Technology & Management'}
+              {settings?.institutionName || 'I.K. Gujral Punjab Technical University (IKGPTU)'}
             </span>
           </div>
 
           <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
             <span className="text-[10px] text-slate-400 block font-semibold">Accreditation Cycle</span>
             <span className="font-bold text-slate-800 text-sm block mt-0.5">
-              {settings?.currentCycle || 'Cycle 3 (2022-2027)'}
+              {settings?.currentCycle || 'NAAC Cycle-II Preparation (Cycle-I Grade B)'}
             </span>
           </div>
 
           <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
             <span className="text-[10px] text-slate-400 block font-semibold">Accreditation Grade</span>
-            <span className="font-bold text-emerald-700 text-sm block mt-0.5">
-              {settings?.accreditationStatus || 'A+ Grade (3.42 CGPA in Cycle 2)'}
+            <span className="font-bold text-blue-700 text-sm block mt-0.5">
+              {settings?.accreditationStatus || 'NAAC Accredited Grade B • Cycle-II A+ SSR Preparation'}
             </span>
           </div>
 

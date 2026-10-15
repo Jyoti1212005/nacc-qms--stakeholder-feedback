@@ -34,7 +34,7 @@ Authenticates a user and starts an active session.
 {
   "user": {
     "id": "user-2",
-    "name": "Prof. Radhika Venkataraman",
+    "name": "Prof. Rajiv Chauhan",
     "email": "iqac@naac-qms.edu",
     "role": "IQAC_ADMIN",
     "designation": "Director, IQAC & Professor",
@@ -194,7 +194,7 @@ Converts a verified quality gap into an assigned CAPA remediation plan.
   "rootCause": "Aging hardware in Lab 4 and insufficient budget allocation.",
   "correctiveAction": "Procure 30 high-performance workstations.",
   "preventiveAction": "Institute a recurring 3-year hardware refresh cycle.",
-  "assignedToName": "Dr. Anand Raman (HoD CSE)",
+  "assignedToName": "Dr. Monika Sachdeva (HoD CSE)",
   "dueDate": "2026-10-31"
 }
 ```

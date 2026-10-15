@@ -252,11 +252,11 @@ export const AtrPage: React.FC = () => {
         <div className="space-y-6">
       {/* Printable Institutional Letterhead (visible in print mode) */}
       <div className="hidden print:block text-center border-b-2 border-slate-900 pb-4 mb-6">
-        <h1 className="text-xl font-extrabold uppercase tracking-wide">Apex Institute of Technology & Management</h1>
-        <p className="text-xs font-semibold">(Autonomous Institution Affiliated to State University • Accredited by NAAC)</p>
+        <h1 className="text-xl font-extrabold uppercase tracking-wide">I.K. Gujral Punjab Technical University (IKGPTU)</h1>
+        <p className="text-xs font-semibold">(State Technical University Established by Govt. of Punjab • NAAC Accredited)</p>
         <p className="text-xs mt-1">INTERNAL QUALITY ASSURANCE CELL (IQAC)</p>
         <h2 className="text-sm font-bold mt-2 uppercase underline">
-          ACTION TAKEN REPORT (ATR) ON STAKEHOLDER FEEDBACK (ACADEMIC YEAR 2026-27)
+          ACTION TAKEN REPORT (ATR) ON STAKEHOLDER FEEDBACK
         </h2>
       </div>
 
@@ -357,20 +357,20 @@ export const AtrPage: React.FC = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center text-xs pt-4">
             <div>
               <div className="h-10 border-b border-dashed border-slate-400 max-w-44 mx-auto" />
-              <p className="font-bold text-slate-800 mt-2">Prof. Radhika Venkataraman</p>
-              <p className="text-[11px] text-slate-500 font-medium">Director, IQAC</p>
+              <p className="font-bold text-slate-800 mt-2">Prof. Rajiv Chauhan</p>
+              <p className="text-[11px] text-slate-500 font-medium">Director, IQAC & Professor</p>
             </div>
 
             <div>
               <div className="h-10 border-b border-dashed border-slate-400 max-w-44 mx-auto" />
-              <p className="font-bold text-slate-800 mt-2">Dr. Anand Raman</p>
-              <p className="text-[11px] text-slate-500 font-medium">Secretary, Academic Council</p>
+              <p className="font-bold text-slate-800 mt-2">Dr. Navdeepak Sandhu</p>
+              <p className="text-[11px] text-slate-500 font-medium">Registrar / Secretary, Academic Council</p>
             </div>
 
             <div className="col-span-2 sm:col-span-1">
               <div className="h-10 border-b border-dashed border-slate-400 max-w-44 mx-auto" />
-              <p className="font-bold text-slate-800 mt-2">Dr. K. S. Krishnamurthy</p>
-              <p className="text-[11px] text-slate-500 font-medium">Principal & Head of Institution</p>
+              <p className="font-bold text-slate-800 mt-2">Prof. (Dr.) Susheel Mittal</p>
+              <p className="text-[11px] text-slate-500 font-medium">Vice-Chancellor & Head of Institution</p>
             </div>
           </div>
 

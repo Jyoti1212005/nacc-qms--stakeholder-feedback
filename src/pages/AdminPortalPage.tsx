@@ -716,11 +716,12 @@ export const AdminPortalPage: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { name: 'B.Tech Computer Science', code: 'CSE', branchCourse: 'B.Tech in Computer Science and Engineering', hod: 'Dr. Anand Raman', score: 4.28, faculty: 65, duration: '4 Years (UG)' },
-                { name: 'Mechanical Engineering', code: 'MECH', branchCourse: 'B.Tech in Mechanical Engineering', hod: 'Dr. Rajesh Deshmukh', score: 4.12, faculty: 48, duration: '4 Years (UG)' },
-                { name: 'BCA (Computer Applications)', code: 'BCA', branchCourse: 'Bachelor of Computer Applications (BCA)', hod: 'Dr. Meenakshi Sundaram', score: 4.20, faculty: 36, duration: '3 Years (UG)' },
-                { name: 'BBA (Business Administration)', code: 'BBA', branchCourse: 'Bachelor of Business Administration (BBA)', hod: 'Dr. Sunita Kulkarni', score: 4.15, faculty: 32, duration: '3 Years (UG)' },
-                { name: 'B.Tech CSE (AI & ML)', code: 'CSE-AIML', branchCourse: 'B.Tech CSE (Artificial Intelligence & ML)', hod: 'Dr. Vikramaditya Sen', score: 4.38, faculty: 44, duration: '4 Years (UG)' },
+                { name: 'Computer Science & Engineering', code: 'CSE', branchCourse: 'B.Tech & M.Tech in CSE / AI&DS', hod: 'Dr. Monika Sachdeva', score: 4.35, faculty: 65, duration: '4 Years (UG) / 2 Years (PG)' },
+                { name: 'Mechanical Engineering', code: 'ME', branchCourse: 'B.Tech & M.Tech in Mechanical Engineering', hod: 'Dr. Neel Kanth Grover', score: 4.18, faculty: 48, duration: '4 Years (UG) / 2 Years (PG)' },
+                { name: 'Computer Applications', code: 'CA', branchCourse: 'Master of Computer Applications (MCA) & BCA', hod: 'Dr. Vikramjeet Singh', score: 4.25, faculty: 36, duration: '2 Years (PG) / 3 Years (UG)' },
+                { name: 'Management Studies', code: 'MGMT', branchCourse: 'Master of Business Administration (MBA) & BBA', hod: 'Dr. Harmeen Soch', score: 4.20, faculty: 38, duration: '2 Years (PG) / 3 Years (UG)' },
+                { name: 'Electrical Engineering', code: 'EE', branchCourse: 'B.Tech in Electrical Engineering', hod: 'Dr. Yadwinder Singh Brar', score: 4.30, faculty: 42, duration: '4 Years (UG)' },
+                { name: 'Civil Engineering', code: 'CE', branchCourse: 'B.Tech in Civil Engineering', hod: 'Dr. Rajiv Chauhan', score: 4.22, faculty: 34, duration: '4 Years (UG)' },
               ].map((dept) => (
                 <div
                   key={dept.code}

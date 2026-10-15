@@ -138,8 +138,8 @@ export const AiAtrReportModal: React.FC<Props> = ({
 </head>
 <body>
   <div class="header">
-    <div class="inst-name">APEX INSTITUTE OF TECHNOLOGY & MANAGEMENT (AUTONOMOUS)</div>
-    <div class="subtitle">Approved by AICTE • Affiliated to State Technological University • NAAC Accredited 'A+' Grade</div>
+    <div class="inst-name">I.K. GUJRAL PUNJAB TECHNICAL UNIVERSITY (IKGPTU)</div>
+    <div class="subtitle">State Technical University (Govt. of Punjab) • UGC 12(B) Approved • NAAC Accredited Grade 'B' (Cycle-I) • Cycle-II A+ Preparation</div>
     <div class="badge">INTERNAL QUALITY ASSURANCE CELL (IQAC)</div>
     <div class="doc-title">${report.title}</div>
   </div>
@@ -210,12 +210,12 @@ export const AiAtrReportModal: React.FC<Props> = ({
 
   <div class="sign-section">
     <div class="sign-block">
-      <div>Prof. Radhika Venkataraman, Ph.D.</div>
-      <div style="font-size: 11px; font-weight: 500; color: #64748b;">Director, IQAC</div>
+      <div>Prof. Rajiv Chauhan</div>
+      <div style="font-size: 11px; font-weight: 500; color: #64748b;">Director, IQAC & Professor</div>
     </div>
     <div class="sign-block">
-      <div>Dr. K. S. Krishnamurthy, M.Tech, Ph.D.</div>
-      <div style="font-size: 11px; font-weight: 500; color: #64748b;">Principal & Chairperson, IQAC</div>
+      <div>Prof. (Dr.) Susheel Mittal</div>
+      <div style="font-size: 11px; font-weight: 500; color: #64748b;">Vice-Chancellor & Chairperson, IQAC</div>
     </div>
   </div>
 </body>
@@ -460,10 +460,10 @@ export const AiAtrReportModal: React.FC<Props> = ({
                       <span>Internal Quality Assurance Cell (IQAC)</span>
                     </div>
                     <h1 className="text-lg sm:text-2xl font-black text-[#0a192f] tracking-tight uppercase">
-                      Apex Institute of Technology & Management (Autonomous)
+                      I.K. Gujral Punjab Technical University (IKGPTU)
                     </h1>
                     <p className="text-xs text-slate-600 mt-1">
-                      Approved by AICTE • Affiliated to State Technological University • NAAC Accredited with 'A+' Grade (Cycle 3)
+                      State Technical University Established by Govt. of Punjab • NAAC Accredited Grade 'B' (Cycle-I) • Cycle-II A+ SSR Portfolio
                     </p>
                     <div className="mt-3 inline-block px-3 py-1 bg-slate-900 text-white text-xs font-extrabold rounded-md uppercase tracking-wider">
                       {report.title}
@@ -582,7 +582,7 @@ export const AiAtrReportModal: React.FC<Props> = ({
                     <div className="space-y-1">
                       <div className="h-10 flex items-end justify-center">
                         <span className="font-serif italic font-bold text-blue-900 text-sm">
-                          Radhika Venkataraman
+                          Rajiv Chauhan
                         </span>
                       </div>
                       <div className="border-t border-slate-400 pt-1">
@@ -594,7 +594,7 @@ export const AiAtrReportModal: React.FC<Props> = ({
                     <div className="space-y-1">
                       <div className="h-10 flex items-end justify-center">
                         <span className="font-serif italic font-bold text-indigo-900 text-sm">
-                          K. S. Krishnamurthy
+                          Susheel Mittal
                         </span>
                       </div>
                       <div className="border-t border-slate-400 pt-1">
@@ -608,7 +608,7 @@ export const AiAtrReportModal: React.FC<Props> = ({
                   <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
                     <div className="flex items-center space-x-3.5">
                       <div className="p-1.5 bg-white rounded-lg border border-slate-200 shadow-2xs shrink-0">
-                        <QrCodeSvg value={`https://apex.edu/verify/${report.referenceNo}`} size={70} />
+                        <QrCodeSvg value={`https://ptu.ac.in/verify/${report.referenceNo}`} size={70} />
                       </div>
                       <div className="text-left space-y-0.5">
                         <div className="flex items-center space-x-2">

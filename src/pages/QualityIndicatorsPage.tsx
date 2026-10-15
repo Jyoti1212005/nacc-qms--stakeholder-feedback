@@ -48,7 +48,7 @@ export const QualityIndicatorsPage: React.FC = () => {
     correctiveAction: '',
     preventiveAction: '',
     assignedToId: 'user-hod-cse',
-    assignedToName: 'Dr. Anand Raman (HoD CSE)',
+    assignedToName: 'Dr. Monika Sachdeva (HoD CSE)',
   });
   const [isAssigningCapa, setIsAssigningCapa] = useState(false);
 
@@ -127,7 +127,7 @@ export const QualityIndicatorsPage: React.FC = () => {
       correctiveAction: `Remediate ${qi.name} deficit through targeted departmental intervention and syllabus/infrastructure revision.`,
       preventiveAction: `Institute bi-weekly tracking checkpoints and incorporate progress metrics in monthly HoD review meetings.`,
       assignedToId: 'user-hod-cse',
-      assignedToName: 'Dr. Anand Raman (HoD CSE)',
+      assignedToName: 'Dr. Monika Sachdeva (HoD CSE)',
     });
   };
 
@@ -458,13 +458,13 @@ export const QualityIndicatorsPage: React.FC = () => {
                   }
                   className="w-full p-2.5 border border-slate-200 rounded-xl text-xs font-semibold"
                 >
-                  <option value="Dr. Anand Raman (HoD CSE)">Dr. Anand Raman (HoD B.Tech Computer Science)</option>
-                  <option value="Dr. Rajesh Deshmukh (HoD Mechanical)">Dr. Rajesh Deshmukh (HoD Mechanical Engineering)</option>
-                  <option value="Dr. Meenakshi Sundaram (HoD BCA)">Dr. Meenakshi Sundaram (HoD BCA)</option>
-                  <option value="Dr. Sunita Kulkarni (HoD BBA)">Dr. Sunita Kulkarni (HoD BBA)</option>
-                  <option value="Dr. Vikramaditya Sen (HoD CSE AI&ML)">Dr. Vikramaditya Sen (HoD B.Tech CSE AI&ML)</option>
-                  <option value="Prof. Nitin Gadgil (Dean Placements)">Prof. Nitin Gadgil (Dean Placements)</option>
-                  <option value="Chief Librarian & Systems Admin">Chief Librarian & Systems Admin</option>
+                  <option value="Dr. Monika Sachdeva (HoD CSE)">Dr. Monika Sachdeva (HoD Computer Science & Engineering)</option>
+                  <option value="Dr. Neel Kanth Grover (HoD Mechanical)">Dr. Neel Kanth Grover (HoD Mechanical Engineering)</option>
+                  <option value="Dr. Vikramjeet Singh (HoD MCA)">Dr. Vikramjeet Singh (HoD Computer Applications)</option>
+                  <option value="Dr. Harmeen Soch (HoD Management)">Dr. Harmeen Soch (HoD Management Studies)</option>
+                  <option value="Dr. Raman Kumar (Coordinator CSE AI&ML)">Dr. Raman Kumar (Coordinator AI & Data Science)</option>
+                  <option value="Dr. Mrigender Singh Bedi (Director Placements)">Dr. Mrigender Singh Bedi (Director CR&P / Placements)</option>
+                  <option value="Dr. Satwinder Singh (Library Officer)">Dr. Satwinder Singh (Central Knowledge Resource Centre)</option>
                 </select>
               </div>
 

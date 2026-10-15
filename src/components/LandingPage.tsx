@@ -1109,7 +1109,7 @@ export const LandingPage: React.FC = () => {
                 issue: 'High-Performance Computing Cluster Inadequacy for Deep Learning Lab',
                 rootCause: 'Surge in AI specialization enrollment outpaced physical GPU workstation capacity.',
                 correctiveAction: 'Procured 4x NVIDIA A100 GPU compute servers and upgraded gigabit lab backbone.',
-                assignedTo: 'Dr. Anand Raman (HoD CSE)',
+                assignedTo: 'Dr. Monika Sachdeva (HoD CSE)',
                 statusLabel: 'Resolved / Closed',
                 badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
                 dotColor: 'bg-emerald-500',
@@ -1125,7 +1125,7 @@ export const LandingPage: React.FC = () => {
                 issue: 'Industrial Automation & CNC Lab Simulator Software Upgrade Needed',
                 rootCause: 'Legacy proprietary software licenses expired; modern curriculum requires Industry 4.0 PLC.',
                 correctiveAction: 'Installed 60 seats of modern CAD/CAM software and Siemens Mechatronics training rigs.',
-                assignedTo: 'Dr. Vikramaditya Sharma (HoD Mechanical)',
+                assignedTo: 'Dr. Neel Kanth Grover (HoD Mechanical)',
                 statusLabel: 'Pending Verification',
                 badgeColor: 'bg-amber-100 text-amber-900 border-amber-300',
                 dotColor: 'bg-amber-500',
@@ -1141,7 +1141,7 @@ export const LandingPage: React.FC = () => {
                 issue: 'Industry Case-Study Pedagogy & Harvard Business Publishing Access Request',
                 rootCause: 'Course material lacked real-time emerging market case studies in FinTech & Supply Chain.',
                 correctiveAction: 'Subscribed to Harvard Business School Publishing institutional case database.',
-                assignedTo: 'Dr. Meenakshi Sundaram (HoD MBA)',
+                assignedTo: 'Dr. Harmeen Soch (HoD MBA)',
                 statusLabel: 'In Review',
                 badgeColor: 'bg-blue-100 text-blue-900 border-blue-300',
                 dotColor: 'bg-blue-500',
@@ -1294,7 +1294,7 @@ export const LandingPage: React.FC = () => {
                       date: '2026-03-28 14:32:10 IST',
                       action: 'VERIFY_EVIDENCE',
                       actionBadge: 'bg-blue-100 text-blue-800 border-blue-200',
-                      role: 'IQAC Director (Prof. Radhika Venkataraman)',
+                      role: 'IQAC Director (Prof. Rajiv Chauhan)',
                       desc: 'Verified & sealed documentary proof for CAPA-2025-001 (GPU Lab Upgrade) under Metric 1.4.2.',
                       status: 'Verified',
                       hash: '0x8f2a41d9e72b...4a12',
@@ -1304,7 +1304,7 @@ export const LandingPage: React.FC = () => {
                       date: '2026-03-27 11:15:45 IST',
                       action: 'RATIFY_CAPA',
                       actionBadge: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-                      role: 'Principal (Dr. K. S. Krishnamurthy)',
+                      role: 'Vice-Chancellor (Prof. Dr. Susheel Mittal)',
                       desc: 'Approved closure of Action Plan CAPA-2025-001 after post-remediation score jump (3.20 -> 4.65).',
                       status: 'Verified',
                       hash: '0xd41c09ab31f8...9b73',
@@ -1314,7 +1314,7 @@ export const LandingPage: React.FC = () => {
                       date: '2026-03-26 16:40:22 IST',
                       action: 'FORMULATE_CAPA',
                       actionBadge: 'bg-purple-100 text-purple-800 border-purple-200',
-                      role: 'HoD Mechanical (Dr. Vikramaditya Sharma)',
+                      role: 'HoD Mechanical (Dr. Neel Kanth Grover)',
                       desc: 'Formulated Corrective & Preventive Action Plan for CNC & Automation Lab modernization.',
                       status: 'Verified',
                       hash: '0x7e31b64cf012...88df',
@@ -2425,7 +2425,7 @@ export const LandingPage: React.FC = () => {
                   type="text"
                   value={googleModalName}
                   onChange={(e) => setGoogleModalName(e.target.value)}
-                  placeholder="e.g. Dr. K. S. Krishnamurthy"
+                  placeholder="e.g. Prof. (Dr.) Susheel Mittal"
                   className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 min-h-[40px] text-xs text-[#0a192f] placeholder:text-slate-400 focus:outline-hidden focus:border-[#4285F4]"
                 />
               </div>

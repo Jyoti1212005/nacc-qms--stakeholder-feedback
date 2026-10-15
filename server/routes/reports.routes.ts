@@ -29,7 +29,7 @@ reportsRouter.post('/reports/generate', (req: Request, res: Response) => {
       closedActions: qualityData.closedActions,
       generatedTimestamp: new Date().toISOString(),
     },
-    generatedBy: user?.fullName || 'Prof. Radhika Venkataraman (IQAC Director)',
+    generatedBy: user?.fullName || 'Prof. Rajiv Chauhan (Director, IQAC)',
     isApproved: false,
     createdAt: new Date().toISOString(),
   };
@@ -45,7 +45,7 @@ reportsRouter.post('/reports/:id/approve', (req: Request, res: Response) => {
   if (!rep) return res.status(404).json({ error: 'Report not found' });
 
   rep.isApproved = true;
-  rep.approvedBy = user?.fullName || 'Dr. K. S. Krishnamurthy (Principal)';
+  rep.approvedBy = user?.fullName || 'Prof. (Dr.) Susheel Mittal (Vice-Chancellor)';
   dbStore.logAudit('APPROVE', 'REPORTS', `Approved Report: ${rep.title}`, user, undefined, req.ip);
   res.json({ success: true, report: rep });
 });

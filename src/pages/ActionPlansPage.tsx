@@ -45,7 +45,7 @@ export const ActionPlansPage: React.FC = () => {
   const [createRootCause, setCreateRootCause] = useState('');
   const [createCorrective, setCreateCorrective] = useState('');
   const [createPreventive, setCreatePreventive] = useState('');
-  const [createAssigned, setCreateAssigned] = useState('Dr. Anand Raman (HoD CSE)');
+  const [createAssigned, setCreateAssigned] = useState('Dr. Monika Sachdeva (HoD CSE)');
   const [createDueDate, setCreateDueDate] = useState(new Date(Date.now() + 45 * 86400000).toISOString().slice(0, 10));
 
   const loadData = () => {

@@ -189,20 +189,20 @@ export const ExportNaacAtrSsrModal: React.FC<ExportNaacAtrSsrModalProps> = ({
               </div>
               <div className="text-center sm:text-left">
                 <h1 className="text-xl sm:text-2xl font-black text-[#0a192f] tracking-tight uppercase">
-                  Apex Institute of Technology & Management
+                  I.K. Gujral Punjab Technical University (IKGPTU)
                 </h1>
                 <p className="text-xs font-semibold text-slate-600">
-                  (Autonomous Institution Affiliated to State Technological University • Approved by AICTE, New Delhi)
+                  (State Technical University Established by Govt. of Punjab • UGC 12(B) & AICTE Approved • Estd. 1997)
                 </p>
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-1">
-                  <span className="px-2 py-0.5 text-[10px] font-black bg-amber-100 text-amber-900 border border-amber-300 rounded uppercase">
-                    NAAC 'A++' Accredited (CGPA 3.82)
+                  <span className="px-2 py-0.5 text-[10px] font-black bg-blue-100 text-blue-900 border border-blue-300 rounded uppercase">
+                    NAAC Grade 'B' (Cycle-I) • Cycle-II A+ SSR Portfolio
                   </span>
-                  <span className="px-2 py-0.5 text-[10px] font-bold bg-blue-100 text-blue-900 border border-blue-300 rounded uppercase">
-                    ISO 9001:2015 Certified
+                  <span className="px-2 py-0.5 text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 rounded uppercase">
+                    NIRF Engineering Ranked (96–120 Band)
                   </span>
                   <span className="px-2 py-0.5 text-[10px] font-bold bg-slate-100 text-slate-800 border border-slate-300 rounded uppercase">
-                    Institutional Code: AISHE C-12490
+                    Official Portal: ptu.ac.in
                   </span>
                 </div>
               </div>
@@ -360,18 +360,18 @@ export const ExportNaacAtrSsrModal: React.FC<ExportNaacAtrSsrModalProps> = ({
             {/* Middle: IQAC Director */}
             <div className="text-center space-y-1">
               <div className="font-serif italic font-extrabold text-[#0a192f] text-base border-b border-slate-300 pb-1 mx-auto max-w-[200px]">
-                Prof. Radhika Venkataraman
+                Prof. Rajiv Chauhan
               </div>
               <div className="text-xs font-black text-[#0a192f] uppercase">Director, IQAC</div>
               <div className="text-[10px] text-slate-500">Internal Quality Assurance Cell</div>
             </div>
 
-            {/* Right: Principal */}
+            {/* Right: Principal / Vice-Chancellor */}
             <div className="text-center space-y-1">
               <div className="font-serif italic font-extrabold text-[#0a192f] text-base border-b border-slate-300 pb-1 mx-auto max-w-[200px]">
-                Dr. K. S. Krishnamurthy
+                Prof. (Dr.) Susheel Mittal
               </div>
-              <div className="text-xs font-black text-[#0a192f] uppercase">Principal & Chairperson, IQAC</div>
+              <div className="text-xs font-black text-[#0a192f] uppercase">Vice-Chancellor & Chairperson, IQAC</div>
               <div className="text-[10px] text-slate-500">Head of Institution</div>
             </div>
           </div>

@@ -27,7 +27,7 @@ export const GapAnalysisPage: React.FC = () => {
   const [rootCause, setRootCause] = useState('');
   const [correctiveAction, setCorrectiveAction] = useState('');
   const [preventiveAction, setPreventiveAction] = useState('');
-  const [assignedToName, setAssignedToName] = useState('Dr. Anand Raman (HoD CSE)');
+  const [assignedToName, setAssignedToName] = useState('Dr. Monika Sachdeva (HoD CSE)');
   const [dueDate, setDueDate] = useState(new Date(Date.now() + 45 * 86400000).toISOString().slice(0, 10));
 
   const loadGaps = () => {

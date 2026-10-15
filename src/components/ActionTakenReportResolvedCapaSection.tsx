@@ -156,8 +156,8 @@ export const ActionTakenReportResolvedCapaSection: React.FC<ActionTakenReportRes
   <div class="atr-container">
     ${includeLetterhead ? `
     <div class="header-banner">
-      <h1>Apex Institute of Technology & Management</h1>
-      <p>(Autonomous Institution • Accredited 'A++' Grade by NAAC • ISO 9001:2015 Certified)</p>
+      <h1>I.K. Gujral Punjab Technical University (IKGPTU)</h1>
+      <p>(State Technical University • Established by Govt. of Punjab • NAAC Accredited Grade 'B' • Cycle-II A+ Prep)</p>
       <p style="color:#ffffff; font-weight:bold; margin-top:6px; letter-spacing:1px;">INTERNAL QUALITY ASSURANCE CELL (IQAC)</p>
       <div style="font-size:14px; font-weight:bold; color:#ff7a50; margin-top:8px;">
         ACTION TAKEN REPORT (ATR) ON RESOLVED CAPA ACTIONS
@@ -244,23 +244,23 @@ export const ActionTakenReportResolvedCapaSection: React.FC<ActionTakenReportRes
     <div class="sign-grid">
       <div class="sign-box">
         <div class="line"></div>
-        <p>Prof. Radhika Venkataraman</p>
+        <p>Prof. Rajiv Chauhan</p>
         <span>Director, IQAC</span>
       </div>
       <div class="sign-box">
         <div class="line"></div>
-        <p>Dr. Anand Raman</p>
-        <span>Secretary, Academic Council</span>
+        <p>Dr. Monika Sachdeva</p>
+        <span>Director Campus / HoD CSE</span>
       </div>
       <div class="sign-box">
         <div class="line"></div>
-        <p>Dr. K. S. Krishnamurthy</p>
-        <span>Principal & Chairperson, IQAC</span>
+        <p>Prof. (Dr.) Susheel Mittal</p>
+        <span>Vice-Chancellor & Chairperson, IQAC</span>
       </div>
     </div>` : ''}
 
     <div style="text-align:center; font-size:9px; color:#94a3b8; margin-top:24px; border-top:1px solid #f1f5f9; padding-top:10px;">
-      Apex Institute of Technology & Management • NAAC Self-Study Report (SSR) Official Quality Artifact • Generated ${new Date().toLocaleDateString()}
+      I.K. Gujral Punjab Technical University (IKGPTU) • NAAC Self-Study Report (SSR) Official Quality Artifact • Generated ${new Date().toLocaleDateString()}
     </div>
   </div>
 </body>
@@ -610,13 +610,13 @@ export const ActionTakenReportResolvedCapaSection: React.FC<ActionTakenReportRes
               <div className="bg-[#0a192f] text-white p-6 rounded-xl border-b-4 border-[#ff7a50] text-center relative overflow-hidden">
                 <div className="relative z-10">
                   <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-white/10 text-[#fed7aa] border border-white/20">
-                    Apex Institute of Technology & Management
+                    I.K. Gujral Punjab Technical University (IKGPTU)
                   </span>
                   <h1 className="text-xl sm:text-2xl font-black uppercase tracking-wide text-white mt-1.5">
                     Action Taken Report (ATR) on Resolved CAPA Items
                   </h1>
                   <p className="text-xs text-slate-300 mt-0.5">
-                    (Autonomous Institution • NAAC 'A++' Grade • ISO 9001:2015 Accredited Division)
+                    (State Technical University • Established by Govt. of Punjab • NAAC Accredited Grade 'B')
                   </p>
                   <p className="text-xs font-bold text-[#ffa07a] mt-2 uppercase tracking-wider">
                     INTERNAL QUALITY ASSURANCE CELL (IQAC) • {selectedAcademicYear}
@@ -751,30 +751,30 @@ export const ActionTakenReportResolvedCapaSection: React.FC<ActionTakenReportRes
               <div className="pt-4 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center text-xs">
                 <div className="p-3 bg-slate-50/70 rounded-xl border border-slate-100">
                   <div className="h-10 border-b border-dashed border-slate-400 max-w-40 mx-auto" />
-                  <p className="font-extrabold text-[#0a192f] mt-2">Prof. Radhika Venkataraman</p>
-                  <p className="text-[11px] text-slate-500">Director, IQAC</p>
+                  <p className="font-extrabold text-[#0a192f] mt-2">Prof. Rajiv Chauhan</p>
+                  <p className="text-[11px] text-slate-500">Director, IQAC & Professor</p>
                   <span className="text-[9px] text-emerald-700 font-bold block mt-1">✓ Digitally Audited</span>
                 </div>
 
                 <div className="p-3 bg-slate-50/70 rounded-xl border border-slate-100">
                   <div className="h-10 border-b border-dashed border-slate-400 max-w-40 mx-auto" />
-                  <p className="font-extrabold text-[#0a192f] mt-2">Dr. Anand Raman</p>
-                  <p className="text-[11px] text-slate-500">Secretary, Academic Council</p>
-                  <span className="text-[9px] text-emerald-700 font-bold block mt-1">✓ BoS Approved</span>
+                  <p className="font-extrabold text-[#0a192f] mt-2">Dr. Navdeepak Sandhu</p>
+                  <p className="text-[11px] text-slate-500">Registrar / Academic Council</p>
+                  <span className="text-[9px] text-emerald-700 font-bold block mt-1">✓ Statutory Verified</span>
                 </div>
 
                 <div className="p-3 bg-slate-50/70 rounded-xl border border-slate-100">
                   <div className="h-10 border-b border-dashed border-slate-400 max-w-40 mx-auto" />
-                  <p className="font-extrabold text-[#0a192f] mt-2">Dr. K. S. Krishnamurthy</p>
-                  <p className="text-[11px] text-slate-500">Principal & Head of Institution</p>
-                  <span className="text-[9px] text-emerald-700 font-bold block mt-1">✓ Governing Seal</span>
+                  <p className="font-extrabold text-[#0a192f] mt-2">Prof. (Dr.) Susheel Mittal</p>
+                  <p className="text-[11px] text-slate-500">Vice-Chancellor & Head of Institution</p>
+                  <span className="text-[9px] text-emerald-700 font-bold block mt-1">✓ University Seal</span>
                 </div>
               </div>
             )}
 
             {/* Footer Accreditation Subtext */}
             <div className="text-center text-[10px] text-slate-400 pt-2 border-t border-slate-100">
-              Institutional Action Taken Artifact • NAAC Continuous Quality Improvement Protocol • Apex Institute of Technology & Management
+              Institutional Action Taken Artifact • NAAC Continuous Quality Improvement Protocol • I.K. Gujral Punjab Technical University (IKGPTU)
             </div>
           </div>
         ) : (

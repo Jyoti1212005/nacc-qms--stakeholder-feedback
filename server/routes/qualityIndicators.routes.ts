@@ -107,7 +107,7 @@ qualityIndicatorsRouter.post('/quality-indicators/:id/assign-rapid-capa', (req: 
     assignedToId: assignedToId || user?.id || 'user-hod-cse',
     assignedToName: assignedToName || 'Head of Department / Committee Chair',
     createdById: user?.id || 'user-iqac',
-    createdByName: user?.fullName || 'Prof. Radhika Venkataraman (Director, IQAC)',
+    createdByName: user?.fullName || 'Prof. Rajiv Chauhan (Director, IQAC)',
     startDate: new Date().toISOString().slice(0, 10),
     dueDate: new Date(Date.now() + 30 * 24 * 3600 * 1000).toISOString().slice(0, 10),
     expectedOutcome: `Elevate ${indicator.code} score from ${indicator.actualScore} to >= ${indicator.targetScore} ${indicator.unit}.`,

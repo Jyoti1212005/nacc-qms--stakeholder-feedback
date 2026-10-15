@@ -79,7 +79,7 @@ export const ReportsPage: React.FC = () => {
         showToast('Report officially approved and archived for statutory audit!', 'success');
         loadReports();
         if (previewReport && previewReport.id === id) {
-          setPreviewReport({ ...previewReport, isApproved: true, approvedBy: 'Dr. K. S. Krishnamurthy (Principal)' });
+          setPreviewReport({ ...previewReport, isApproved: true, approvedBy: 'Prof. (Dr.) Susheel Mittal (Vice-Chancellor)' });
         }
       }
     } catch (e) {
@@ -344,11 +344,11 @@ export const ReportsPage: React.FC = () => {
             <div className="my-4 flex-1 overflow-y-auto p-6 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-6">
               <div className="text-center border-b-2 border-slate-900 pb-4">
                 <h2 className="text-base font-extrabold uppercase text-slate-900">
-                  Apex Institute of Technology & Management
+                  I.K. Gujral Punjab Technical University (IKGPTU)
                 </h2>
-                <p className="text-[11px] text-slate-600 font-medium">Autonomous Higher Education Institution • Accredited by NAAC</p>
+                <p className="text-[11px] text-slate-600 font-medium">State Technical University Established by Govt. of Punjab • NAAC Accredited</p>
                 <h3 className="text-sm font-bold text-blue-900 mt-2">{previewReport.title}</h3>
-                <p className="text-[10px] text-slate-400 mt-0.5">Academic Year 2026-27 • Internal Quality Assurance Cell</p>
+                <p className="text-[10px] text-slate-400 mt-0.5">Academic Cycle • Internal Quality Assurance Cell (IQAC)</p>
               </div>
 
               <div className="space-y-3">
@@ -392,9 +392,9 @@ export const ReportsPage: React.FC = () => {
                   <div>
                     <div className="h-8 border-b border-dashed border-slate-400 max-w-40 mx-auto" />
                     <p className="font-bold text-slate-800 mt-2">
-                      {previewReport.approvedBy || 'Dr. K. S. Krishnamurthy'}
+                      {previewReport.approvedBy || 'Prof. (Dr.) Susheel Mittal'}
                     </p>
-                    <p className="text-[10px] text-slate-500">Principal & Head of Institution</p>
+                    <p className="text-[10px] text-slate-500">Vice-Chancellor & Head of Institution</p>
                   </div>
                 </div>
               </div>

@@ -128,10 +128,12 @@ systemRouter.get('/search', (req: Request, res: Response) => {
 // System Settings
 systemRouter.get('/settings', (_req: Request, res: Response) => {
   res.json({
-    institutionName: 'Apex Institute of Technology & Management (Autonomous)',
-    shortName: 'NAAC-QMS',
-    currentCycle: 'Cycle 3 (2022-2027)',
-    accreditationStatus: 'A+ Grade (3.42 CGPA in previous cycle)',
+    institutionName: 'I.K. Gujral Punjab Technical University (IKGPTU)',
+    shortName: 'IKGPTU (PTU)',
+    websiteUrl: 'https://ptu.ac.in/',
+    address: 'Jalandhar - Kapurthala Highway, Near Science City, Kapurthala, Punjab - 144603',
+    currentCycle: 'NAAC Cycle-II Preparation (Cycle-I Grade B)',
+    accreditationStatus: 'NAAC Accredited Grade B • Cycle-II A+ SSR Portfolio Active',
     currentAcademicYear: dbStore.academicYears.find((ay) => ay.isCurrent)?.name || '2026-27',
     academicYears: dbStore.academicYears,
     weights: dbStore.qualityWeights,

@@ -43,7 +43,7 @@ actionPlansRouter.post('/action-plans', (req: Request, res: Response) => {
     priority: data.priority || 'HIGH',
     status: data.status || 'OPEN',
     assignedToId: data.assignedToId || 'user-hod-cse',
-    assignedToName: data.assignedToName || 'Dr. Anand Raman',
+    assignedToName: data.assignedToName || 'Dr. Monika Sachdeva',
     createdById: user?.id || 'user-iqac',
     createdByName: user?.fullName || 'IQAC Coordinator',
     startDate: data.startDate || new Date().toISOString().slice(0, 10),

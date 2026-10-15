@@ -698,7 +698,7 @@ export const ClosingTheLoopPage: React.FC = () => {
                       IQAC Verification & Statutory Compliance Certificate
                     </span>
                     <p className="text-[11px] text-emerald-900 leading-relaxed">
-                      This institutional document was audited and verified on <strong>{activeEvidenceModal.evidenceVerifiedAt}</strong> under the authority of Dr. K. S. Krishnamurthy (Principal) and Prof. Radhika Venkataraman (IQAC Director). Formally catalogued for NAAC Self-Study Report (SSR) presentation.
+                      This institutional document was audited and verified on <strong>{activeEvidenceModal.evidenceVerifiedAt}</strong> under the authority of Prof. (Dr.) Susheel Mittal (Vice-Chancellor) and Prof. Rajiv Chauhan (Director, IQAC). Formally catalogued for I.K. Gujral Punjab Technical University NAAC Self-Study Report (SSR) presentation.
                     </p>
                   </div>
                 </div>

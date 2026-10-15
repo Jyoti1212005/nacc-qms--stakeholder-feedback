@@ -26,7 +26,7 @@ analyticsRouter.post('/ai/insights/:id/approve', (req: Request, res: Response) =
   if (!insight) return res.status(404).json({ error: 'Insight record not found' });
 
   insight.isApproved = true;
-  insight.reviewedBy = user?.fullName || 'Prof. Radhika Venkataraman';
+  insight.reviewedBy = user?.fullName || 'Prof. Rajiv Chauhan';
   insight.reviewedAt = new Date().toISOString();
 
   dbStore.logAudit('APPROVE_ANALYTICS', 'ANALYTICS', `IQAC approved qualitative insight: ${insight.title}`, user, undefined, req.ip);
@@ -66,7 +66,7 @@ analyticsRouter.post('/ai/atr-generate', (req: Request, res: Response) => {
       rootCause: 'Curriculum lacked mandatory competitive coding labs in 5th/6th semesters; students lacked mock corporate evaluations.',
       actionTaken: 'Mandated 120-hour verified industry coding bootcamp with corporate mock evaluations; embedded HackerRank Enterprise test harness.',
       preventiveAction: 'Revised syllabus to integrate algorithmic problem-solving as a 2-credit continuous assessment core course.',
-      responsibleAuthority: 'Dr. Anand Raman (HoD CSE)',
+      responsibleAuthority: 'Dr. Monika Sachdeva (HoD CSE)',
       baselineScore: 3.12,
       remeasuredScore: 4.42,
       delta: 1.30,
@@ -88,7 +88,7 @@ analyticsRouter.post('/ai/atr-generate', (req: Request, res: Response) => {
       rootCause: 'Existing GPU servers were legacy generation with limited VRAM capacity for modern transformer models.',
       actionTaken: 'Procured and commissioned 30 NVIDIA RTX 4090 GPU workstations with high-throughput local network storage.',
       preventiveAction: 'Institutional Annual Lab Modernization Policy enacted with dedicated budget allocation of ₹45 Lakhs annually.',
-      responsibleAuthority: 'Dr. Vikramaditya Sen (HoD CSE AI&ML) & Lab Superintendent',
+      responsibleAuthority: 'Dr. Monika Sachdeva (HoD CSE) & Er. Gurinder Singh (Senior Lab Officer)',
       baselineScore: 3.25,
       remeasuredScore: 4.41,
       delta: 1.16,
@@ -130,7 +130,7 @@ analyticsRouter.post('/ai/atr-generate', (req: Request, res: Response) => {
       rootCause: 'Course syllabi were based on traditional IC engine curricula without elective tracks in mechatronics and EV technology.',
       actionTaken: 'Board of Studies (BoS) approved 3 new specialized electives: "EV Powertrains", "Industrial Robotics & ROS", and "Digital Twin Technology".',
       preventiveAction: 'Established mandatory triennial syllabus revision cycle with 2 external industry experts on each BoS committee.',
-      responsibleAuthority: 'Dr. Vikram Joshi (HoD Mechanical)',
+      responsibleAuthority: 'Dr. Neel Kanth Grover (Professor, DSW & HoD Mechanical)',
       baselineScore: 3.30,
       remeasuredScore: 4.35,
       delta: 1.05,
@@ -182,7 +182,7 @@ Key corrective interventions successfully resolved include: (1) Mandatory 120-ho
     title: `Action Taken Report (ATR) on Stakeholder Feedback - AY ${ay.name}`,
     referenceNo: `NAAC-QMS-ATR-${ay.name.replace('-', '')}-${targetDept?.code || 'INST'}`,
     generatedAt: new Date().toISOString(),
-    generatedBy: user?.fullName || 'Prof. Radhika Venkataraman (Director, IQAC)',
+    generatedBy: user?.fullName || 'Prof. Rajiv Chauhan (Director, IQAC, IKGPTU)',
     academicYear: ay.name,
     academicYearId: ay.id,
     department: deptName,
@@ -206,8 +206,8 @@ Key corrective interventions successfully resolved include: (1) Mandatory 120-ho
       { code: 'EVI-2026-07', title: 'Career Readiness Matrix Circular & Progress Ledger', category: 'Student Progression', verifiedBy: 'Director Placements', verificationDate: '2026-09-15' },
     ],
     signatories: {
-      iqacDirector: 'Prof. Radhika Venkataraman, Ph.D. — Director, IQAC',
-      principal: 'Dr. K. S. Krishnamurthy, M.Tech, Ph.D. — Principal & Chairperson, IQAC',
+      iqacDirector: 'Prof. Rajiv Chauhan — Director, IQAC, IKGPTU',
+      principal: 'Prof. (Dr.) Susheel Mittal — Vice-Chancellor & Chairperson, IQAC (IKGPTU)',
     },
   };
 
@@ -229,7 +229,7 @@ Key corrective interventions successfully resolved include: (1) Mandatory 120-ho
         status: 'RATIFIED & ARCHIVED',
       },
       generatedBy: reportPayload.generatedBy,
-      approvedBy: 'Dr. K. S. Krishnamurthy (Principal)',
+      approvedBy: 'Prof. (Dr.) Susheel Mittal (Vice-Chancellor)',
       isApproved: true,
       createdAt: reportPayload.generatedAt,
     });
