@@ -82,37 +82,39 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="h-16 bg-[#0a192f] border-b border-[#1b3456] sticky top-0 z-30 px-3 sm:px-4 lg:px-6 flex items-center justify-between shadow-lg text-white">
+    <header className="h-16 bg-[#0a192f] border-b border-[#1b3456] sticky top-0 z-30 px-2.5 sm:px-4 lg:px-6 flex items-center justify-between shadow-lg text-white w-full max-w-full overflow-hidden select-none">
       {/* Left: Hamburger (mobile/tablet < lg) & Branding & Academic Year Selector */}
-      <div className="flex items-center space-x-2 sm:space-x-3">
+      <div className="flex items-center space-x-2 sm:space-x-2.5 min-w-0 shrink">
         {/* Animated Hamburger Button for < lg screens */}
         <button
           onClick={toggleMobileNav}
           aria-label={isMobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          className="lg:hidden p-2 min-w-[44px] min-h-[44px] rounded-xl bg-[#0f2444] hover:bg-[#16335a] text-[#ffa07a] hover:text-white border border-[#234573] flex items-center justify-center transition-all cursor-pointer shadow-xs"
+          className="lg:hidden p-2 min-w-[38px] min-h-[38px] rounded-xl bg-[#0f2444] hover:bg-[#16335a] text-[#ffa07a] hover:text-white border border-[#234573] flex items-center justify-center transition-all cursor-pointer shadow-xs shrink-0"
         >
           {isMobileNavOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5" />}
         </button>
 
-        <div className="flex items-center space-x-2 sm:space-x-2.5">
-          <div className="w-9 h-9 rounded-xl bg-linear-to-br from-[#0f2d59] to-[#1e3a8a] border border-[#3b5e8c] flex items-center justify-center text-blue-300 shadow-md font-bold text-sm tracking-wider shrink-0">
-            <Award className="w-5 h-5" />
+        <div className="flex items-center space-x-2 sm:space-x-2.5 min-w-0">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-linear-to-br from-[#0f2d59] to-[#1e3a8a] border border-[#3b5e8c] flex items-center justify-center text-blue-300 shadow-md font-bold text-sm tracking-wider shrink-0">
+            <Award className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="flex items-center space-x-1.5 sm:space-x-2">
-              <span className="font-extrabold text-white tracking-tight text-sm sm:text-base">IKGPTU NAAC-QMS</span>
-              <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-bold bg-blue-500/20 text-blue-300 rounded border border-blue-400/30">
+              <span className="font-extrabold text-white tracking-tight text-xs sm:text-sm lg:text-base truncate">
+                IKGPTU NAAC-QMS
+              </span>
+              <span className="hidden sm:inline-block px-1.5 py-0.2 text-[9px] sm:text-[10px] font-bold bg-blue-500/20 text-blue-300 rounded border border-blue-400/30 shrink-0">
                 PTU Jalandhar
               </span>
             </div>
-            <p className="text-[10px] sm:text-[11px] text-blue-200/80 font-medium hidden md:block">
+            <p className="text-[10px] sm:text-[11px] text-blue-200/80 font-medium hidden 2xl:block truncate">
               I.K. Gujral Punjab Technical University • Stakeholder QMS
             </p>
           </div>
         </div>
 
-        {/* Academic Year Dropdown in Navy with Peach font accent */}
-        <div className="hidden sm:flex items-center space-x-1.5 bg-[#0f2444] border border-[#234573] rounded-xl px-2.5 py-1.5 text-xs text-blue-100 font-medium">
+        {/* Academic Year Dropdown in Navy with Peach font accent (visible on xl+) */}
+        <div className="hidden xl:flex items-center space-x-1.5 bg-[#0f2444] border border-[#234573] rounded-xl px-2.5 py-1.5 text-xs text-blue-100 font-medium shrink-0">
           <Calendar className="w-3.5 h-3.5 text-[#ffa07a]" />
           <span className="text-[#fed7aa] font-semibold">AY:</span>
           <select
@@ -130,15 +132,15 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Middle: Global Search bar trigger */}
-      <div className="flex-1 max-w-md mx-3 lg:mx-4 hidden md:block">
+      {/* Middle: Global Search bar trigger (visible on lg+) */}
+      <div className="flex-1 max-w-xs xl:max-w-md mx-2 lg:mx-4 hidden lg:block min-w-0">
         <button
           onClick={() => setIsSearchOpen(true)}
-          className="w-full flex items-center justify-between px-3 py-2 text-xs text-blue-100/80 bg-[#0d203b] hover:bg-[#122b4d] border border-[#234573] rounded-xl transition-colors cursor-pointer group shadow-inner"
+          className="w-full flex items-center justify-between px-3 py-1.5 text-xs text-blue-100/80 bg-[#0d203b] hover:bg-[#122b4d] border border-[#234573] rounded-xl transition-colors cursor-pointer group shadow-inner"
         >
-          <div className="flex items-center space-x-2">
-            <Search className="w-3.5 h-3.5 text-[#ffa07a] group-hover:text-white" />
-            <span className="text-blue-200/70 truncate">Search surveys, indicators, CAPAs, evidence...</span>
+          <div className="flex items-center space-x-2 min-w-0 truncate">
+            <Search className="w-3.5 h-3.5 text-[#ffa07a] group-hover:text-white shrink-0" />
+            <span className="text-blue-200/70 truncate text-xs">Search surveys, CAPAs, evidence...</span>
           </div>
           <kbd className="px-1.5 py-0.5 text-[10px] bg-[#071324] border border-[#234573] rounded text-[#fed7aa] font-mono shrink-0 ml-2">
             ⌘K
@@ -147,28 +149,30 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Right: Quick actions, Role Switcher, Notifications & Profile */}
-      <div className="flex items-center space-x-1.5 sm:space-x-2.5">
-        {/* Mobile Search Button (< md) */}
+      <div className="flex items-center space-x-1 sm:space-x-2 shrink-0">
+        {/* Mobile Search Button (< lg) */}
         <button
           onClick={() => setIsSearchOpen(true)}
           aria-label="Open search dialog"
-          className="md:hidden p-2 min-w-[44px] min-h-[44px] rounded-xl text-blue-200 hover:text-white hover:bg-[#0f2444] border border-transparent hover:border-[#234573] flex items-center justify-center transition-colors cursor-pointer"
+          className="lg:hidden p-2 min-w-[38px] min-h-[38px] rounded-xl text-blue-200 hover:text-white hover:bg-[#0f2444] border border-transparent hover:border-[#234573] flex items-center justify-center transition-colors cursor-pointer shrink-0"
         >
           <Search className="w-4 h-4 text-[#ffa07a]" />
         </button>
 
+        {/* IKGPTU Data quick button (visible on 2xl+) */}
         <button
           onClick={() => setShowCollegeModal(true)}
-          className="hidden sm:flex items-center space-x-1.5 px-3 py-2 min-h-[44px] rounded-xl text-xs font-bold bg-[#0d223f] hover:bg-[#15345d] text-blue-200 hover:text-white border border-blue-400/30 transition-all cursor-pointer shadow-xs"
+          className="hidden 2xl:flex items-center space-x-1.5 px-2.5 py-1.5 min-h-[38px] rounded-xl text-xs font-bold bg-[#0d223f] hover:bg-[#15345d] text-blue-200 hover:text-white border border-blue-400/30 transition-all cursor-pointer shadow-xs shrink-0"
           title="Open IKGPTU University Profile & Website Data Importer"
         >
           <Globe className="w-3.5 h-3.5 text-blue-400" />
           <span>IKGPTU Data</span>
         </button>
 
+        {/* Admin Portal quick button (visible on 2xl+) */}
         <button
           onClick={() => setActivePage('admin')}
-          className="hidden md:flex items-center space-x-1.5 px-3 py-2 min-h-[44px] rounded-xl text-xs font-bold bg-[#0f2444] hover:bg-[#16335a] text-[#fed7aa] border border-[#ff7a50]/40 transition-all cursor-pointer shadow-xs hover:border-[#ff7a50]"
+          className="hidden 2xl:flex items-center space-x-1.5 px-2.5 py-1.5 min-h-[38px] rounded-xl text-xs font-bold bg-[#0f2444] hover:bg-[#16335a] text-[#fed7aa] border border-[#ff7a50]/40 transition-all cursor-pointer shadow-xs hover:border-[#ff7a50] shrink-0"
           title="Open Central Admin Portal & View All Form Results"
         >
           <ShieldCheck className="w-3.5 h-3.5 text-[#ff7a50]" />
@@ -178,33 +182,15 @@ export const Navbar: React.FC = () => {
           </span>
         </button>
 
-        <button
-          onClick={() => setShowPublicAtrModal(true)}
-          className="hidden xl:flex items-center space-x-1.5 px-3 py-2 min-h-[44px] rounded-xl text-xs font-bold bg-[#0d223f] hover:bg-[#15345d] text-[#ffa07a] border border-[#ff7a50]/40 transition-all cursor-pointer shadow-xs hover:border-[#ff7a50]"
-          title="Open Public ATR Transparency Portal (NAAC Metric 1.4.2)"
-        >
-          <Award className="w-3.5 h-3.5 text-[#ff7a50]" />
-          <span>Public ATR (1.4.2)</span>
-        </button>
-
-        <button
-          onClick={() => setActivePage('feedback')}
-          className="hidden lg:flex items-center space-x-1.5 px-3 py-2 min-h-[44px] rounded-xl text-xs font-bold bg-linear-to-r from-[#ff7a50] to-[#f97316] hover:from-[#f0683d] hover:to-[#ea580c] text-white shadow-md shadow-orange-950/20 transition-all cursor-pointer"
-          title="Take Stakeholder Survey"
-        >
-          <ClipboardList className="w-3.5 h-3.5 text-white" />
-          <span>Surveys & Feedback</span>
-        </button>
-
         {/* Quick Demo Switcher - Compact with View More */}
-        <div className="relative">
+        <div className="relative shrink-0">
           <button
             onClick={() => {
               setShowDemoMenu(!showDemoMenu);
               setShowNotifMenu(false);
               setShowUserMenu(false);
             }}
-            className="flex items-center space-x-1.5 px-2.5 py-2 min-h-[44px] rounded-xl text-xs font-semibold bg-[#0f2444] hover:bg-[#16335a] text-slate-100 border border-slate-700/70 transition-colors cursor-pointer"
+            className="flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1.5 min-h-[38px] rounded-xl text-xs font-semibold bg-[#0f2444] hover:bg-[#16335a] text-slate-100 border border-slate-700/70 transition-colors cursor-pointer shrink-0"
             title="Switch Demo Role"
           >
             <Sparkles className="w-3.5 h-3.5 text-blue-400 shrink-0" />
@@ -213,7 +199,7 @@ export const Navbar: React.FC = () => {
           </button>
 
           {showDemoMenu && (
-            <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 py-2 z-50 text-slate-900 animate-in fade-in zoom-in-95 duration-100">
+            <div className="absolute right-0 mt-2 w-[calc(100vw-1.5rem)] sm:w-80 max-w-xs bg-white rounded-2xl shadow-2xl border border-slate-200 py-2 z-50 text-slate-900 animate-in fade-in zoom-in-95 duration-100">
               <div className="px-3.5 py-2 border-b border-slate-100 bg-slate-50/80 rounded-t-2xl flex items-center justify-between">
                 <div>
                   <p className="text-[11px] font-bold text-slate-900 uppercase tracking-wider">IKGPTU Staff & Roles</p>
@@ -285,7 +271,7 @@ export const Navbar: React.FC = () => {
               }
             }}
             aria-label="Notifications"
-            className={`relative p-2 min-w-[44px] min-h-[44px] rounded-xl flex items-center justify-center transition-all cursor-pointer ${
+            className={`relative p-2 min-w-[38px] min-h-[38px] rounded-xl flex items-center justify-center transition-all cursor-pointer shrink-0 ${
               showNotifMenu
                 ? 'bg-[#16335a] text-white shadow-inner'
                 : 'text-blue-200 hover:text-white hover:bg-[#0f2444]'
@@ -306,7 +292,7 @@ export const Navbar: React.FC = () => {
           </button>
 
           {showNotifMenu && (
-            <div className="absolute right-0 mt-2 w-80 sm:w-104 bg-white rounded-2xl shadow-2xl border-2 border-[#fed7aa] py-2.5 z-50 text-[#0b1a30] animate-in fade-in zoom-in-95 duration-100">
+            <div className="absolute right-0 mt-2 w-[calc(100vw-1.5rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl border-2 border-[#fed7aa] py-2.5 z-50 text-[#0b1a30] animate-in fade-in zoom-in-95 duration-100">
               {/* Header */}
               <div className="px-4 py-2 border-b border-[#f3e8e0] bg-[#fffaf5] rounded-t-2xl flex items-center justify-between">
                 <div>
@@ -548,15 +534,15 @@ export const Navbar: React.FC = () => {
               setShowDemoMenu(false);
               setShowNotifMenu(false);
             }}
-            className="flex items-center space-x-1.5 sm:space-x-2 pl-2 pr-1.5 py-1.5 min-h-[44px] rounded-xl hover:bg-[#0f2444] transition-colors cursor-pointer"
+            className="flex items-center space-x-1 sm:space-x-1.5 pl-1.5 pr-1 py-1 min-h-[38px] rounded-xl hover:bg-[#0f2444] transition-colors cursor-pointer shrink-0"
           >
             <img
               src={currentUser?.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&auto=format&fit=crop&q=80'}
               alt={currentUser?.fullName}
-              className="w-8 h-8 rounded-full object-cover border-2 border-[#ff9d7a] shrink-0"
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border-2 border-[#ff9d7a] shrink-0"
             />
-            <div className="hidden lg:block text-left">
-              <p className="text-xs font-bold text-white truncate max-w-32 leading-tight">
+            <div className="hidden xl:block text-left">
+              <p className="text-xs font-bold text-white truncate max-w-28 leading-tight">
                 {currentUser?.fullName}
               </p>
               <span className="text-[10px] font-semibold text-[#fed7aa] uppercase tracking-wider">
@@ -567,7 +553,7 @@ export const Navbar: React.FC = () => {
           </button>
 
           {showUserMenu && (
-            <div className="absolute right-0 mt-2 w-60 bg-white rounded-2xl shadow-2xl border border-[#fed7aa] py-1.5 z-50 text-[#0b1a30] animate-in fade-in duration-100">
+            <div className="absolute right-0 mt-2 w-60 max-w-[calc(100vw-1.5rem)] bg-white rounded-2xl shadow-2xl border border-[#fed7aa] py-1.5 z-50 text-[#0b1a30] animate-in fade-in duration-100">
               <div className="px-3.5 py-2.5 border-b border-[#f3e8e0] bg-[#fffaf5] rounded-t-2xl">
                 <p className="text-xs font-bold text-[#0b1a30]">{currentUser?.fullName}</p>
                 <p className="text-[11px] text-slate-500 truncate">{currentUser?.email}</p>
@@ -635,11 +621,11 @@ export const Navbar: React.FC = () => {
         <button
           onClick={logout}
           id="btn-navbar-logout"
-          className="flex items-center space-x-1.5 px-2.5 py-1.5 min-h-[40px] rounded-xl text-xs font-bold bg-[#14325a] hover:bg-rose-900/60 text-blue-200 hover:text-rose-200 border border-blue-400/30 hover:border-rose-400/40 transition-all cursor-pointer shadow-xs shrink-0"
+          className="hidden sm:flex items-center space-x-1.5 p-2 sm:px-2.5 sm:py-1.5 min-h-[38px] rounded-xl text-xs font-bold bg-[#14325a] hover:bg-rose-900/60 text-blue-200 hover:text-rose-200 border border-blue-400/30 hover:border-rose-400/40 transition-all cursor-pointer shadow-xs shrink-0"
           title="Sign out of current account"
         >
-          <LogOut className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Sign Out</span>
+          <LogOut className="w-3.5 h-3.5 shrink-0" />
+          <span className="hidden 2xl:inline">Sign Out</span>
         </button>
       </div>
 

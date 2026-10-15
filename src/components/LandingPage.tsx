@@ -92,6 +92,7 @@ export const LandingPage: React.FC = () => {
   const [showCollegeModal, setShowCollegeModal] = useState(false);
   const [showPublicAtrModal, setShowPublicAtrModal] = useState(false);
   const [showExportSsrModal, setShowExportSsrModal] = useState(false);
+  const [showHeaderMenu, setShowHeaderMenu] = useState(false);
   const [landingAcademicYear, setLandingAcademicYear] = useState('ay-4');
   const [roleFilterTab, setRoleFilterTab] = useState<'ALL' | 'STUDENTS' | 'FACULTY_STAFF' | 'LEADERSHIP_ADMIN' | 'EXTERNAL'>('ALL');
   const [showAllPersonas, setShowAllPersonas] = useState(false);
@@ -508,28 +509,30 @@ export const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-blue-600 selection:text-white overflow-x-hidden w-full font-sans">
       {/* Top Header - Executive Slate Bar */}
-      <header className="border-b border-slate-800 bg-slate-900/95 text-white sticky top-0 z-40 px-3 sm:px-6 py-3 flex items-center justify-between shadow-xs backdrop-blur-md">
-        <div className="flex items-center space-x-2.5 sm:space-x-3.5 min-w-0">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-linear-to-br from-blue-600 to-indigo-700 border border-blue-500/40 flex items-center justify-center text-white font-bold shadow-xs shrink-0">
-            <Award className="w-5 h-5 sm:w-5.5 sm:h-5.5" />
+      <header className="border-b border-slate-800 bg-slate-900/95 text-white sticky top-0 z-40 px-3 sm:px-5 lg:px-6 h-16 flex items-center justify-between shadow-xs backdrop-blur-md w-full max-w-full overflow-hidden select-none">
+        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 shrink">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-linear-to-br from-blue-600 to-indigo-700 border border-blue-500/40 flex items-center justify-center text-white font-bold shadow-xs shrink-0">
+            <Award className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div className="min-w-0">
-            <div className="flex items-center space-x-2">
-              <span className="font-extrabold text-base sm:text-lg tracking-tight text-white truncate">IKGPTU NAAC-QMS</span>
-              <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider bg-blue-500/20 text-blue-300 rounded-md border border-blue-400/30 shrink-0">
+            <div className="flex items-center space-x-1.5 sm:space-x-2">
+              <span className="font-extrabold text-xs sm:text-sm lg:text-base tracking-tight text-white truncate">
+                IKGPTU NAAC-QMS
+              </span>
+              <span className="hidden sm:inline-flex items-center space-x-1 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider bg-blue-500/20 text-blue-300 rounded border border-blue-400/30 shrink-0">
                 <ShieldCheck className="w-3 h-3 text-blue-400" />
-                <span>NAAC Accredited (Grade 'B')</span>
+                <span>NAAC 'B'</span>
               </span>
             </div>
-            <p className="text-[11px] text-slate-300 font-normal hidden md:block truncate">
-              I.K. Gujral Punjab Technical University Jalandhar • Continuous Quality Management (ptu.ac.in)
+            <p className="text-[10px] text-slate-300 font-normal hidden 2xl:block truncate">
+              I.K. Gujral Punjab Technical University Jalandhar (ptu.ac.in)
             </p>
           </div>
         </div>
 
-        <div className="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0">
-          {/* Academic Year Dropdown in Navbar (Default: AY 2025–26) */}
-          <div className="hidden lg:flex items-center space-x-1.5 bg-[#0f2444] border border-[#234573] rounded-xl px-2.5 py-1.5 text-xs text-blue-100 font-medium">
+        <div className="flex items-center space-x-1 sm:space-x-2 shrink-0">
+          {/* Academic Year Dropdown (visible on 2xl+) */}
+          <div className="hidden 2xl:flex items-center space-x-1.5 bg-[#0f2444] border border-[#234573] rounded-xl px-2.5 py-1.5 text-xs text-blue-100 font-medium shrink-0">
             <Calendar className="w-3.5 h-3.5 text-[#ffa07a]" />
             <span className="text-[#fed7aa] font-bold">AY:</span>
             <select
@@ -545,72 +548,119 @@ export const LandingPage: React.FC = () => {
             </select>
           </div>
 
-          {/* IKGPTU Website Data & Profile Trigger */}
+          {/* IKGPTU Website Data & Profile Trigger (visible on xl+) */}
           <button
             onClick={() => setShowCollegeModal(true)}
             id="btn-header-college-profile"
-            className="px-2.5 sm:px-3 py-2 min-h-[44px] text-xs font-bold bg-[#0d223f] hover:bg-[#15345d] text-blue-200 hover:text-white rounded-xl border border-blue-400/30 transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm shrink-0"
+            className="hidden xl:inline-flex items-center space-x-1.5 px-2.5 py-1.5 min-h-[38px] text-xs font-bold bg-[#0d223f] hover:bg-[#15345d] text-blue-200 hover:text-white rounded-xl border border-blue-400/30 transition-all cursor-pointer shadow-xs shrink-0"
             title="View IKGPTU Official Profile Crawled from https://ptu.ac.in/"
           >
             <Globe className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-            <span className="hidden sm:inline">IKGPTU Profile (ptu.ac.in)</span>
-            <span className="sm:hidden">PTU</span>
+            <span>IKGPTU Data</span>
           </button>
 
-          {/* Export NAAC ATR / SSR (PDF) Utility Trigger */}
+          {/* Export NAAC ATR / SSR (PDF) Utility Trigger (visible on 2xl+) */}
           <button
             onClick={() => setShowExportSsrModal(true)}
             id="btn-header-export-ssr"
-            className="px-2.5 sm:px-3 py-2 min-h-[44px] text-xs font-bold bg-[#14325a] hover:bg-[#1b4175] text-[#fed7aa] hover:text-white rounded-xl border border-amber-400/30 transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm"
-            title="Export NAAC Metric 1.4.2 ATR / SSR Document (PDF Format)"
+            className="hidden 2xl:inline-flex items-center space-x-1.5 px-2.5 py-1.5 min-h-[38px] text-xs font-bold bg-[#14325a] hover:bg-[#1b4175] text-[#fed7aa] hover:text-white rounded-xl border border-amber-400/30 transition-all cursor-pointer shadow-xs shrink-0"
+            title="Export NAAC Metric 1.4.2 ATR / SSR Document"
           >
             <FileDown className="w-3.5 h-3.5 text-[#ffa07a] shrink-0" />
-            <span className="hidden xl:inline">Export NAAC ATR / SSR</span>
-            <span className="xl:hidden">Export SSR</span>
+            <span>Export SSR</span>
           </button>
 
+          {/* Public ATR Modal (visible on lg+) */}
           <button
             onClick={() => setShowPublicAtrModal(true)}
-            className="px-2.5 sm:px-3 py-2 min-h-[44px] text-xs font-bold bg-[#0f2444] hover:bg-[#16335a] text-blue-100 hover:text-white rounded-xl border border-blue-400/30 transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm"
+            className="hidden lg:inline-flex items-center space-x-1.5 px-2.5 py-1.5 min-h-[38px] text-xs font-bold bg-[#0f2444] hover:bg-[#16335a] text-blue-100 hover:text-white rounded-xl border border-blue-400/30 transition-all cursor-pointer shadow-xs shrink-0"
             title="NAAC Mandatory Disclosure: Action Taken Report (Metric 1.4.2)"
           >
             <ShieldCheck className="w-3.5 h-3.5 text-[#ffa07a] shrink-0" />
-            <span className="hidden md:inline">Public ATR</span>
-            <span className="md:hidden">ATR</span>
+            <span>Public ATR</span>
           </button>
 
+          {/* Quick Feedback Portal (visible on md+) */}
           <button
             onClick={() => {
               setSurveySubmitted(false);
               setShowSurveyModal(true);
             }}
-            className="px-2.5 sm:px-3 py-2 min-h-[44px] text-xs font-bold bg-[#0f2444] hover:bg-[#16335a] text-[#ffebd9] hover:text-white rounded-xl border border-[#2a4d7d] transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm"
+            className="hidden md:inline-flex items-center space-x-1.5 px-2.5 py-1.5 min-h-[38px] text-xs font-bold bg-[#0f2444] hover:bg-[#16335a] text-[#ffebd9] hover:text-white rounded-xl border border-[#2a4d7d] transition-all cursor-pointer shadow-xs shrink-0"
           >
             <Send className="w-3.5 h-3.5 text-[#ffa07a] shrink-0" />
-            <span className="hidden xs:inline">Quick Feedback</span>
-            <span className="xs:hidden">Feedback</span>
+            <span>Quick Feedback</span>
           </button>
 
+          {/* Mobile Quick Portals Dropdown (< md screens) */}
+          <div className="relative md:hidden shrink-0">
+            <button
+              onClick={() => setShowHeaderMenu(!showHeaderMenu)}
+              className="p-2 min-h-[38px] min-w-[38px] rounded-xl text-blue-200 hover:text-white bg-[#0f2444] border border-[#234573] flex items-center justify-center transition-colors cursor-pointer"
+              aria-label="Quick Navigation Options"
+            >
+              <Globe className="w-4 h-4 text-blue-400" />
+            </button>
+
+            {showHeaderMenu && (
+              <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-200 py-1.5 z-50 text-slate-900 animate-in fade-in zoom-in-95 duration-100">
+                <div className="px-3.5 py-1.5 border-b border-slate-100 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                  IKGPTU Portals
+                </div>
+                <button
+                  onClick={() => { setShowCollegeModal(true); setShowHeaderMenu(false); }}
+                  className="w-full text-left px-3.5 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 flex items-center space-x-2"
+                >
+                  <Globe className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span>IKGPTU Data & IQAC</span>
+                </button>
+                <button
+                  onClick={() => { setShowPublicAtrModal(true); setShowHeaderMenu(false); }}
+                  className="w-full text-left px-3.5 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 flex items-center space-x-2"
+                >
+                  <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Public ATR (1.4.2)</span>
+                </button>
+                <button
+                  onClick={() => { setShowExportSsrModal(true); setShowHeaderMenu(false); }}
+                  className="w-full text-left px-3.5 py-2 text-xs font-bold text-slate-800 hover:bg-slate-50 flex items-center space-x-2"
+                >
+                  <FileDown className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>Export SSR Booklet</span>
+                </button>
+                <button
+                  onClick={() => { setSurveySubmitted(false); setShowSurveyModal(true); setShowHeaderMenu(false); }}
+                  className="w-full text-left px-3.5 py-2 text-xs font-bold text-[#c2410c] hover:bg-[#fff5ee] flex items-center space-x-2"
+                >
+                  <Send className="w-4 h-4 text-[#ff7a50] shrink-0" />
+                  <span>Take Quick Survey</span>
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Registration Button */}
           <button
             onClick={() => {
               setAuthModalTab('register');
               setShowLoginModal(true);
             }}
             id="btn-header-register"
-            className="px-2.5 sm:px-3.5 py-2 min-h-[44px] text-xs font-bold bg-[#fff0e6] hover:bg-[#ffe2cc] text-[#c2410c] rounded-xl border border-[#fed7aa] shadow-xs transition-all flex items-center space-x-1.5 cursor-pointer"
+            className="px-2.5 sm:px-3 py-1.5 min-h-[38px] text-xs font-bold bg-[#fff0e6] hover:bg-[#ffe2cc] text-[#c2410c] rounded-xl border border-[#fed7aa] shadow-xs transition-all flex items-center space-x-1.5 cursor-pointer shrink-0"
           >
             <UserPlus className="w-3.5 h-3.5 text-[#ff7a50] shrink-0" />
             <span className="hidden sm:inline">Register</span>
             <span className="sm:hidden">Join</span>
           </button>
 
+          {/* Login Button */}
           <button
             onClick={() => {
               setAuthModalTab('login');
               setShowLoginModal(true);
             }}
             id="btn-header-login"
-            className="px-3 sm:px-4 py-2 min-h-[44px] text-xs font-bold bg-linear-to-r from-[#ff7a50] to-[#f97316] hover:from-[#f0683d] hover:to-[#ea580c] text-white rounded-xl shadow-md shadow-orange-950/20 transition-all flex items-center space-x-1.5 cursor-pointer"
+            className="px-3 sm:px-3.5 py-1.5 min-h-[38px] text-xs font-bold bg-linear-to-r from-[#ff7a50] to-[#f97316] hover:from-[#f0683d] hover:to-[#ea580c] text-white rounded-xl shadow-md shadow-orange-950/20 transition-all flex items-center space-x-1.5 cursor-pointer shrink-0"
           >
             <LogIn className="w-3.5 h-3.5 shrink-0" />
             <span className="hidden sm:inline">Institutional Login</span>
