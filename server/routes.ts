@@ -14,6 +14,7 @@ import { analyticsRouter } from './routes/analytics.routes.ts';
 import { reportsRouter } from './routes/reports.routes.ts';
 import { departmentsRouter } from './routes/departments.routes.ts';
 import { systemRouter } from './routes/system.routes.ts';
+import { institutionRouter } from './routes/institution.routes.ts';
 
 export const apiRouter = Router();
 
@@ -33,5 +34,6 @@ apiRouter.use(analyticsRouter);
 apiRouter.use(reportsRouter);
 apiRouter.use(departmentsRouter);
 apiRouter.use(systemRouter);
+apiRouter.use(institutionRouter);
 
 export default apiRouter;

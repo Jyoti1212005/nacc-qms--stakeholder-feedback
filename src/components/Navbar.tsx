@@ -20,12 +20,14 @@ import {
   Radio,
   ArrowRight,
   X,
+  Globe,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useApp } from '../context/AppContext';
 import { StakeholderProfile } from './StakeholderProfile';
 import { PublicAtrPortalModal } from './PublicAtrPortalModal';
 import { RoleMatrixModal } from './RoleMatrixModal';
+import { CollegeWebsiteImporterModal } from './CollegeWebsiteImporterModal';
 
 export const Navbar: React.FC = () => {
   const { currentUser, logout, demoAccounts, demoLogin } = useAuth();
@@ -51,6 +53,7 @@ export const Navbar: React.FC = () => {
   const [showDemoMenu, setShowDemoMenu] = useState(false);
   const [showAllNavbarRoles, setShowAllNavbarRoles] = useState(false);
   const [showRoleMatrixNavbar, setShowRoleMatrixNavbar] = useState(false);
+  const [showCollegeModal, setShowCollegeModal] = useState(false);
   const [showNotifMenu, setShowNotifMenu] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showPublicAtrModal, setShowPublicAtrModal] = useState(false);
@@ -92,18 +95,18 @@ export const Navbar: React.FC = () => {
         </button>
 
         <div className="flex items-center space-x-2 sm:space-x-2.5">
-          <div className="w-9 h-9 rounded-xl bg-linear-to-br from-[#0f2d59] to-[#1e3a8a] border border-[#3b5e8c] flex items-center justify-center text-[#ff9d7a] shadow-md font-bold text-sm tracking-wider shrink-0">
+          <div className="w-9 h-9 rounded-xl bg-linear-to-br from-[#0f2d59] to-[#1e3a8a] border border-[#3b5e8c] flex items-center justify-center text-blue-300 shadow-md font-bold text-sm tracking-wider shrink-0">
             <Award className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center space-x-1.5 sm:space-x-2">
-              <span className="font-extrabold text-white tracking-tight text-sm sm:text-base">NAAC-QMS</span>
-              <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-extrabold bg-[#fff0e6] text-[#c2410c] rounded border border-[#fed7aa]">
-                QMS 2026
+              <span className="font-extrabold text-white tracking-tight text-sm sm:text-base">IKGPTU NAAC-QMS</span>
+              <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-bold bg-blue-500/20 text-blue-300 rounded border border-blue-400/30">
+                PTU Jalandhar
               </span>
             </div>
             <p className="text-[10px] sm:text-[11px] text-blue-200/80 font-medium hidden md:block">
-              Stakeholder Feedback & Continuous Quality Assurance
+              I.K. Gujral Punjab Technical University • Stakeholder QMS
             </p>
           </div>
         </div>
@@ -152,6 +155,15 @@ export const Navbar: React.FC = () => {
           className="md:hidden p-2 min-w-[44px] min-h-[44px] rounded-xl text-blue-200 hover:text-white hover:bg-[#0f2444] border border-transparent hover:border-[#234573] flex items-center justify-center transition-colors cursor-pointer"
         >
           <Search className="w-4 h-4 text-[#ffa07a]" />
+        </button>
+
+        <button
+          onClick={() => setShowCollegeModal(true)}
+          className="hidden sm:flex items-center space-x-1.5 px-3 py-2 min-h-[44px] rounded-xl text-xs font-bold bg-[#0d223f] hover:bg-[#15345d] text-blue-200 hover:text-white border border-blue-400/30 transition-all cursor-pointer shadow-xs"
+          title="Open IKGPTU University Profile & Website Data Importer"
+        >
+          <Globe className="w-3.5 h-3.5 text-blue-400" />
+          <span>IKGPTU Data</span>
         </button>
 
         <button
@@ -647,6 +659,12 @@ export const Navbar: React.FC = () => {
       <RoleMatrixModal
         isOpen={showRoleMatrixNavbar}
         onClose={() => setShowRoleMatrixNavbar(false)}
+      />
+
+      {/* College Website Importer & Profile Modal */}
+      <CollegeWebsiteImporterModal
+        isOpen={showCollegeModal}
+        onClose={() => setShowCollegeModal(false)}
       />
     </header>
   );
